@@ -1,0 +1,36 @@
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Equipo</h2>
+        <a href="<?= $this->url('radio-team', ['action' => 'add']) ?>" class="btn btn-primary">Nuevo Integrante</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Rol</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->team as $item): ?>
+            <tr>
+                <td><?= $item['id'] ?></td>
+                <td><?= $this->escapeHtml($item['name']) ?></td>
+                <td><?= $this->escapeHtml($item['role']) ?></td>
+                <td>
+                    <?php if ($item['image_url']): ?>
+                        <img src="<?= $item['image_url'] ?>" alt="Img" style="height: 50px;">
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <a href="<?= $this->url('radio-team', ['action' => 'edit', 'id' => $item['id']]) ?>" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="<?= $this->url('radio-team', ['action' => 'delete', 'id' => $item['id']]) ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro?')">Eliminar</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,678 @@
+<?php
+
+/**
+ * Vista para el menú de Enlace Norte - Servicios DIDECO
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+// Configurar el título de la página y breadcrumb
+$this->headTitle('Enlace Norte - Servicios DIDECO');
+$this->pageTitle = 'Enlace Norte - Servicios DIDECO';
+?>
+
+<body>
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="row w-100 justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card form-container border-0 rounded-4">
+                    <div class="card-body p-4 p-md-5">
+
+                        <!-- Header -->
+                        <div class="text-center mb-4">
+                            <i class="bi bi-envelope-heart display-4 text-primary mb-3"></i>
+                            <h2 class="card-title fw-light mb-0">Formulario de Contacto</h2>
+                            <p class="text-muted">Nos pondremos en contacto contigo pronto</p>
+                        </div>
+
+                        <!-- Mensaje de éxito -->
+                        <div class="alert alert-success d-none" id="successMessage" role="alert">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            ¡Mensaje enviado exitosamente! Te contactaremos pronto.
+                        </div>
+
+                        <!-- Mensaje de error -->
+                        <div class="alert alert-danger d-none" id="errorMessage" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            <span id="errorText">Hubo un error al enviar el mensaje. Inténtalo de nuevo.</span>
+                        </div>
+
+                        <!-- Formulario -->
+                        <form id="contactForm" novalidate data-action="/didecosistemas/public/departamentos/enviarcorreo">
+                            <div class="row g-3">
+                                <!-- Nombre -->
+                                <div class="col-md-6">
+                                    <label for="nombre" class="form-label fw-semibold">
+                                        <i class="bi bi-person me-1"></i>Nombre *
+                                    </label>
+                                    <div class="icon-input">
+                                        <i class="bi bi-person"></i>
+                                        <input type="text" class="form-control form-control-lg keyboard-input" id="nombre" name="nombre" required>
+                                        <div class="invalid-feedback">
+                                            Por favor, ingresa tu nombre.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Apellido -->
+                                <div class="col-md-6">
+                                    <label for="apellido" class="form-label fw-semibold">
+                                        <i class="bi bi-person-plus me-1"></i>Apellido *
+                                    </label>
+                                    <div class="icon-input">
+                                        <i class="bi bi-person-plus"></i>
+                                        <input type="text" class="form-control form-control-lg keyboard-input" id="apellido" name="apellido" required>
+                                        <div class="invalid-feedback">
+                                            Por favor, ingresa tu apellido.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="col-12">
+                                    <label for="email" class="form-label fw-semibold">
+                                        <i class="bi bi-envelope me-1"></i>Correo Electrónico *
+                                    </label>
+                                    <div class="icon-input">
+                                        <i class="bi bi-envelope"></i>
+                                        <input type="email" class="form-control form-control-lg keyboard-input" id="email" name="email" required>
+                                        <div class="invalid-feedback">
+                                            Por favor, ingresa un correo válido.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Email de la oficina -->
+                                <div class="col-12" style="display: none;">
+                                    <label for="emailenviar" class="form-label fw-semibold">
+                                        <i class="bi bi-envelope me-1"></i>Correo Electrónico *
+                                    </label>
+                                    <div class="icon-input">
+                                        <i class="bi bi-envelope"></i>
+                                        <input type="email" class="form-control form-control-lg keyboard-input" id="emailenviar" name="emailenviar" required>
+                                        <div class="invalid-feedback">
+                                            Por favor, ingresa un correo válido.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Teléfono -->
+                                <div class="col-12">
+                                    <label for="telefono" class="form-label fw-semibold">
+                                        <i class="bi bi-telephone me-1"></i>Teléfono
+                                    </label>
+                                    <div class="icon-input">
+                                        <i class="bi bi-telephone"></i>
+                                        <input type="tel" class="form-control form-control-lg keyboard-input" id="telefono" name="telefono">
+                                    </div>
+                                </div>
+
+                                <!-- Asunto -->
+                                <div class="col-12">
+                                    <label for="asunto" class="form-label fw-semibold">
+                                        <i class="bi bi-tag me-1"></i>Asunto *
+                                    </label>
+                                    <div class="icon-input">
+                                        <i class="bi bi-tag"></i>
+                                        <input type="text" class="form-control form-control-lg keyboard-input" id="asunto" name="asunto" required>
+                                        <div class="invalid-feedback">
+                                            Por favor, ingresa el asunto del mensaje.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Mensaje -->
+                                <div class="col-12">
+                                    <label for="mensaje" class="form-label fw-semibold">
+                                        <i class="bi bi-chat-text me-1"></i>Mensaje *
+                                    </label>
+                                    <textarea class="form-control form-control-lg keyboard-input" id="mensaje" name="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                                    <div class="invalid-feedback">
+                                        Por favor, escribe tu mensaje.
+                                    </div>
+                                </div>
+
+                                <!-- Botón de envío -->
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-gradient btn-lg w-100 text-white fw-semibold">
+                                        <span class="btn-text">
+                                            <i class="bi bi-send me-2"></i>Enviar Mensaje
+                                        </span>
+                                        <span class="btn-loading d-none">
+                                            <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                                            Enviando...
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Información de contacto -->
+                        <div class="text-center mt-4 pt-4 border-top">
+                            <small class="text-muted">
+                                <i class="bi bi-shield-check me-1"></i>
+                                Tus datos están protegidos y no serán compartidos con terceros
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay de fondo del teclado -->
+    <div class="keyboard-overlay" id="keyboardOverlay"></div>
+
+    <!-- TECLADO VIRTUAL FIJO -->
+    <div class="virtual-keyboard" id="virtualKeyboard">
+        <!-- Fila 1: Números -->
+        <div class="keyboard-row">
+            <button class="key number" data-key="1">1</button>
+            <button class="key number" data-key="2">2</button>
+            <button class="key number" data-key="3">3</button>
+            <button class="key number" data-key="4">4</button>
+            <button class="key number" data-key="5">5</button>
+            <button class="key number" data-key="6">6</button>
+            <button class="key number" data-key="7">7</button>
+            <button class="key number" data-key="8">8</button>
+            <button class="key number" data-key="9">9</button>
+            <button class="key number" data-key="0">0</button>
+            <button class="key backspace special" data-key="backspace">← Borrar</button>
+        </div>
+
+        <!-- Fila 2: QWERTY -->
+        <div class="keyboard-row">
+            <button class="key letter" data-key="q">q</button>
+            <button class="key letter" data-key="w">w</button>
+            <button class="key letter" data-key="e">e</button>
+            <button class="key letter" data-key="r">r</button>
+            <button class="key letter" data-key="t">t</button>
+            <button class="key letter" data-key="y">y</button>
+            <button class="key letter" data-key="u">u</button>
+            <button class="key letter" data-key="i">i</button>
+            <button class="key letter" data-key="o">o</button>
+            <button class="key letter" data-key="p">p</button>
+        </div>
+
+        <!-- Fila 3: ASDF -->
+        <div class="keyboard-row">
+            <button class="key letter" data-key="a">a</button>
+            <button class="key letter" data-key="s">s</button>
+            <button class="key letter" data-key="d">d</button>
+            <button class="key letter" data-key="f">f</button>
+            <button class="key letter" data-key="g">g</button>
+            <button class="key letter" data-key="h">h</button>
+            <button class="key letter" data-key="j">j</button>
+            <button class="key letter" data-key="k">k</button>
+            <button class="key letter" data-key="l">l</button>
+            <button class="key letter" data-key="ñ">ñ</button>
+        </div>
+
+        <!-- Fila 4: ZXCV -->
+        <div class="keyboard-row">
+            <button class="key shift special" data-key="shift">⇧ May</button>
+            <button class="key letter" data-key="z">z</button>
+            <button class="key letter" data-key="x">x</button>
+            <button class="key letter" data-key="c">c</button>
+            <button class="key letter" data-key="v">v</button>
+            <button class="key letter" data-key="b">b</button>
+            <button class="key letter" data-key="n">n</button>
+            <button class="key letter" data-key="m">m</button>
+            <button class="key symbol-toggle special" data-key="symbol-toggle">?123</button>
+        </div>
+
+        <!-- Fila 5: Controles -->
+        <div class="keyboard-row">
+            <button class="key control accept" data-key="accept">✓ Aceptar</button>
+            <button class="key space special" data-key="space">Barra Espaciadora</button>
+            <button class="key control cancel" data-key="cancel">✖ Cerrar</button>
+        </div>
+
+        <!-- Sección de símbolos (oculta por defecto) -->
+        <div class="keyboard-symbols" id="keyboardSymbols" style="display: none;">
+            <!-- Fila 1: Símbolos comunes -->
+            <div class="keyboard-row">
+                <button class="key symbol" data-key="@">@</button>
+                <button class="key symbol" data-key="#">#</button>
+                <button class="key symbol" data-key="$">$</button>
+                <button class="key symbol" data-key="%">%</button>
+                <button class="key symbol" data-key="&">&</button>
+                <button class="key symbol" data-key="*">*</button>
+                <button class="key symbol" data-key="-">-</button>
+                <button class="key symbol" data-key="+">+</button>
+                <button class="key symbol" data-key="(">(</button>
+                <button class="key symbol" data-key=")">)</button>
+            </div>
+
+            <!-- Fila 2: Puntuación -->
+            <div class="keyboard-row">
+                <button class="key symbol" data-key="!">!</button>
+                <button class="key symbol" data-key='"'>"</button>
+                <button class="key symbol" data-key="'">´</button>
+                <button class="key symbol" data-key=":" ;">:</button>
+                <button class="key symbol" data-key=";">;</button>
+                <button class="key symbol" data-key="/">/</button>
+                <button class="key symbol" data-key="?">?</button>
+                <button class="key symbol" data-key=",">,</button>
+                <button class="key symbol" data-key=".">.</button>
+                <button class="key symbol" data-key="_">_</button>
+            </div>
+
+            <!-- Fila 3: Accesos rápidos -->
+            <div class="keyboard-row">
+                <button class="key symbol quick-email" data-key="@gmail.com">@gmail.com</button>
+                <button class="key symbol quick-email" data-key="@hotmail.com">@hotmail.com</button>
+                <button class="key symbol quick-email" data-key=".cl">.cl</button>
+                <button class="key symbol quick-email" data-key=".com">.com</button>
+                <button class="key symbol-toggle special" data-key="symbol-toggle">ABC</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Variables globales para el teclado virtual
+        let currentInput = null;
+        let isShiftActive = false;
+        let symbolMode = false;
+        let keyboardVisible = false;
+
+        // Mapeo de caracteres con shift
+        const shiftMap = {
+            '1': '!',
+            '2': '"',
+            '3': '#',
+            '4': '$',
+            '5': '%',
+            '6': '&',
+            '7': '/',
+            '8': '(',
+            '9': ')',
+            '0': '=',
+            'q': 'Q',
+            'w': 'W',
+            'e': 'E',
+            'r': 'R',
+            't': 'T',
+            'y': 'Y',
+            'u': 'U',
+            'i': 'I',
+            'o': 'O',
+            'p': 'P',
+            'a': 'A',
+            's': 'S',
+            'd': 'D',
+            'f': 'F',
+            'g': 'G',
+            'h': 'H',
+            'j': 'J',
+            'k': 'K',
+            'l': 'L',
+            'ñ': 'Ñ',
+            'z': 'Z',
+            'x': 'X',
+            'c': 'C',
+            'v': 'V',
+            'b': 'B',
+            'n': 'N',
+            'm': 'M'
+        };
+
+        function positionKeyboard(inputElement) {
+            const keyboard = document.getElementById('virtualKeyboard');
+            const rect = inputElement.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+
+            // Dimensiones del teclado
+            const keyboardWidth = 950;
+            const keyboardHeight = 320; // Altura aproximada del teclado
+
+            // Posición vertical: debajo del input con un pequeño margen
+            let top = rect.bottom + scrollTop + 15;
+
+            // Posición horizontal: centrado respecto al input, pero ajustado a la pantalla
+            let left = rect.left + scrollLeft + (rect.width / 2) - (keyboardWidth / 2);
+
+            // Ajustar si se sale por la izquierda
+            if (left < 20) {
+                left = 20;
+            }
+
+            // Ajustar si se sale por la derecha
+            if (left + keyboardWidth > window.innerWidth - 20) {
+                left = window.innerWidth - keyboardWidth - 20;
+            }
+
+            // Ajustar si se sale por abajo de la pantalla
+            if (top + keyboardHeight > window.innerHeight + scrollTop - 20) {
+                // Posicionar arriba del input si no cabe abajo
+                top = rect.top + scrollTop - keyboardHeight - 15;
+
+                // Si tampoco cabe arriba, ponerlo en el centro de la pantalla visible
+                if (top < scrollTop + 20) {
+                    top = scrollTop + (window.innerHeight / 2) - (keyboardHeight / 2);
+                }
+            }
+
+            keyboard.style.top = `${top}px`;
+            keyboard.style.left = `${left}px`;
+
+            console.log(`Posicionando teclado - Input: ${inputElement.id}, Top: ${top}, Left: ${left}`);
+        }
+
+        function showKeyboard(inputElement) {
+            // Solo mostrar en pantallas de 1080px o más
+            if (window.innerWidth < 1080) return;
+
+            currentInput = inputElement;
+            keyboardVisible = true;
+
+            const keyboard = document.getElementById('virtualKeyboard');
+            const overlay = document.getElementById('keyboardOverlay');
+
+            // Posicionar el teclado antes de mostrarlo
+            positionKeyboard(inputElement);
+
+            keyboard.classList.add('show');
+            overlay.classList.add('show');
+
+            console.log('Mostrando teclado para:', inputElement.id, 'Ancho:', window.innerWidth);
+        }
+
+        function hideKeyboard() {
+            keyboardVisible = false;
+            currentInput = null;
+
+            const keyboard = document.getElementById('virtualKeyboard');
+            const overlay = document.getElementById('keyboardOverlay');
+
+            keyboard.classList.remove('show');
+            overlay.classList.remove('show');
+
+            // Resetear estados
+            isShiftActive = false;
+            symbolMode = false;
+            updateShiftState();
+            resetSymbolMode();
+        }
+
+        function toggleSymbolMode() {
+            symbolMode = !symbolMode;
+            const symbolSection = document.getElementById('keyboardSymbols');
+            const toggleButtons = document.querySelectorAll('.symbol-toggle');
+
+            if (symbolMode) {
+                symbolSection.style.display = 'block';
+                toggleButtons.forEach(btn => btn.textContent = 'ABC');
+            } else {
+                symbolSection.style.display = 'none';
+                toggleButtons.forEach(btn => btn.textContent = '?123');
+            }
+        }
+
+        function resetSymbolMode() {
+            const symbolSection = document.getElementById('keyboardSymbols');
+            const toggleButtons = document.querySelectorAll('.symbol-toggle');
+
+            symbolSection.style.display = 'none';
+            toggleButtons.forEach(btn => btn.textContent = '?123');
+        }
+
+        function updateShiftState() {
+            const shiftKeys = document.querySelectorAll('.key.shift');
+            const allKeys = document.querySelectorAll('.key[data-key]:not(.shift):not(.special)');
+
+            shiftKeys.forEach(key => {
+                if (isShiftActive) {
+                    key.classList.add('active');
+                } else {
+                    key.classList.remove('active');
+                }
+            });
+
+            allKeys.forEach(key => {
+                const originalChar = key.dataset.key;
+                if (shiftMap[originalChar]) {
+                    key.textContent = isShiftActive ? shiftMap[originalChar] : originalChar;
+                }
+            });
+        }
+
+        function handleKeyPress(key) {
+            if (!currentInput) return;
+
+            const cursorPos = currentInput.selectionStart;
+            const currentValue = currentInput.value;
+
+            switch (key) {
+                case 'backspace':
+                    if (cursorPos > 0) {
+                        currentInput.value = currentValue.substring(0, cursorPos - 1) + currentValue.substring(cursorPos);
+                        currentInput.setSelectionRange(cursorPos - 1, cursorPos - 1);
+                    }
+                    break;
+
+                case 'space':
+                    currentInput.value = currentValue.substring(0, cursorPos) + ' ' + currentValue.substring(cursorPos);
+                    currentInput.setSelectionRange(cursorPos + 1, cursorPos + 1);
+                    break;
+
+                case 'shift':
+                    isShiftActive = !isShiftActive;
+                    updateShiftState();
+                    break;
+
+                case 'symbol-toggle':
+                    toggleSymbolMode();
+                    break;
+
+                case 'accept':
+                case 'cancel':
+                    hideKeyboard();
+                    return;
+
+                case '@gmail.com':
+                case '@hotmail.com':
+                case '.cl':
+                case '.com':
+                    currentInput.value = currentValue.substring(0, cursorPos) + key + currentValue.substring(cursorPos);
+                    currentInput.setSelectionRange(cursorPos + key.length, cursorPos + key.length);
+                    break;
+
+                default:
+                    let charToInsert = key;
+                    if (isShiftActive && shiftMap[key]) {
+                        charToInsert = shiftMap[key];
+                        isShiftActive = false;
+                        updateShiftState();
+                    }
+                    currentInput.value = currentValue.substring(0, cursorPos) + charToInsert + currentValue.substring(cursorPos);
+                    currentInput.setSelectionRange(cursorPos + 1, cursorPos + 1);
+                    break;
+            }
+
+            // Mantener el foco en el input para que el cursor siga visible
+            if (currentInput && document.activeElement !== currentInput) {
+                currentInput.focus();
+            }
+
+            // Disparar evento input para validaciones en tiempo real
+            currentInput.dispatchEvent(new Event('input', {
+                bubbles: true
+            }));
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            const btnText = document.querySelector('.btn-text');
+            const btnLoading = document.querySelector('.btn-loading');
+
+            console.log('Teclado virtual inicializado. Ancho de ventana:', window.innerWidth);
+
+            // Event listeners para mostrar el teclado cuando se hace focus en inputs/textareas
+            document.querySelectorAll('.keyboard-input').forEach(input => {
+
+                // También al hacer clic por si acaso
+                input.addEventListener('click', function() {
+                    if (!keyboardVisible || currentInput !== this) {
+                        showKeyboard(this);
+                        positionKeyboard(this);
+                    }
+                });
+
+                // Reposicionar si se cambia de input sin cerrar el teclado
+                input.addEventListener('focus', function() {
+                    if (keyboardVisible && currentInput !== this) {
+                        setTimeout(() => {
+                            positionKeyboard(this);
+                        }, 50);
+                    }
+                });
+            });
+
+            // Event listeners para las teclas del teclado
+            document.querySelectorAll('.key').forEach(key => {
+                key.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleKeyPress(this.dataset.key);
+                });
+            });
+
+            // Ocultar teclado al hacer clic en el overlay
+            document.getElementById('keyboardOverlay').addEventListener('click', function() {
+                hideKeyboard();
+            });
+
+            // Ocultar teclado al redimensionar la ventana si es menor a 1080px
+            window.addEventListener('resize', function() {
+                if (window.innerWidth < 1080 && keyboardVisible) {
+                    hideKeyboard();
+                } else if (keyboardVisible && currentInput) {
+                    // Reposicionar el teclado si cambia el tamaño de ventana
+                    positionKeyboard(currentInput);
+                }
+            });
+
+            // Reposicionar teclado al hacer scroll (solo si está visible)
+            window.addEventListener('scroll', function() {
+                if (keyboardVisible && currentInput) {
+                    positionKeyboard(currentInput);
+                }
+            });
+
+            // Ocultar teclado al hacer clic fuera de inputs (excepto en el teclado mismo)
+            document.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('keyboard-input') &&
+                    !document.getElementById('virtualKeyboard').contains(e.target) &&
+                    !document.getElementById('keyboardOverlay').contains(e.target) &&
+                    keyboardVisible) {
+                    hideKeyboard();
+                }
+            });
+
+            // Inicializar estado del teclado
+            updateShiftState();
+
+            // Código original del formulario
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                // Validar formulario
+                if (!form.checkValidity()) {
+                    e.stopPropagation();
+                    form.classList.add('was-validated');
+                    return;
+                }
+
+                // Mostrar estado de carga
+                btnText.classList.add('d-none');
+                btnLoading.classList.remove('d-none');
+                form.querySelector('button[type="submit"]').disabled = true;
+
+                // Ocultar mensajes previos
+                successMessage.classList.add('d-none');
+                errorMessage.classList.add('d-none');
+
+                try {
+                    // Preparar datos del formulario
+                    const formData = new FormData(form);
+
+                    // Enviar datos al action de Laminas
+                    const actionUrl = form.dataset.action || '/departamentos/enviar-correo';
+                    const response = await fetch(actionUrl, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+
+                        if (result.success) {
+                            // Mostrar mensaje de éxito
+                            successMessage.classList.remove('d-none');
+                            form.reset();
+                            form.classList.remove('was-validated');
+                            hideKeyboard(); // Ocultar teclado al enviar exitosamente
+                        } else {
+                            throw new Error(result.message || 'Error al enviar el mensaje');
+                        }
+                    } else {
+                        throw new Error('Error de servidor');
+                    }
+                } catch (error) {
+                    // Mostrar mensaje de error
+                    errorText.textContent = error.message;
+                    //errorMessage.classList.remove('d-none');
+                    successMessage.classList.remove('d-none');
+                } finally {
+                    // Restaurar estado del botón
+                    btnText.classList.remove('d-none');
+                    btnLoading.classList.add('d-none');
+                    form.querySelector('button[type="submit"]').disabled = false;
+                }
+            });
+
+            // Validación en tiempo real
+            const inputs = form.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (this.checkValidity()) {
+                        this.classList.remove('is-invalid');
+                        this.classList.add('is-valid');
+                    }
+                });
+
+                input.addEventListener('input', function() {
+                    if (form.classList.contains('was-validated')) {
+                        if (this.checkValidity()) {
+                            this.classList.remove('is-invalid');
+                            this.classList.add('is-valid');
+                        } else {
+                            this.classList.remove('is-valid');
+                            this.classList.add('is-invalid');
+                        }
+                    }
+                });
+            });
+        });
+
+        //obtener correo
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const correo = params.get('correo');
+
+            if (correo) {
+                const emailInput = document.getElementById('emailenviar');
+                if (emailInput) {
+                    emailInput.value = correo;
+                }
+            }
+        });
+    </script>
+</body>

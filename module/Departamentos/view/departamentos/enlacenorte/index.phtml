@@ -1,0 +1,302 @@
+<?php
+
+/**
+ * Vista para el menú de Enlace Norte - Servicios DIDECO
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+// Configurar el título de la página y breadcrumb
+$this->headTitle('Enlace Norte - Servicios DIDECO');
+$this->pageTitle = 'Enlace Norte - Servicios DIDECO';
+?>
+
+<div class="container">
+    <!-- Encabezado de la sección -->
+    <div class="text-center mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold mb-3" style="color: #15356c;">
+                    <i class="fas fa-compass me-3" style="color: #6537b6;"></i>
+                    Enlace Norte - Servicios DIDECO
+                </h1>
+                <p class="lead text-muted">
+                    Accede a todos los servicios de desarrollo social, subsidios, pensiones y beneficios
+                    disponibles para las familias del sector norte de nuestra comuna.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid de servicios con estilos unificados -->
+    <div class="grid-container">
+
+        <!-- Subsidio Único Familiar (SUF) -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/subsidiofamiliar" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-currency-dollar"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Subsidio Único Familiar (SUF)</div>
+                <div class="descripcion">
+                    Beneficio económico mensual para familias en situación de vulnerabilidad social.
+                </div>
+            </div>
+        </a>
+
+        <!-- Subsidio Maternal -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/subsidiomaternal" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-heart-pulse"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Subsidio Maternal</div>
+                <div class="descripcion">
+                    Apoyo económico para mujeres embarazadas que requieren atención médica especializada.
+                </div>
+            </div>
+        </a>
+
+        <!-- Subsidio Recién Nacido -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/subsidioreciennacido" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-emoji-smile"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Subsidio Recién Nacido</div>
+                <div class="descripcion">
+                    Beneficio económico destinado a cubrir gastos asociados al cuidado del recién nacido.
+                </div>
+            </div>
+        </a>
+
+        <!-- Subsidio Madre -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/subsidiomadre" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-person-heart"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Subsidio Madre</div>
+                <div class="descripcion">
+                    Apoyo económico mensual para madres en situación de vulnerabilidad social.
+                </div>
+            </div>
+        </a>
+
+        <!-- SUF Menores de 18 años -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/subsidiocesantiamenores" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-people"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">SUF Menores de 18 años</div>
+                <div class="descripcion">
+                    Subsidio específico para familias con causantes menores de 18 años.
+                </div>
+            </div>
+        </a>
+
+        <!-- Subsidio Familiar Duplo -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/subsidiofamiliarduplo" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-plus-circle"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Subsidio Familiar Duplo</div>
+                <div class="descripcion">
+                    Beneficio adicional para familias que califican para recibir apoyo económico reforzado.
+                </div>
+            </div>
+        </a>
+
+        <!-- Pensiones -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/pensiones" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-bank"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Pensiones</div>
+                <div class="descripcion">
+                    Información general sobre trámites y beneficios relacionados con pensiones.
+                </div>
+            </div>
+        </a>
+
+        <!-- Pensión Garantizada Universal (PGU) -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/pensionuniversal" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-shield-check"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Pensión Garantizada Universal (PGU)</div>
+                <div class="descripcion">
+                    Beneficio previsional universal para adultos mayores de 65 años que cumplan los requisitos.
+                </div>
+            </div>
+        </a>
+
+        <!-- Pensión Básica Solidaria de Invalidez (PBSI) -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/pensioninvalidez" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-person-wheelchair"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Pensión Básica Solidaria de Invalidez</div>
+                <div class="descripcion">
+                    Pensión para personas entre 18 y 65 años con invalidez, que no tienen derecho a pensión.
+                </div>
+            </div>
+        </a>
+
+        <!-- Aporte Previsional Solidario de Invalidez (APSI) -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/aporteinvalidez" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-graph-up-arrow"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Aporte Previsional Solidario de Invalidez</div>
+                <div class="descripcion">
+                    Complemento a la pensión de invalidez para personas que reciben pensiones de bajo monto.
+                </div>
+            </div>
+        </a>
+
+        <!-- Bono Por Hijo -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/bonoporhijo" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-gift"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Bono Por Hijo</div>
+                <div class="descripcion">
+                    Beneficio económico adicional por cada hijo para mujeres pensionadas.
+                </div>
+            </div>
+        </a>
+
+        <!-- Subsidio de Discapacidad -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/subsidiodiscapacidad" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-universal-access"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Subsidio de Discapacidad (S.D.)</div>
+                <div class="descripcion">
+                    Apoyo económico mensual para personas con discapacidad mental en situación de vulnerabilidad.
+                </div>
+            </div>
+        </a>
+
+        <!-- Subsidios Agua Potable -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/subsidioagua" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-droplet"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Subsidios Agua Potable</div>
+                <div class="descripcion">
+                    Subsidios para el pago del consumo de agua potable y alcantarillado para familias vulnerables.
+                </div>
+            </div>
+        </a>
+
+        <!-- SAP Rural -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/saprural" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-tree"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">SAP Rural</div>
+                <div class="descripcion">
+                    Subsidio para usuarios de sistemas de agua potable rural (APR).
+                </div>
+            </div>
+        </a>
+
+        <!-- SAP Urbano -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/sapurbano" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-buildings"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">SAP Urbano</div>
+                <div class="descripcion">
+                    Subsidio de Agua Potable para sectores urbanos con conexión domiciliaria de agua potable.
+                </div>
+            </div>
+        </a>
+
+        <!-- Comodato -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/comodato" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-file-earmark-text"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Comodato</div>
+                <div class="descripcion">
+                    Asesoramiento para trámites de comodato y cesión de uso de bienes municipales.
+                </div>
+            </div>
+        </a>
+
+        <!-- Territorial Juntas Vecinales -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/juntasvecinales" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-house-door"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Territorial Juntas Vecinales</div>
+                <div class="descripcion">
+                    Apoyo y orientación para la formación, gestión y fortalecimiento de juntas de vecinos.
+                </div>
+            </div>
+        </a>
+
+        <!-- Territorial Organizaciones Funcionales -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/organizacionesfuncionales" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-diagram-3"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Territorial Organizaciones Funcionales</div>
+                <div class="descripcion">
+                    Asesoramiento para organizaciones comunitarias, clubes deportivos, centros de madres y agrupaciones.
+                </div>
+            </div>
+        </a>
+
+        <!-- Equipo de Logística y Emergencia Enlace Norte -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte/emergencias" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-exclamation-triangle"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Equipo de Logística y Emergencia</div>
+                <div class="descripcion">
+                    Coordinación de apoyo logístico y respuesta ante situaciones de emergencia en el sector norte.
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-10">
+            <div class="info-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <i class="bi bi-info-circle info-icon"></i>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="mb-2 fw-bold">¿Tienes dudas o quieres postular?</h6>
+                        <p class="mb-0">
+                            El equipo de Enlace Norte está disponible para orientarte y acompañarte en tu proceso.
+                        </p>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <a href="/didecosistemas/public/departamentos/correos?correo=enlacenorte@municipalidadarica.cl" class="btn btn-outline-primary btn-sm">Contactar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

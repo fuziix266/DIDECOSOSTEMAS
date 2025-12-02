@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Trámites</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+        }
+        .navbar-custom {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark navbar-custom mb-4">
+        <div class="container-fluid">
+            <a href="<?= $this->url('departamentos-mantencion', ['action' => 'dashboard']) ?>" class="navbar-brand">
+                ← Sistema de Mantención
+            </a>
+            <div class="d-flex align-items-center text-white">
+                <span class="me-3">
+                    👤 <?= $this->escapeHtml($this->usuario['nombre']) ?>
+                </span>
+                <a href="<?= $this->url('departamentos-mantencion', ['action' => 'logout']) ?>" class="btn btn-light btn-sm">
+                    Salir
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">Gestión de Trámites</h4>
+                        
+                        <!-- Filtro por Departamento -->
+                        <form method="GET" class="mb-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="departamento" class="form-label">Filtrar por Departamento</label>
+                                    <select name="departamento" id="departamento" class="form-select" onchange="this.form.submit()">
+                                        <option value="">-- Seleccione un departamento --</option>
+                                        <?php foreach ($this->departamentos as $dept): ?>
+                                            <option value="<?= $dept['id'] ?>" <?= $dept['id'] == $this->departamentoId ? 'selected' : '' ?>>
+                                                <?= $this->escapeHtml($dept['nombre']) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+
+                        <?php if (!empty($this->tramites)): ?>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nombre del Trámite</th>
+                                            <th>Slug</th>
+                                            <th>Responsable</th>
+                                            <th class="text-center">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($this->tramites as $tramite): ?>
+                                        <tr>
+                                            <td><?= $tramite['id'] ?></td>
+                                            <td><?= $this->escapeHtml($tramite['nombre']) ?></td>
+                                            <td><code><?= $this->escapeHtml($tramite['slug']) ?></code></td>
+                                            <td><?= $this->escapeHtml($tramite['responsable_nombre'] ?? '-') ?></td>
+                                            <td class="text-center">
+                                                <a href="<?= $this->url('departamentos-mantencion', ['action' => 'editartramite', 'id' => $tramite['id']]) ?>" 
+                                                   class="btn btn-sm btn-primary">
+                                                    ✏️ Editar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php elseif ($this->departamentoId > 0): ?>
+                            <div class="alert alert-info">
+                                No hay trámites en este departamento.
+                            </div>
+                        <?php else: ?>
+                            <div class="alert alert-warning">
+                                Por favor, seleccione un departamento para ver sus trámites.
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

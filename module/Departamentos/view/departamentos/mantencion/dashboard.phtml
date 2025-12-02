@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Mantención</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar-custom {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+        }
+        .stats-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border: none;
+            color: white;
+        }
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark navbar-custom mb-4">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Sistema de Mantención - DIDECO</span>
+            <div class="d-flex align-items-center text-white">
+                <span class="me-3">
+                    👤 <?= $this->escapeHtml($this->usuario['nombre']) ?>
+                    <span class="badge bg-light text-dark ms-2"><?= ucfirst($this->usuario['rol']) ?></span>
+                </span>
+                <a href="<?= $this->url('departamentos-mantencion', ['action' => 'logout']) ?>" class="btn btn-light btn-sm">
+                    Salir
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Bienvenida -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <h5>👋 Bienvenido, <?= $this->escapeHtml($this->usuario['nombre']) ?></h5>
+                    <p class="mb-0">Desde aquí puedes gestionar los contenidos del sistema DIDECO.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estadísticas -->
+        <div class="row">
+            <?php if ($this->usuario['rol'] === 'administrador'): ?>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stats-icon bg-primary bg-opacity-10 text-primary">
+                            👥
+                        </div>
+                        <h3 class="mb-0">-</h3>
+                        <p class="text-muted mb-3">Usuarios del Sistema</p>
+                        <a href="<?= $this->url('departamentos-mantencion', ['action' => 'usuarios']) ?>" class="btn btn-primary btn-sm">
+                            Gestionar Usuarios
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stats-icon bg-success bg-opacity-10 text-success">
+                            🏢
+                        </div>
+                        <h3 class="mb-0"><?= count($this->departamentos) ?></h3>
+                        <p class="text-muted mb-3">Departamentos</p>
+                        <a href="#" class="btn btn-success btn-sm disabled">
+                            Ver Departamentos
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stats-icon bg-warning bg-opacity-10 text-warning">
+                            📝
+                        </div>
+                        <h3 class="mb-0"><?= $this->totalTramites ?></h3>
+                        <p class="text-muted mb-3">Trámites Totales</p>
+                        <a href="<?= $this->url('departamentos-mantencion', ['action' => 'tramites']) ?>" class="btn btn-warning btn-sm">
+                            Gestionar Trámites
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Acciones Rápidas -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Acciones Rápidas</h5>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <?php if ($this->usuario['rol'] === 'administrador'): ?>
+                            <a href="<?= $this->url('departamentos-mantencion', ['action' => 'agregarusuario']) ?>" class="btn btn-gradient">
+                                ➕ Nuevo Usuario
+                            </a>
+                            <?php endif; ?>
+                            <a href="<?= $this->url('departamentos-mantencion', ['action' => 'tramites']) ?>" class="btn btn-outline-primary">
+                                ✏️ Editar Trámites
+                            </a>
+                            <a href="/" class="btn btn-outline-secondary">
+                                🏠 Volver al Sitio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista de Departamentos -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Departamentos Disponibles</h5>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Departamento</th>
+                                        <th>Slug</th>
+                                        <th class="text-center">Orden</th>
+                                        <th class="text-center">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($this->departamentos as $dept): ?>
+                                    <tr>
+                                        <td><?= $this->escapeHtml($dept['nombre']) ?></td>
+                                        <td><code><?= $this->escapeHtml($dept['slug']) ?></code></td>
+                                        <td class="text-center"><?= $dept['orden'] ?></td>
+                                        <td class="text-center">
+                                            <?php if ($dept['activo']): ?>
+                                                <span class="badge bg-success">Activo</span>
+                                            <?php else: ?>
+                                                <span class="badge bg-secondary">Inactivo</span>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

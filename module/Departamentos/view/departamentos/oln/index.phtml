@@ -1,0 +1,106 @@
+<?php
+
+/**
+ * Vista para el menú de Trámites de la Oficina Local de la Niñez (OLN)
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+// Configurar el título de la página y breadcrumb
+$this->headTitle('Trámites Oficina Local de la Niñez');
+$this->pageTitle = 'Trámites Oficina Local de la Niñez';
+?>
+
+<div class="container">
+    <!-- Encabezado de la sección -->
+    <div class="text-center mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold mb-3" style="color: #15356c;">
+                    <i class="fas fa-child me-3" style="color: #e67e22;"></i>
+                    Oficina Local de la Niñez (OLN)
+                </h1>
+                <p class="lead text-muted">
+                    Accede a los trámites y servicios orientados a la protección y promoción de los derechos de niños, niñas y adolescentes.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid de trámites OLN -->
+    <div class="grid-container">
+
+        <!-- Trámite 1 -->
+        <a href="/didecosistemas/public/departamentos/oln/demanda" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-exclamation-triangle"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Demandas Espontáneas</div>
+                <div class="descripcion">
+                    Denuncia de situaciones de vulneración de derechos de NNA para activar medidas de protección.
+                </div>
+            </div>
+        </a>
+
+        <!-- Trámite 2 -->
+        <a href="/didecosistemas/public/departamentos/oln/proteccionuniversal" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-people"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Protección Universal</div>
+                <div class="descripcion">
+                    Acciones preventivas y de restitución de derechos para NNA en riesgo.
+                </div>
+            </div>
+        </a>
+
+        <!-- Trámite 3 -->
+        <a href="/didecosistemas/public/departamentos/oln/proteccionurgencia" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-shield-exclamation"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Protección de Urgencia</div>
+                <div class="descripcion">
+                    Medidas inmediatas frente a vulneraciones graves a los derechos de NNA.
+                </div>
+            </div>
+        </a>
+
+        <!-- Trámite 4 -->
+        <a href="/didecosistemas/public/departamentos/oln/promocionderechosnna" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-megaphone"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Promoción de Derechos</div>
+                <div class="descripcion">
+                    Capacitaciones, stands y actividades para promover derechos de NNA en el territorio.
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-10">
+            <div class="info-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <i class="bi bi-info-circle info-icon"></i>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="mb-2 fw-bold">¿Tienes dudas o quieres postular?</h6>
+                        <p class="mb-0">
+                            El equipo de la Oficina Local de la Niñez está disponible para orientarte y acompañarte en tu proceso.
+                        </p>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <a href="/didecosistemas/public/departamentos/correos?correo=oln@municipalidadarica.cl" class="btn btn-outline-primary btn-sm">Contactar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

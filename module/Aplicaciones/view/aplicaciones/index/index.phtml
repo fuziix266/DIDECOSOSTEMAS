@@ -1,0 +1,223 @@
+<!-- Archivo adaptado para Bootstrap 5: cambios realizados en este fragmento:
+    - Eliminado <body> (el layout ya lo define)
+    - Reemplazados helpers de margin v4 (ej: ml-* -> ms-*/me-*)
+    - Reemplazados elementos <p class="icon-tabler-card"> por <span class="icon-tabler-card d-block"> para mantener semántica y compatibilidad
+    - Se verificó y se utilizan atributos data-bs-* (Bootstrap 5)
+-->
+<style>
+    /* Estilos locales para unificar tamaño de tarjetas en SECCIONES */
+    .card-secction {
+        min-height: 96px;
+    }
+
+    .card-secction .card-body {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 100%;
+    }
+
+    a.text-decoration-none.d-block {
+        text-decoration: none;
+    }
+
+    @media (min-width: 768px) {
+        .card-secction {
+            min-height: 110px;
+        }
+    }
+</style>
+<app-root aria-hidden="false" ng-version="19.2.6" _nghost-ng-c3981582092=""><router-outlet _ngcontent-ng-c3981582092=""></router-outlet><app-index><app-header _nghost-ng-c1885573272="">
+
+        </app-header><app-navbar _nghost-ng-c1450539795="">
+            <app-modal-search-file _ngcontent-ng-c1450539795="">
+                <div id="modal-search" tabindex="-1" role="dialog" aria-modal="true" class="modal modal-blur fade">
+                    <div role="document" class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Buscar documento</h5><button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                            </div><!---->
+                            <div class="modal-body">
+                                <div class="mb-3"><label class="form-label"></label>
+                                    <div class="row g-2">
+                                        <div class="col"><input type="text" placeholder="Escribe el nombre del archivo..." class="form-control form-control-rounded"></div>
+                                        <div class="col-auto"><a href="#" aria-label="Button" class="btn btn-icon"><i class="bi bi-search fs-4" aria-hidden="true"></i></a><!----><!----></div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table-vcenter table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Nombre</th>
+                                                <th>Descripción</th>
+                                                <th>Tamaño</th>
+                                                <th>Tipo</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="align-middle"><!----><!---->
+                                            <tr>
+                                                <td colspan="8" class="text-secondary text-center"> No se encontraron registros </td>
+                                            </tr><!----><!---->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer"><a href="#" data-bs-dismiss="modal" class="btn btn-link link-secondary btn-3"> Cerrar </a></div>
+                        </div>
+                    </div>
+                </div>
+            </app-modal-search-file>
+        </app-navbar><router-outlet></router-outlet><app-home _nghost-ng-c4059217591="">
+            <section>
+                <div class="container-xl pt-3"><!----><!---->
+                    <div id="carousel-banners" class="carousel slide carousel-fade">
+                        <div class="carousel-indicators"><button type="button" class="active" aria-current="true" data-bs-target="#carousel-banners" data-bs-slide-to="0" aria-label="Slide 1"></button><!----></div>
+                        <div class="carousel-inner rounded-4">
+                            <div class="carousel-item active"><a href="#"><img class="d-block w-100" src="vehiculos/imagenes/inicio/banner_aplicaciones_dideco.jpg" alt="DIDECO"></a></div><!---->
+                        </div><!---->
+                    </div><!----><!----><!---->
+                </div>
+            </section>
+            <section>
+                <div class="container-xl pt-3">
+                    <div class="row">
+                        <div class="col-md-3 col-6 pt-2"><a class="text-decoration-none d-block" href="vehiculos/admin">
+                                <div class="card rounded-4" style="background-color: #27c9a2;">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">
+                                            <span class="icon-tabler-card d-block"><i class="bi bi-file-earmark-check fs-4" aria-hidden="true"></i></span><span class="fw-bolder text-uppercase">Administración<br>QR Vehicular</span>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </a></div>
+                        <div class="col-md-3 col-6 pt-2"><a class="text-decoration-none d-block" href="#">
+                                <div class="card rounded-4" style="background-color: #ffcb4a;">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">
+                                            <span class="icon-tabler-card d-block"><i class="bi bi-people fs-4" aria-hidden="true"></i></span><span class="fw-bolder text-uppercase">Troncos<br>Familiares</span>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </a></div>
+                        <div class="col-md-3 col-6 pt-2"><a class="text-decoration-none d-block" href="radio/admin">
+                                <div class="card rounded-4" style="background-color: #06048C;">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">
+                                            <span class="icon-tabler-card d-block"><i class="bi bi-mic fs-4 text-white" aria-hidden="true"></i></span><span class="fw-bolder text-uppercase text-white">Administración<br>Radio</span>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </a></div>
+                        <div class="col-md-3 col-6 pt-2"><a href="https://leykarin.imaarica.cl/" target="_blank" class="text-decoration-none d-block">
+                                <div class="card rounded-4" style="background-color: #ff6848;">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">
+                                            <span class="icon-tabler-card d-block"><i class="bi bi-briefcase fs-4 text-white" aria-hidden="true"></i></span><span class="fw-bolder text-uppercase text-white">Tarjeta<br>Senior</span>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </a></div>
+                        <div class="col-md-3 col-6 pt-2"><a class="text-decoration-none d-block" href="aplicaciones/bingo">
+                                <div class="card rounded-4" style="background-color: #00a8e6;">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">
+                                            <span class="icon-tabler-card d-block"><i class="bi bi-file-earmark fs-4 text-white" aria-hidden="true"></i></span><span class="fw-bolder text-uppercase card-solicitudes text-white">Bingos<br>DIDECO</span>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </a></div>
+                    </div>
+                </div>
+            </section>
+            <!-- Secciones 
+            <section>
+                <div class="container-xl">
+                    <div class="mt-6">
+                        <div class="d-flex align-items-center my-4">
+                            <hr class="flex-grow-1">
+                            <h2 class="mx-3 mb-0 text-primary fw-bold">SECCIONES</h2>
+                            <hr class="flex-grow-1">
+                        </div>
+                        <div class="row pt-1">
+                            <div class="col-md-3 pb-1"><a class="text-decoration-none d-block" href="#">
+                                    <div class="card card-sm card-secction">
+                                        <div class="card-body">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto"><span class="bg-primary avatar rounded-circle text-white"><i class="bi bi-map fs-5" aria-hidden="true"></i></span></div>
+                                                <div class="col">
+                                                    <h3 class="card-title mb-1">
+                                                        <div class="text-reset">Sección</div>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a></div>
+                            <div class="col-md-3 pb-1"><a class="text-decoration-none d-block" href="#">
+                                    <div class="card card-sm card-secction">
+                                        <div class="card-body">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto"><span class="bg-primary avatar rounded-circle text-white"><i class="bi bi-info-circle fs-5" aria-hidden="true"></i></span></div>
+                                                <div class="col">
+                                                    <h3 class="card-title mb-1">
+                                                        <div class="text-reset">Sección</div>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a></div>
+                            <div class="col-md-3 pb-1"><a class="text-decoration-none d-block" href="#">
+                                    <div class="card card-sm card-secction">
+                                        <div class="card-body">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto"><span class="bg-primary avatar rounded-circle text-white"><i class="bi bi-laptop fs-5" aria-hidden="true"></i></span></div>
+                                                <div class="col">
+                                                    <h3 class="card-title mb-1">
+                                                        <div class="text-reset">Sección</div>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a></div>
+                            <div class="col-md-3 pb-1"><a class="text-decoration-none d-block" href="#">
+                                    <div class="card card-sm card-secction">
+                                        <div class="card-body">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto"><span class="bg-primary avatar rounded-circle text-white"><i class="bi bi-file-earmark-lock fs-5" aria-hidden="true"></i></span></div>
+                                                <div class="col">
+                                                    <h3 class="card-title mb-1">
+                                                        <div class="text-reset">Sección</div>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            -->
+            <section>
+                <div id="modal-popup" tabindex="-1" aria-hidden="true" class="modal fade">
+                    <div role="document" class="modal-dialog modal-dialog-centered" style="max-width: 600px; width: 90%; margin: auto;">
+                        <div class="modal-content" style="background-color: transparent;"><!----><!----><!---->
+                            <div role="alert" class="alert alert-info mb-0 bg-white">
+                                <div class="d-flex">
+                                    <div class="ms-2"><i class="bi bi-info-circle fs-4" aria-hidden="true"></i></div>
+                                    <div>
+                                        <h4 class="alert-title" style="margin-left: 5px;"> Información </h4>
+                                        <div class="text-secondary"> No hay banners publicados en este momento. </div>
+                                    </div>
+                                </div>
+                            </div><!----><!---->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- body eliminado (este fragmento se inserta dentro del layout) -->

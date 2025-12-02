@@ -1,0 +1,138 @@
+<?php
+
+/**
+
+ * Vista para el menú de Trámites - Oficina Afrodescendiente
+
+ * @var Laminas\View\Renderer\PhpRenderer $this
+
+ * @var array $departamento Datos del departamento desde BD
+
+ * @var array $tramites Lista de trámites desde BD
+
+ */
+
+
+
+$this->headTitle($departamento['nombre']);
+
+$this->pageTitle = 'Trámites ' . $departamento['nombre'];
+
+?>
+
+
+
+<div class="container">
+
+  <!-- Encabezado -->
+
+  <div class="text-center mb-5">
+
+    <div class="row justify-content-center">
+
+      <div class="col-lg-8">
+
+        <h1 class="display-5 fw-bold mb-3" style="color: #15356c;">
+
+          <i class="<?= $departamento['icono_bootstrap'] ?: $departamento['icono_fontawesome'] ?> me-3" style="color: <?= $departamento['color_primario'] ?>;"></i>
+
+          <?= $this->escapeHtml($departamento['nombre']) ?>
+
+        </h1>
+
+        <p class="lead text-muted">
+
+          <?= $this->escapeHtml($departamento['descripcion']) ?>
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Grid de trámites -->
+
+  <div class="grid-container">
+
+    
+
+    <?php foreach ($tramites as $tramite): ?>
+
+    <a href="/didecosistemas/public/departamentos/<?= $this->escapeHtml($departamento['slug']) ?>/<?= $this->escapeHtml($tramite['slug']) ?>" class="card-departamento">
+
+      <div class="card-icon">
+
+        <i class="<?= $this->escapeHtml($tramite['icono_bootstrap'] ?: $tramite['icono_fontawesome']) ?>"></i>
+
+      </div>
+
+      <div class="card-content">
+
+        <div class="card-title"><?= $this->escapeHtml($tramite['nombre']) ?></div>
+
+        <div class="descripcion">
+
+          <?= $this->escapeHtml($tramite['descripcion_corta']) ?>
+
+        </div>
+
+      </div>
+
+    </a>
+
+    <?php endforeach; ?>
+
+
+
+  </div>
+
+
+
+  <!-- Información de contacto -->
+
+  <div class="row justify-content-center mt-5">
+
+    <div class="col-lg-10">
+
+      <div class="info-banner">
+
+        <div class="row align-items-center">
+
+          <div class="col-md-2 text-center">
+
+            <i class="bi bi-info-circle info-icon"></i>
+
+          </div>
+
+          <div class="col-md-8">
+
+            <h6 class="mb-2 fw-bold">¿Eres parte del pueblo afrodescendiente?</h6>
+
+            <p class="mb-0">
+
+              Visítanos y conoce todos los servicios que la municipalidad ofrece para visibilizar y promover tus derechos y cultura.
+
+            </p>
+
+          </div>
+
+          <div class="col-md-2 text-center">
+
+            <a href="/didecosistemas/public/departamentos/correos?correo=<?= $departamento['email_contacto'] ?>" class="btn btn-outline-primary btn-sm">Contactar</a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+

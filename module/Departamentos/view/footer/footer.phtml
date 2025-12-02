@@ -1,0 +1,229 @@
+<style>
+    .footer {
+        background: #051c9c;
+        color: white;
+    }
+
+    .contenido-footer {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .copyright {
+        background: rgb(255, 255, 255);
+        padding: 1rem 0;
+        color: rgb(29, 29, 29);
+    }
+
+    .footer-section h5 {
+        color: #dbe8ff;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .footer-section a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: color 0.3s ease;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .footer-section a:hover {
+        color: #dbe8ff;
+    }
+
+    /* separador footer */
+    .separador-footer {
+        margin-top: 2rem;
+    }
+
+    .celeste {
+        background-color: #01a5e2;
+        padding-top: 0.5rem;
+    }
+
+    .verde {
+        background-color: #00ac8e;
+        padding-top: 0.5rem;
+    }
+
+    .rojo {
+        background-color: #d1694e;
+        padding-top: 0.5rem;
+    }
+
+    .amarillo {
+        background-color: #eec85d;
+        padding-top: 0.5rem;
+    }
+
+    .contenedor-logo-footer-totem {
+        display: none;
+    }
+
+    @media (max-width: 1081px) and (min-width: 1080px) {
+        .contenedor-footer {
+            display: none;
+        }
+
+        .contenedor-logo-footer-totem {
+            display: block;
+            text-align: center;
+        }
+
+        .logo-footer-totem {
+            max-width: 50%;
+        }
+
+    }
+
+    @media (max-width: 768px) {
+
+        .contenido-footer-uno {
+            text-align: center;
+        }
+
+        .logo-footer-uno {
+            max-width: 70% !important;
+        }
+
+        .contenido-footer-dos {
+            display: none;
+        }
+
+        .contenido-footer-tres {
+            display: none;
+        }
+
+        .contenido-footer-cuatro {
+            display: none;
+        }
+    }
+</style>
+
+<div class="separador-footer d-flex">
+    <div class="flex-fill celeste"></div>
+    <div class="flex-fill verde"></div>
+    <div class="flex-fill rojo"></div>
+    <div class="flex-fill amarillo"></div>
+</div>
+<footer class="footer text-white">
+    <div class="container contenedor-logo-footer-totem">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="/didecosistemas/public/img/logo-municipalidad.webp" alt="Logo Municipalidad de Arica" class="img-fluid mb-3 mt-3 logo-footer-totem">
+            </div>
+        </div>
+    </div>
+    <div class="container contenedor-footer">
+        <div class="row contenido-footer">
+            <!-- Logo y contacto -->
+            <div class="col-md-3 contenido-footer-uno">
+                <img src="/didecosistemas/public/img/logo-municipalidad.webp" alt="Logo Municipalidad de Arica" class="img-fluid mb-3 logo-footer-uno">
+                <p>Ilustre Municipalidad de Arica<br>Avenida Rafael Sotomayor #415, Arica.</p>
+                <a href="tel:432380004" class="text-white">Teléfono: 432380004</a>
+                <div class="mt-3 fw-bold">VISITA NUESTRAS REDES SOCIALES</div>
+                <div class="d-flex mt-2 justify-content-center">
+                    <div class="col-md-2">
+                        <a href="https://www.instagram.com/municipioarica/" target="_blank" class="me-3" style="color: #eec85d">
+                            <i class="bi bi-instagram fs-4"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="https://www.facebook.com/muniarica" target="_blank" class="me-3" style="color: #eec85d">
+                            <i class="bi bi-facebook fs-4"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="https://www.youtube.com/@municipalidaddearica" target="_blank" class="me-3" style="color: #eec85d">
+                            <i class="bi bi-youtube fs-4"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="https://www.tiktok.com/@municipioarica" target="_blank" class="me-3" style="color: #eec85d">
+                            <i class="bi bi-tiktok fs-4"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="https://www.flickr.com/photos/muniarica" target="_blank" class="me-3" style="color: #eec85d">
+                            <i class="bi bi-camera fs-4"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="https://open.spotify.com/show/0UGp5pytH9UTnBUU3EULcl" target="_blank" class="me-3" style="color: #eec85d">
+                            <i class="bi bi-spotify fs-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Municipalidad -->
+            <div class="col-md-3 contenido-footer-dos">
+                <h5 class="fw-bold" style="color: #eec85d">MUNICIPALIDAD</h5>
+                <ul class="list-unstyled">
+                    <li><a href="https://www.muniarica.cl/alcalde/" class="text-white">Alcalde</a></li>
+                    <li><a href="https://www.muniarica.cl/concejo-municipal/" class="text-white">Concejo municipal</a></li>
+                    <li><a href="https://www.muniarica.cl/ordenanzas/" class="text-white">Ordenanzas</a></li>
+                    <li><a href="https://www.muniarica.cl/concursos-publicos/" class="text-white">Concursos públicos</a></li>
+                    <li><a href="https://www.muniarica.cl/juzgado-de-policia-local/" class="text-white">Juzgado de policía local</a></li>
+                    <li><a href="https://www.muniarica.cl/transito/" class="text-white">Tránsito</a></li>
+                    <li><a href="https://www.muniarica.cl/direccion-de-administracion-y-finanzas/" class="text-white">Administración y Finanzas</a></li>
+                    <li><a href="https://www.muniarica.cl/marco-normativo/" class="text-white">Marco Normativo</a></li>
+                    <li><a href="https://www.muniarica.cl/pladeco/" class="text-white">PLADECO</a></li>
+                    <li><a href="https://www.muniarica.cl/organigrama/" class="text-white">Organigrama</a></li>
+                    <li><a href="https://www.muniarica.cl/cuentas-publicas/" class="text-white">Cuentas públicas</a></li>
+                    <li><a href="https://www.muniarica.cl/plan-regulador/" class="text-white">Plan regulador</a></li>
+                </ul>
+            </div>
+
+            <!-- Servicios Municipales -->
+            <div class="col-md-3 contenido-footer-tres">
+                <h5 class="fw-bold" style="color: #eec85d">SERVICIOS MUNICIPALES</h5>
+                <ul class="list-unstyled">
+                    <li><a href="https://www.muniarica.cl/parque-centenario/" class="text-white">Parque Centenario</a></li>
+                    <li><a href="https://www.muniarica.cl/omil/" class="text-white">OMIL</a></li>
+                    <li><a href="https://www.muniarica.cl/dideco/" class="text-white">DIDECO</a></li>
+                    <li><a href="https://www.muniarica.cl/cementerio/" class="text-white">Cementerio</a></li>
+                    <li><a href="https://www.muniarica.cl/veterinaria-municipal/" class="text-white">Veterinaria municipal</a></li>
+                    <li><a href="https://www.muniarica.cl/deportes/" class="text-white">Deportes</a></li>
+                    <li><a href="https://www.muniarica.cl/farmacia-municipal/" class="text-white">Farmacia municipal</a></li>
+                    <li><a href="https://www.muniarica.cl/tramites-en-linea/" class="text-white">Trámites en línea</a></li>
+                    <li><a href="https://www.muniarica.cl/retiro-de-vehiculos/" class="text-white">Retiro de vehículos</a></li>
+                    <li><a href="https://www.muniarica.cl/retiro-de-residuos/" class="text-white">Retiro de residuos</a></li>
+                </ul>
+            </div>
+
+            <!-- Accesos IMA -->
+            <div class="col-md-3 contenido-footer-cuatro">
+                <h5 class="fw-bold" style="color: #eec85d">ACCESOS IMA</h5>
+                <ul class="list-unstyled">
+                    <li><a href="https://intranet.muniarica.cl/" class="text-white">Intranet Municipal</a></li>
+                    <li><a href="https://rrhh.muniarica.cl/" class="text-white">Intranet RRHH</a></li>
+                    <li><a href="https://webmail.muniarica.cl/" class="text-white">Webmail</a></li>
+                    <li><a href="https://smi.muniarica.cl/" class="text-white">Sistema de Iniciativas</a></li>
+                    <li><a href="https://www.muniarica.cl/obras/" class="text-white">Listado de Obras 2016-2024</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="text-center copyright w-100">
+        <small class="d-block text-wrap text-break text-center px-3">
+            &copy; 2025 DIDECO - Ilustre Municipalidad de Arica - Todos los derechos reservados.
+        </small>
+    </div>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DKB6N7EJTZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-DKB6N7EJTZ');
+    </script>
+</footer>

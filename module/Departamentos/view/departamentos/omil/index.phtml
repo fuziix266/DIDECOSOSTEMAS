@@ -1,0 +1,143 @@
+<?php
+
+/**
+ * Vista para el menú de Trámites de la Oficina Municipal de Intermediación Laboral (OMIL)
+ */
+
+$this->headTitle('Trámites Oficina OMIL');
+$this->pageTitle = 'Trámites Oficina OMIL';
+?>
+
+<div class="container">
+    <!-- Encabezado de la sección -->
+    <div class="text-center mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold mb-3" style="color: #15356c;">
+                    <i class="fas fa-briefcase me-3" style="color: #2980b9;"></i>
+                    Oficina Municipal de Intermediación Laboral (OMIL)
+                </h1>
+                <p class="lead text-muted">
+                    Accede a los servicios que ofrece la OMIL para la inscripción, postulación laboral y certificaciones.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid de trámites OMIL -->
+    <div class="grid-container">
+
+        <!-- Trámite 1 -->
+        <a href="/didecosistemas/public/departamentos/omil/inscripcion" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-person-check"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Inscripción o Actualización de Datos</div>
+                <div class="descripcion">
+                    Registro de datos de usuarios en base comunal OMIL para acceder a ofertas laborales.
+                </div>
+            </div>
+        </a>
+
+        <!-- Trámite 2 -->
+        <a href="/didecosistemas/public/departamentos/omil/postulacion" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-laptop"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Postulación a Oferta Laboral</div>
+                <div class="descripcion">
+                    Acceso a ofertas laborales vigentes publicadas en muniarica.cl u oficina OMIL.
+                </div>
+            </div>
+        </a>
+
+        <!-- Trámite 3 -->
+        <a href="/didecosistemas/public/departamentos/omil/certificadocesantia" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-file-earmark-text"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Certificado de Cesantía</div>
+                <div class="descripcion">
+                    Documento para acreditar condición de cesantía con fines administrativos.
+                </div>
+            </div>
+        </a>
+
+        <!-- Trámite 4 -->
+        <a href="/didecosistemas/public/departamentos/omil/certificadoinscripcion" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-person-lines-fill"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Certificado de Inscripción</div>
+                <div class="descripcion">
+                    Constancia de inscripción del usuario en la base de datos de OMIL.
+                </div>
+            </div>
+        </a>
+
+        <!-- Trámite 5 -->
+        <a href="/didecosistemas/public/departamentos/omil/solicituddiscapacidad" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-universal-access"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Certificado Usuario con Discapacidad</div>
+                <div class="descripcion">
+                    Documento requerido para postular a programas de emprendimiento.
+                </div>
+            </div>
+        </a>
+
+        <!-- Trámite 6 -->
+        <a href="/didecosistemas/public/departamentos/omil/cesantiasolidaria" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-arrow-repeat"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Actualización por Trámite de Cesantía Solidaria</div>
+                <div class="descripcion">
+                    Apoyo en actualización de datos en la Bolsa Nacional de Empleo (BNE).
+                </div>
+            </div>
+        </a>
+
+        <!-- Trámite 7 -->
+        <a href="/didecosistemas/public/departamentos/omil/requerimiento" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-person-plus"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Solicitud de Requerimiento de Personal</div>
+                <div class="descripcion">
+                    Permite a empleadores levantar ofertas laborales a través de OMIL.
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-10">
+            <div class="info-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <i class="bi bi-info-circle info-icon"></i>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="mb-2 fw-bold">¿Tienes dudas o quieres postular?</h6>
+                        <p class="mb-0">
+                            El equipo de la Oficina Municipal de Información Laboral (OMIL) está disponible para orientarte y acompañarte en tu proceso.
+                        </p>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <a href="/didecosistemas/public/departamentos/correos?correo=omil@municipalidadarica.cl" class="btn btn-outline-primary btn-sm">Contactar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

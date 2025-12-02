@@ -1,0 +1,143 @@
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Gestión de Usuarios</h1>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUsuario">
+            <i class="bi bi-plus-lg"></i> Nuevo Usuario
+        </button>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Rol</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($this->usuarios as $usuario): ?>
+                            <tr>
+                                <td><?= $this->escapeHtml($usuario['nombre']) ?></td>
+                                <td><?= $this->escapeHtml($usuario['correo']) ?></td>
+                                <td>
+                                    <span class="badge bg-<?= $usuario['rol'] === 'ADMIN' ? 'warning' : 'info' ?>">
+                                        <?= $usuario['rol'] ?>
+                                    </span>
+                                </td>
+                                <td>
+                                    <?php if ($usuario['activo']): ?>
+                                        <span class="badge bg-success">Activo</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-secondary">Inactivo</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <button type="button" class="btn btn-outline-primary"
+                                            onclick='editarUsuario(<?= json_encode($usuario) ?>)'>
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <?php if ($usuario['id'] != 1): // Evitar borrar al admin principal 
+                                        ?>
+                                            <a href="<?= $this->url('radio-admin-eliminar-usuario', ['id' => $usuario['id']]) ?>"
+                                                class="btn btn-outline-danger"
+                                                onclick="return confirm('¿Está seguro de eliminar este usuario?')">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        <?php endif; ?>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Usuario -->
+<div class="modal fade" id="modalUsuario" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="<?= $this->url('radio-admin-guardar-usuario') ?>" method="post">
+                <input type="hidden" name="id" id="usuario_id" value="0">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Nuevo Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" id="nombre" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Correo</label>
+                        <input type="email" class="form-control" name="correo" id="correo" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" name="password" id="password">
+                        <div class="form-text text-muted" id="passwordHelp">Obligatorio para nuevos usuarios.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Rol</label>
+                        <select class="form-select" name="rol" id="rol">
+                            <option value="EDITOR">Editor</option>
+                            <option value="ADMIN">Administrador</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" name="activo" id="activo" value="1" checked>
+                        <label class="form-check-label" for="activo">Usuario Activo</label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function editarUsuario(usuario) {
+        document.getElementById('modalTitle').textContent = 'Editar Usuario';
+        document.getElementById('usuario_id').value = usuario.id;
+        document.getElementById('nombre').value = usuario.nombre;
+        document.getElementById('correo').value = usuario.correo;
+        document.getElementById('rol').value = usuario.rol;
+        document.getElementById('activo').checked = usuario.activo == 1;
+
+        document.getElementById('password').required = false;
+        document.getElementById('passwordHelp').textContent = 'Dejar en blanco para mantener la actual.';
+
+        new bootstrap.Modal(document.getElementById('modalUsuario')).show();
+    }
+
+    // Limpiar modal al cerrar
+    document.getElementById('modalUsuario').addEventListener('hidden.bs.modal', function() {
+        document.getElementById('modalTitle').textContent = 'Nuevo Usuario';
+        document.getElementById('usuario_id').value = '0';
+        document.getElementById('nombre').value = '';
+        document.getElementById('correo').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('rol').value = 'EDITOR';
+        document.getElementById('activo').checked = true;
+        document.getElementById('password').required = true;
+        document.getElementById('passwordHelp').textContent = 'Obligatorio para nuevos usuarios.';
+    });
+</script>

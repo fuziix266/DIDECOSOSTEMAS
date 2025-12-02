@@ -1,0 +1,8 @@
+<h2>Listado de respuestas</h2>
+<ul>
+<?php foreach ($respuestas as $r): ?>
+    <li>
+        <?= $this->escapeHtml($r['nombre']) ?> (<?= $this->escapeHtml($r['evaluacion']) ?>)
+    </li>
+<?php endforeach; ?>
+</ul>

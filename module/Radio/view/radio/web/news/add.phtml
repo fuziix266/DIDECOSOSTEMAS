@@ -1,0 +1,33 @@
+<div class="container mt-4">
+    <h2><?= $this->news ? 'Editar' : 'Nueva' ?> Noticia</h2>
+    
+    <form method="post" enctype="multipart/form-data" class="mt-4">
+        <div class="mb-3">
+            <label class="form-label">Título</label>
+            <input type="text" name="title" class="form-control" value="<?= $this->news ? $this->escapeHtmlAttr($this->news['title']) : '' ?>" required>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Resumen</label>
+            <textarea name="summary" class="form-control" rows="2"><?= $this->news ? $this->escapeHtml($this->news['summary']) : '' ?></textarea>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Contenido</label>
+            <textarea name="content" class="form-control summernote" rows="5"><?= $this->news ? $this->escapeHtml($this->news['content']) : '' ?></textarea>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Imagen</label>
+            <?php if ($this->news && $this->news['image_url']): ?>
+                <div class="mb-2">
+                    <img src="<?= $this->news['image_url'] ?>" alt="Current Image" style="height: 100px;">
+                </div>
+            <?php endif; ?>
+            <input type="file" name="image" class="form-control" accept="image/*">
+        </div>
+        
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="<?= $this->url('radio-news') ?>" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

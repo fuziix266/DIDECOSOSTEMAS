@@ -1,0 +1,164 @@
+<?php
+
+/**
+ * Vista para el menú de Subsidios y Pensiones
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+// Configurar título y breadcrumb
+$this->headTitle('Subsidios y Pensiones');
+$this->pageTitle = 'Subsidios y Pensiones';
+?>
+
+<div class="container">
+  <div class="text-center mb-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <h1 class="display-5 fw-bold mb-3" style="color: #15356c;">
+          <i class="fas fa-hand-holding-usd me-3" style="color: #6537b6;"></i>
+          Subsidios y Pensiones
+        </h1>
+        <p class="lead text-muted">
+          Información sobre beneficios económicos disponibles para personas en situación de vulnerabilidad, incluyendo subsidios familiares, pensiones y ayudas para el pago de servicios básicos.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-container">
+
+    <a href="/didecosistemas/public/departamentos/subsidioypensiones/suf" class="card-departamento">
+      <div class="card-icon"><i class="bi bi-person-bounding-box"></i></div>
+      <div class="card-content">
+        <div class="card-title">Subsidio Único Familiar (SUF)</div>
+        <div class="descripcion">Aporte económico para menores de 18 años en familias sin previsión social.</div>
+      </div>
+    </a>
+
+    <a href="/didecosistemas/public/departamentos/subsidioypensiones/maternal" class="card-departamento">
+      <div class="card-icon"><i class="bi bi-gender-female"></i></div>
+      <div class="card-content">
+        <div class="card-title">Subsidio Maternal</div>
+        <div class="descripcion">Beneficio monetario para mujeres sin previsión a partir del 5to mes de embarazo.</div>
+      </div>
+    </a>
+
+    <a href="/didecosistemas/public/departamentos/subsidioypensiones/reciénnacido" class="card-departamento">
+      <div class="card-icon"><i class="bi bi-baby"></i></div>
+      <div class="card-content">
+        <div class="card-title">Subsidio Recién Nacido</div>
+        <div class="descripcion">Aporte para hijos de beneficiarias del Subsidio Maternal, hasta los 3 meses.</div>
+      </div>
+    </a>
+
+    <a href="/didecosistemas/public/departamentos/subsidioypensiones/madre" class="card-departamento">
+      <div class="card-icon"><i class="bi bi-person-hearts"></i></div>
+      <div class="card-content">
+        <div class="card-title">Subsidio Madre</div>
+        <div class="descripcion">Apoyo económico a madres beneficiarias del SUF, por un periodo de 3 años.</div>
+      </div>
+    </a>
+
+    <a href="/didecosistemas/public/departamentos/subsidioypensiones/menores" class="card-departamento">
+      <div class="card-icon"><i class="bi bi-emoji-smile"></i></div>
+      <div class="card-content">
+        <div class="card-title">SUF por Menores de 18 años</div>
+        <div class="descripcion">Subsidio para niños y niñas sin previsión social, según su edad y condición escolar.</div>
+      </div>
+    </a>
+
+    <a href="/didecosistemas/public/departamentos/subsidioypensiones/familiarduplo" class="card-departamento">
+      <div class="card-icon"><i class="bi bi-discord"></i></div>
+      <div class="card-content">
+        <div class="card-title">Subsidio Familiar Duplo</div>
+        <div class="descripcion">Subsidio duplicado para menores con discapacidad acreditada.</div>
+      </div>
+    </a>
+
+    <a href="/didecosistemas/public/departamentos/subsidioypensiones/pgu" class="card-departamento">
+      <div class="card-icon"><i class="bi bi-cash-coin"></i></div>
+      <div class="card-content">
+        <div class="card-title">Pensión Garantizada Universal</div>
+        <div class="descripcion">Apoyo a mayores de 65 años que pertenezcan al 90% más vulnerable.</div>
+      </div>
+    </a>
+
+    <a href="/didecosistemas/public/departamentos/subsidioypensiones/pbsi" class="card-departamento">
+      <div class="card-icon"><i class="bi bi-person-x"></i></div>
+      <div class="card-content">
+        <div class="card-title">PBSI - Invalidez</div>
+        <div class="descripcion">Pensión mensual para personas sin régimen previsional con diagnóstico de invalidez.</div>
+      </div>
+    </a>
+
+    <a href="/didecosistemas/public/departamentos/subsidioypensiones/apsi" class="card-departamento">
+      <div class="card-icon"><i class="bi bi-heart-pulse"></i></div>
+      <div class="card-content">
+        <div class="card-title">APSI</div>
+        <div class="descripcion">Aporte solidario para personas con pensión de invalidez inferior a la PGU.</div>
+      </div>
+    </a>
+
+    <a href="/didecosistemas/public/departamentos/subsidioypensiones/bonoporhijo" class="card-departamento">
+      <div class="card-icon"><i class="bi bi-gift"></i></div>
+      <div class="card-content">
+        <div class="card-title">Bono por Hijo</div>
+        <div class="descripcion">Beneficio que incrementa los fondos previsionales de madres por cada hijo nacido.</div>
+      </div>
+    </a>
+
+    <a href="/didecosistemas/public/departamentos/subsidioypensiones/discapacidad" class="card-departamento">
+      <div class="card-icon"><i class="bi bi-universal-access"></i></div>
+      <div class="card-content">
+        <div class="card-title">Subsidio de Discapacidad</div>
+        <div class="descripcion">Subsidio mensual para menores con discapacidad mental, física o sensorial severa.</div>
+      </div>
+    </a>
+
+    <a href="/didecosistemas/public/departamentos/subsidioypensiones/aguapotable" class="card-departamento">
+      <div class="card-icon"><i class="bi bi-droplet-half"></i></div>
+      <div class="card-content">
+        <div class="card-title">Subsidio Agua Potable</div>
+        <div class="descripcion">Aporte al pago mensual de agua potable y alcantarillado para familias vulnerables.</div>
+      </div>
+    </a>
+
+    <a href="/didecosistemas/public/departamentos/subsidioypensiones/saprural" class="card-departamento">
+      <div class="card-icon"><i class="bi bi-tree"></i></div>
+      <div class="card-content">
+        <div class="card-title">SAP Rural</div>
+        <div class="descripcion">Subsidio para usuarios de sistemas de agua potable rural (APR).</div>
+      </div>
+    </a>
+
+    <a href="/didecosistemas/public/departamentos/subsidioypensiones/sapurbano" class="card-departamento">
+      <div class="card-icon"><i class="bi bi-house-door"></i></div>
+      <div class="card-content">
+        <div class="card-title">SAP Urbano</div>
+        <div class="descripcion">Subsidio al pago de agua potable para hogares de sectores urbanos vulnerables.</div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="row justify-content-center mt-5">
+    <div class="col-lg-10">
+      <div class="info-banner">
+        <div class="row align-items-center">
+          <div class="col-md-2 text-center">
+            <i class="bi bi-info-circle info-icon"></i>
+          </div>
+          <div class="col-md-8">
+            <h6 class="mb-2 fw-bold">¿Tienes dudas o quieres postular?</h6>
+            <p class="mb-0">
+              El equipo de la Oficina de Subsidios y Pensiones está disponible para orientarte y acompañarte en tu proceso.
+            </p>
+          </div>
+          <div class="col-md-2 text-center">
+            <a href="/didecosistemas/public/departamentos/correos?correo=oficina.subsidios@municipalidadarica.cl" class="btn btn-outline-primary btn-sm">Contactar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

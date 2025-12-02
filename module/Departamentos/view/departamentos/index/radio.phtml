@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Radio Dideco</title>
+
+
+
+  <script id='sonic_js' data-port='8020' src='https://app0103.sonicpanelradio.com/cp/widgets.js?r=463'></script>
+
+
+
+  <style>
+    body {
+
+      background-color: #111;
+
+      color: #fff;
+
+      font-family: 'Segoe UI', sans-serif;
+
+    }
+
+
+
+    .radio-wrapper {
+
+      min-height: 0;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      padding: 0;
+
+    }
+
+
+
+    .card-radio {
+
+      background: #1c1c1c;
+
+      border-radius: 20px;
+
+      padding: 30px;
+
+      max-width: 600px;
+
+      width: 100%;
+
+    }
+
+
+
+    .cover img {
+
+      width: 100%;
+
+      max-height: 300px;
+
+      object-fit: cover;
+
+      border-radius: 15px;
+
+      margin-bottom: 20px;
+
+    }
+
+
+
+    .info-line {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: start;
+
+      margin: 10px 0;
+
+    }
+
+
+
+    .info-line i {
+
+      color: #00e0ff;
+
+      margin-right: 10px;
+
+    }
+
+
+
+    .label {
+
+      font-weight: 600;
+
+      color: #ccc;
+
+      margin-right: 10px;
+
+    }
+
+
+
+    iframe {
+
+      border-radius: 10px;
+
+      width: 100%;
+
+      height: 100%;
+
+      border: none;
+
+      margin-top: 20px;
+
+    }
+
+
+
+    .foto {
+
+      background-color: #1c1c1c;
+
+      border-radius: 15px;
+
+      margin-bottom: 20px;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+    }
+
+
+
+    .foto img {
+
+      max-width: 200px;
+
+      max-height: 200px;
+
+    }
+
+
+
+    .separador-footer {
+
+      margin-top: 0 !important;
+
+    }
+
+
+
+    /* botones radio enviar whatsapp y telefono*/
+
+    .custom-contact-button {
+
+      display: flex;
+
+      align-items: stretch;
+
+      text-decoration: none;
+
+      height: 60px;
+
+      /* altura más discreta */
+
+      width: 100%;
+
+      /* ancho completo del contenedor */
+
+      max-width: 100%;
+
+      transition: transform 0.3s ease;
+
+    }
+
+
+
+    .custom-contact-button:hover {
+
+      transform: scale(1.01);
+
+    }
+
+
+
+    .btn-part {
+
+      display: block;
+
+      height: 100%;
+
+      object-fit: contain;
+
+    }
+
+
+
+    .btn-part.left {
+
+      flex-shrink: 0;
+
+    }
+
+
+
+    .btn-part.right {
+
+      flex-shrink: 0;
+
+    }
+
+
+
+    .btn-text {
+
+      flex-grow: 1;
+
+      background-color: white;
+
+      color: #000;
+
+      font-weight: bold;
+
+      font-size: 1rem;
+
+      display: flex;
+
+      align-items: center;
+
+      white-space: nowrap;
+
+      height: 100%;
+
+      padding: 0 10px;
+
+    }
+  </style>
+
+
+
+  <!-- Iconos Bootstrap -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+</head>
+
+
+
+<body>
+
+
+
+  <div class="radio-wrapper">
+
+    <div class="card-radio text-white">
+
+      <h2 class="text-center mb-4">🎧 Radio Dideco</h2>
+
+
+
+      <div class="info-line">
+
+        <i class="bi bi-music-note-beamed"></i>
+
+        <span class="label">Ahora suena:</span>
+
+        <span id="sonic_title"></span>
+
+      </div>
+
+
+
+      <iframe src="https://app0103.sonicpanelradio.com/cp/widgets/player/single/?p=8020" height="110" width="100%" scrolling="no" style="border:none;"></iframe>
+
+
+
+      <div class="d-flex flex-column align-items-center gap-3 mt-4">
+
+        <!-- Botón Tiktok -->
+        <!--
+        <a href="https://www.tiktok.com/@patricioramirez40/live?" target="_blank" class="custom-contact-button">
+          <img src="/didecosistemas/public/img/botones/radio/tiktok-inicio.webp" alt="Tiktok inicio" class="btn-part left">
+          <div class="btn-text">Ir al Live</div>
+          <img src="/didecosistemas/public/img/botones/radio/tiktok-final.webp" alt="Tiktok final" class="btn-part right">
+        </a>
+        -->
+
+        <!-- Botón WhatsApp -->
+
+        <a href="https://wa.me/56993606236?text=Hola%20amigos%20de%20Radio%20DIDECO" target="_blank" class="custom-contact-button">
+
+          <img src="/didecosistemas/public/img/botones/radio/wsp-inicio.webp" alt="WhatsApp inicio" class="btn-part left">
+
+          <div class="btn-text">Enviar Whatsapp</div>
+
+          <img src="/didecosistemas/public/img/botones/radio/wsp-final.webp" alt="WhatsApp final" class="btn-part right">
+
+        </a>
+
+
+
+        <!-- Botón Teléfono -->
+
+        <a href="tel:+56993606236" class="custom-contact-button">
+
+          <img src="/didecosistemas/public/img/botones/radio/llamada-inicio.webp" alt="Teléfono inicio" class="btn-part left">
+
+          <div class="btn-text">Contacto telefónico</div>
+
+          <img src="/didecosistemas/public/img/botones/radio/llamada-final.webp" alt="Teléfono final" class="btn-part right">
+
+        </a>
+
+
+
+      </div>
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+
+
+
+  <script>
+    $(document).ready(function() {
+
+      // Observar cambios dentro del div contenedor
+
+      const targetNode = document.querySelector('.sonic_art');
+
+
+
+      const observer = new MutationObserver(function(mutationsList) {
+
+        mutationsList.forEach(function(mutation) {
+
+          if (mutation.type === 'childList') {
+
+            $('.sonic_art img')
+
+              .hide() // primero oculta
+
+              .css({
+
+                width: '200px',
+
+                height: '200px',
+
+                'object-fit': 'cover',
+
+                display: 'block'
+
+              })
+
+              .fadeIn(1500); // luego aparece suavemente
+
+          }
+
+        });
+
+      });
+
+
+
+      observer.observe(targetNode, {
+
+        childList: true,
+
+        subtree: true
+
+      });
+
+    });
+  </script>
+
+</body>
+
+
+
+</html>

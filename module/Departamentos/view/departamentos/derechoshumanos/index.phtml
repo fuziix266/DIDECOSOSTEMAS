@@ -1,0 +1,73 @@
+<?php
+/**
+ * Menú de trámites - Derechos Humanos
+ */
+
+$this->headTitle($departamento['nombre']);
+$this->pageTitle = $departamento['nombre'];
+?>
+
+<div class="container">
+    <div class="text-center mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold mb-3" style="color: #15356c;">
+                    <i class="fas fa-handshake me-3" style="color: #e67e22;"></i>
+                    <?= $this->escapeHtml($departamento['nombre']) ?>
+                </h1>
+                <?php if (!empty($departamento['descripcion'])): ?>
+                <p class="lead text-muted">
+                    <?= $this->escapeHtml($departamento['descripcion']) ?>
+                </p>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-container">
+        <?php foreach ($tramites as $tramite): ?>
+        <a href="/didecosistemas/public/departamentos/<?= $this->escapeHtmlAttr($departamento['slug']) ?>/<?= $this->escapeHtmlAttr($tramite['slug']) ?>" class="card-departamento">
+            <div class="card-icon">
+                <?php if (!empty($tramite['icono_bootstrap'])): ?>
+                  <i class="<?= $this->escapeHtml($tramite['icono_bootstrap']) ?>"></i>
+                <?php elseif (!empty($tramite['icono_fontawesome'])): ?>
+                  <i class="<?= $this->escapeHtml($tramite['icono_fontawesome']) ?>"></i>
+                <?php endif; ?>
+            </div>
+            <div class="card-content">
+                <div class="card-title"><?= $this->escapeHtml($tramite['nombre']) ?></div>
+                <?php if (!empty($tramite['descripcion_corta'])): ?>
+                <div class="descripcion"><?= $this->escapeHtml($tramite['descripcion_corta']) ?></div>
+                <?php endif; ?>
+            </div>
+        </a>
+        <?php endforeach; ?>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-10">
+            <div class="info-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <i class="bi bi-info-circle info-icon"></i>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="mb-2 fw-bold">¿Tienes dudas o quieres postular?</h6>
+                        <p class="mb-0">
+                            <?php if (!empty($departamento['contacto_email'])): ?>
+                            El equipo de <?= $this->escapeHtml($departamento['nombre']) ?> está disponible para orientarte y acompañarte en tu proceso.
+                            <?php else: ?>
+                            Contáctanos para más información sobre nuestros servicios.
+                            <?php endif; ?>
+                        </p>
+                    </div>
+                    <div class="col-md-2 text-center">
+                    <?php if (!empty($departamento['contacto_email'])): ?>
+                    <a href="/didecosistemas/public/departamentos/correos?correo=<?= $this->escapeHtmlAttr($departamento['contacto_email']) ?>" class="btn btn-outline-primary btn-sm">Contactar</a>
+                    <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1202 @@
+<?php
+
+/**
+ * Layout evaluacion para DIDECO - evaluacion
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var string $content
+ */
+?>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <?= $this->headTitle('DIDECO - Radio')->setSeparator(' - ') ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <?php include 'includes.phtml'; ?>
+
+    <?= $this->headLink() ?>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #051c9c 0%, #051c9c 100%);
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo-container img {
+            max-width: 21rem;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .breadcrumb-custom {
+            background: linear-gradient(135deg, #1e448c 0%, #15356c 100%);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .breadcrumb-custom .breadcrumb-item+.breadcrumb-item::before {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .breadcrumb-custom a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+        }
+
+        .breadcrumb-custom .active {
+            color: white;
+            font-weight: 500;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Estilos específicos para servicios - Bootstrap 5 */
+        .accordion-item {
+            border: 1px solid #dee2e6;
+            margin-bottom: 0.5rem;
+        }
+
+        .accordion-header {
+            margin-bottom: 0;
+        }
+
+        .accordion-button {
+            background-color: #ffffff;
+            border-left: 6px solid #1e448c;
+            color: #000;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-decoration: none;
+            padding: 1rem 1.25rem;
+        }
+
+        .accordion-button:hover {
+            text-decoration: underline;
+            background-color: #f8f9fa;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #f8f9fa;
+            border-left: 6px solid #1e448c;
+        }
+
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(30, 68, 140, 0.25);
+            border-color: #1e448c;
+        }
+
+        /* Compatibilidad con Bootstrap 4 (por si tienes estructura antigua) */
+        .accordion .card-header {
+            background-color: #ffffff;
+            border-left: 6px solid #1e448c;
+            padding: 0;
+        }
+
+        .accordion .btn-link {
+            color: #000;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-decoration: none;
+            width: 100%;
+            height: 100%;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            border: none;
+            background: transparent;
+            display: block;
+        }
+
+        .accordion .btn-link:hover {
+            text-decoration: underline;
+            background-color: #f8f9fa;
+        }
+
+        .accordion .btn-link:focus {
+            box-shadow: 0 0 0 0.25rem rgba(30, 68, 140, 0.25);
+            outline: none;
+        }
+
+        .accordion .card-header h2 {
+            margin: 0;
+        }
+
+        .descripcion-box {
+            background: #fff;
+            border-left: 6px solid #1e448c;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 1.5rem 0;
+            }
+        }
+
+        /* CARITAS DE EVALUACIÓN */
+        .rating-faces {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .face-button {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            font-size: 3.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .face-button.very-sad {
+            background: linear-gradient(145deg, #8b0000, #660000);
+            color: white;
+        }
+
+        .face-button.sad {
+            background: linear-gradient(145deg, #dc3545, #c82333);
+            color: white;
+        }
+
+        .face-button.neutral {
+            background: linear-gradient(145deg, #ffc107, #e0a800);
+            color: white;
+        }
+
+        .face-button.happy {
+            background: linear-gradient(145deg, #28a745, #20a038);
+            color: white;
+        }
+
+        .face-button.very-happy {
+            background: linear-gradient(145deg, #00cc44, #00aa33);
+            color: white;
+        }
+
+        .face-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .face-button.selected {
+            border-color: #051c9c;
+            border-width: 4px;
+            transform: scale(1.15);
+            box-shadow: 0 10px 25px rgba(5, 28, 156, 0.3);
+        }
+
+        .face-button.selected::after {
+            content: '✓';
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            background: #051c9c;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .back-button {
+            display: none !important;
+            position: fixed;
+            top: 4.5rem;
+            left: 1rem;
+            z-index: 1000;
+            background: linear-gradient(135deg, #1e448c 0%, #15356c 100%);
+            border: 1px solid white;
+            border-radius: 50px;
+            padding: 1rem 1.5rem;
+            color: white;
+            box-shadow: 0 4px 15px rgba(30, 68, 140, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 68, 140, 0.4);
+            color: white;
+        }
+
+        @media (max-width: 1081px) and (min-width: 1080px) {
+            .back-button {
+                display: block !important;
+            }
+        }
+
+        /* TECLADO VIRTUAL - NUEVA IMPLEMENTACIÓN */
+        .keyboard-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(2px);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .keyboard-overlay.show {
+            opacity: 1;
+        }
+
+        .virtual-keyboard {
+            position: fixed;
+            background: linear-gradient(135deg, #1e448c 0%, #15356c 100%);
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 950px;
+            width: 950px;
+            z-index: 9999;
+            box-shadow: 0 20px 60px rgba(30, 68, 140, 0.6);
+            border: 4px solid #2e5ea7;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .virtual-keyboard.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .keyboard-row {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .key {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            color: #15356c;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            min-height: 50px;
+            max-height: 50px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            user-select: none;
+        }
+
+        .key:hover {
+            background: linear-gradient(145deg, #e9ecef 0%, #dee2e6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            border-color: #1e448c;
+        }
+
+        .key:active {
+            background: linear-gradient(145deg, #1e448c 0%, #15356c 100%);
+            color: white;
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .key.special {
+            background: linear-gradient(145deg, #2e5ea7 0%, #1e448c 100%);
+            color: white;
+            font-weight: 700;
+        }
+
+        .key.special:hover {
+            background: linear-gradient(145deg, #1e448c 0%, #15356c 100%);
+        }
+
+        .key.shift.active {
+            background: linear-gradient(145deg, #ffc107 0%, #e0a800 100%);
+            color: #212529;
+        }
+
+        .key.accept {
+            background: linear-gradient(145deg, #28a745 0%, #20a038 100%);
+            color: white;
+        }
+
+        .key.cancel {
+            background: linear-gradient(145deg, #dc3545 0%, #c82333 100%);
+            color: white;
+        }
+
+        .key.symbol {
+            background: linear-gradient(145deg, #e3f2fd 0%, #bbdefb 100%);
+            color: #1565c0;
+            border-color: #90caf9;
+        }
+
+        .key.symbol:hover {
+            background: linear-gradient(145deg, #bbdefb 0%, #90caf9 100%);
+            border-color: #1565c0;
+        }
+
+        .key.symbol-toggle {
+            background: linear-gradient(145deg, #fff3e0 0%, #ffcc02 100%);
+            color: #e65100;
+        }
+
+        .key.symbol-toggle:hover {
+            background: linear-gradient(145deg, #ffcc02 0%, #ff9800 100%);
+        }
+
+        .key.quick-email {
+            background: linear-gradient(145deg, #e8f5e8 0%, #c8e6c9 100%);
+            color: #2e7d32;
+            border-color: #a5d6a7;
+        }
+
+        .key.quick-email:hover {
+            background: linear-gradient(145deg, #c8e6c9 0%, #a5d6a7 100%);
+            border-color: #2e7d32;
+        }
+
+        /* TAMAÑOS DE TECLAS */
+        .key.letter,
+        .key.number,
+        .key.symbol {
+            width: 50px;
+            height: 50px;
+        }
+
+        .key.backspace {
+            width: 85px;
+            height: 50px;
+        }
+
+        .key.shift {
+            width: 90px;
+            height: 50px;
+        }
+
+        .key.space {
+            width: 420px;
+            height: 50px;
+            font-size: 14px;
+        }
+
+        .key.control {
+            width: 95px;
+            height: 50px;
+        }
+
+        .key.symbol-toggle {
+            width: 70px;
+            height: 50px;
+            font-size: 14px;
+        }
+
+        .key.quick-email {
+            width: 90px;
+            height: 50px;
+            font-size: 12px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .back-button {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.8rem 1.2rem;
+            }
+
+            .rating-faces {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .face-button {
+                width: 80px;
+                height: 80px;
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+
+    <?= $this->headStyle() ?>
+</head>
+
+<body>
+    <div class="header-section">
+        <div class="container header-content">
+            <div class="logo-container">
+                <img src="/didecosistemas/public/img/logo-dideco.png" alt="Logo DIDECO">
+            </div>
+
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb breadcrumb-custom mb-0">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <a href="/didecosistemas/public/"><i class="bi bi-house-door"></i> Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Evaluación
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="text-center">
+            <h1 class="fw-bold mb-3">Evaluación de atención DIDECO</h1>
+        </div>
+        <p class="lead text-center">
+            Seleccione una oficina para evaluar su atención.
+            <br>
+            El listado incluye únicamente oficinas de DIDECO que atienden público.
+            <br>
+            Si desea evaluar otra oficina de esta Dirección, por favor contáctese a través del siguiente formulario:
+            <a href="/didecosistemas/public/departamentos/correos?correo=dideco@municipalidadarica.cl">Click aquí</a>.
+        </p>
+    </div>
+
+    <!-- MODAL DE EVALUACION -->
+    <div class="modal fade" id="modalEvaluacion" tabindex="-1" aria-labelledby="modalEvaluacionLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content p-4">
+                <div class="modal-header border-0">
+                    <h4 class="modal-title w-100 text-center fw-bold" id="modalEvaluacionLabel">
+                        ¿Cómo calificaría su atención en <span id="departmentName"></span>?
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Caritas de evaluación -->
+                    <div class="rating-faces">
+                        <button class="face-button very-sad" data-rating="1" onclick="selectRating(this)">😡</button>
+                        <button class="face-button sad" data-rating="2" onclick="selectRating(this)">😞</button>
+                        <button class="face-button neutral" data-rating="3" onclick="selectRating(this)">😐</button>
+                        <button class="face-button happy" data-rating="4" onclick="selectRating(this)">😊</button>
+                        <button class="face-button very-happy" data-rating="5" onclick="selectRating(this)">😍</button>
+                    </div>
+
+                    <!-- Formulario -->
+                    <form id="formEvaluacion">
+                        <input type="hidden" id="selectedRating" name="rating" value="">
+                        <input type="hidden" id="selectedDepartment" name="department" value="">
+                        <input type="hidden" id="nombreOficina" name="nombreOficina" value="">
+
+                        <div class="row mb-3">
+                            <div class="col-md-4 mb-3">
+                                <label for="inputNombre" class="form-label fw-bold">Nombre</label>
+                                <input type="text" class="form-control form-control-lg keyboard-input" placeholder="Nombre" id="inputNombre" name="nombre" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="inputCorreo" class="form-label fw-bold">Correo electrónico</label>
+                                <input type="text" class="form-control form-control-lg keyboard-input" placeholder="Correo electrónico" id="inputCorreo" name="correo" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="inputTelefono" class="form-label fw-bold">Teléfono</label>
+                                <input type="tel" class="form-control form-control-lg keyboard-input" placeholder="Teléfono" id="inputTelefono" name="telefono" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputComentario" class="form-label fw-bold">Comentarios adicionales</label>
+                            <textarea class="form-control form-control-lg keyboard-input" rows="4" placeholder="Comentarios adicionales..." id="inputComentario" name="comentario" required></textarea>
+                        </div>
+
+                        <div class="mb-3 text-center">
+                            <small class="text-muted">
+                                <i class="bi bi-info-circle me-1"></i>
+                                Todos los campos son obligatorios, nos pondremos en contacto a la brevedad.
+                            </small>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 me-3">
+                                <i class="bi bi-send me-2"></i>Enviar Evaluación
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">
+                                <i class="bi bi-x-circle me-2"></i>Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay de fondo del teclado -->
+    <div class="keyboard-overlay" id="keyboardOverlay"></div>
+
+    <!-- TECLADO VIRTUAL FIJO -->
+    <div class="virtual-keyboard" id="virtualKeyboard">
+        <!-- Fila 1: Números -->
+        <div class="keyboard-row">
+            <button class="key number" data-key="1">1</button>
+            <button class="key number" data-key="2">2</button>
+            <button class="key number" data-key="3">3</button>
+            <button class="key number" data-key="4">4</button>
+            <button class="key number" data-key="5">5</button>
+            <button class="key number" data-key="6">6</button>
+            <button class="key number" data-key="7">7</button>
+            <button class="key number" data-key="8">8</button>
+            <button class="key number" data-key="9">9</button>
+            <button class="key number" data-key="0">0</button>
+            <button class="key backspace special" data-key="backspace">← Borrar</button>
+        </div>
+
+        <!-- Fila 2: QWERTY -->
+        <div class="keyboard-row">
+            <button class="key letter" data-key="q">q</button>
+            <button class="key letter" data-key="w">w</button>
+            <button class="key letter" data-key="e">e</button>
+            <button class="key letter" data-key="r">r</button>
+            <button class="key letter" data-key="t">t</button>
+            <button class="key letter" data-key="y">y</button>
+            <button class="key letter" data-key="u">u</button>
+            <button class="key letter" data-key="i">i</button>
+            <button class="key letter" data-key="o">o</button>
+            <button class="key letter" data-key="p">p</button>
+        </div>
+
+        <!-- Fila 3: ASDF -->
+        <div class="keyboard-row">
+            <button class="key letter" data-key="a">a</button>
+            <button class="key letter" data-key="s">s</button>
+            <button class="key letter" data-key="d">d</button>
+            <button class="key letter" data-key="f">f</button>
+            <button class="key letter" data-key="g">g</button>
+            <button class="key letter" data-key="h">h</button>
+            <button class="key letter" data-key="j">j</button>
+            <button class="key letter" data-key="k">k</button>
+            <button class="key letter" data-key="l">l</button>
+            <button class="key letter" data-key="ñ">ñ</button>
+        </div>
+
+        <!-- Fila 4: ZXCV -->
+        <div class="keyboard-row">
+            <button class="key shift special" data-key="shift">⇧ May</button>
+            <button class="key letter" data-key="z">z</button>
+            <button class="key letter" data-key="x">x</button>
+            <button class="key letter" data-key="c">c</button>
+            <button class="key letter" data-key="v">v</button>
+            <button class="key letter" data-key="b">b</button>
+            <button class="key letter" data-key="n">n</button>
+            <button class="key letter" data-key="m">m</button>
+            <button class="key symbol-toggle special" data-key="symbol-toggle">?123</button>
+        </div>
+
+        <!-- Fila 5: Controles -->
+        <div class="keyboard-row">
+            <button class="key control accept" data-key="accept">✓ Aceptar</button>
+            <button class="key space special" data-key="space">Barra Espaciadora</button>
+            <button class="key control cancel" data-key="cancel">✖ Cerrar</button>
+        </div>
+
+        <!-- Sección de símbolos (oculta por defecto) -->
+        <div class="keyboard-symbols" id="keyboardSymbols" style="display: none;">
+            <!-- Fila 1: Símbolos comunes -->
+            <div class="keyboard-row">
+                <button class="key symbol" data-key="@">@</button>
+                <button class="key symbol" data-key="#">#</button>
+                <button class="key symbol" data-key="$">$</button>
+                <button class="key symbol" data-key="%">%</button>
+                <button class="key symbol" data-key="&">&</button>
+                <button class="key symbol" data-key="*">*</button>
+                <button class="key symbol" data-key="-">-</button>
+                <button class="key symbol" data-key="+">+</button>
+                <button class="key symbol" data-key="(">(</button>
+                <button class="key symbol" data-key=")">)</button>
+            </div>
+
+            <!-- Fila 2: Puntuación -->
+            <div class="keyboard-row">
+                <button class="key symbol" data-key="!">!</button>
+                <button class="key symbol" data-key='"'>"</button>
+                <button class="key symbol" data-key="'">´</button>
+                <button class="key symbol" data-key=":" ;">:</button>
+                <button class="key symbol" data-key=";">;</button>
+                <button class="key symbol" data-key="/">/</button>
+                <button class="key symbol" data-key="?">?</button>
+                <button class="key symbol" data-key=",">,</button>
+                <button class="key symbol" data-key=".">.</button>
+                <button class="key symbol" data-key="_">_</button>
+            </div>
+
+            <!-- Fila 3: Accesos rápidos -->
+            <div class="keyboard-row">
+                <button class="key symbol quick-email" data-key="@gmail.com">@gmail.com</button>
+                <button class="key symbol quick-email" data-key="@hotmail.com">@hotmail.com</button>
+                <button class="key symbol quick-email" data-key=".cl">.cl</button>
+                <button class="key symbol quick-email" data-key=".com">.com</button>
+                <button class="key symbol-toggle special" data-key="symbol-toggle">ABC</button>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <?= $this->content ?>
+    </main>
+
+    <?= $this->partial('footer/footer') ?>
+
+    <a href="javascript:history.back()" class="back-button">
+        <i class="bi bi-arrow-left"></i>
+        <span>Volver</span>
+    </a>
+
+    <script>
+        // Variables globales para el teclado virtual
+        let currentInput = null;
+        let isShiftActive = false;
+        let symbolMode = false;
+        let keyboardVisible = false;
+        let selectedRating = null;
+
+        // Mapeo de caracteres con shift
+        const shiftMap = {
+            '1': '!',
+            '2': '"',
+            '3': '#',
+            '4': '$',
+            '5': '%',
+            '6': '&',
+            '7': '/',
+            '8': '(',
+            '9': ')',
+            '0': '=',
+            'q': 'Q',
+            'w': 'W',
+            'e': 'E',
+            'r': 'R',
+            't': 'T',
+            'y': 'Y',
+            'u': 'U',
+            'i': 'I',
+            'o': 'O',
+            'p': 'P',
+            'a': 'A',
+            's': 'S',
+            'd': 'D',
+            'f': 'F',
+            'g': 'G',
+            'h': 'H',
+            'j': 'J',
+            'k': 'K',
+            'l': 'L',
+            'ñ': 'Ñ',
+            'z': 'Z',
+            'x': 'X',
+            'c': 'C',
+            'v': 'V',
+            'b': 'B',
+            'n': 'N',
+            'm': 'M'
+        };
+
+        function positionKeyboard(inputElement) {
+            const keyboard = document.getElementById('virtualKeyboard');
+            const rect = inputElement.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+
+            // Dimensiones del teclado
+            const keyboardWidth = 950;
+            const keyboardHeight = 320; // Altura aproximada del teclado
+
+            // Posición vertical: debajo del input con un pequeño margen
+            let top = rect.bottom + scrollTop + 15;
+
+            // Posición horizontal: centrado respecto al input, pero ajustado a la pantalla
+            let left = rect.left + scrollLeft + (rect.width / 2) - (keyboardWidth / 2);
+
+            // Ajustar si se sale por la izquierda
+            if (left < 20) {
+                left = 20;
+            }
+
+            // Ajustar si se sale por la derecha
+            if (left + keyboardWidth > window.innerWidth - 20) {
+                left = window.innerWidth - keyboardWidth - 20;
+            }
+
+            // Ajustar si se sale por abajo de la pantalla
+            if (top + keyboardHeight > window.innerHeight + scrollTop - 20) {
+                // Posicionar arriba del input si no cabe abajo
+                top = rect.top + scrollTop - keyboardHeight - 15;
+
+                // Si tampoco cabe arriba, ponerlo en el centro de la pantalla visible
+                if (top < scrollTop + 20) {
+                    top = scrollTop + (window.innerHeight / 2) - (keyboardHeight / 2);
+                }
+            }
+
+            keyboard.style.top = `${top}px`;
+            keyboard.style.left = `${left}px`;
+
+            console.log(`Posicionando teclado - Input: ${inputElement.id}, Top: ${top}, Left: ${left}`);
+        }
+
+        function showKeyboard(inputElement) {
+            // Solo mostrar en pantallas de 1080px o más
+            if (window.innerWidth < 1080) return;
+
+            currentInput = inputElement;
+            keyboardVisible = true;
+
+            const keyboard = document.getElementById('virtualKeyboard');
+            const overlay = document.getElementById('keyboardOverlay');
+
+            // Posicionar el teclado antes de mostrarlo
+            positionKeyboard(inputElement);
+
+            keyboard.classList.add('show');
+            overlay.classList.add('show');
+
+            console.log('Mostrando teclado para:', inputElement.id, 'Ancho:', window.innerWidth);
+        }
+
+        function hideKeyboard() {
+            keyboardVisible = false;
+            currentInput = null;
+
+            const keyboard = document.getElementById('virtualKeyboard');
+            const overlay = document.getElementById('keyboardOverlay');
+
+            keyboard.classList.remove('show');
+            overlay.classList.remove('show');
+
+            // Resetear estados
+            isShiftActive = false;
+            symbolMode = false;
+            updateShiftState();
+            resetSymbolMode();
+        }
+
+        function toggleSymbolMode() {
+            symbolMode = !symbolMode;
+            const symbolSection = document.getElementById('keyboardSymbols');
+            const toggleButtons = document.querySelectorAll('.symbol-toggle');
+
+            if (symbolMode) {
+                symbolSection.style.display = 'block';
+                toggleButtons.forEach(btn => btn.textContent = 'ABC');
+            } else {
+                symbolSection.style.display = 'none';
+                toggleButtons.forEach(btn => btn.textContent = '?123');
+            }
+        }
+
+        function resetSymbolMode() {
+            const symbolSection = document.getElementById('keyboardSymbols');
+            const toggleButtons = document.querySelectorAll('.symbol-toggle');
+
+            symbolSection.style.display = 'none';
+            toggleButtons.forEach(btn => btn.textContent = '?123');
+        }
+
+        function updateShiftState() {
+            const shiftKeys = document.querySelectorAll('.key.shift');
+            const allKeys = document.querySelectorAll('.key[data-key]:not(.shift):not(.special)');
+
+            shiftKeys.forEach(key => {
+                if (isShiftActive) {
+                    key.classList.add('active');
+                } else {
+                    key.classList.remove('active');
+                }
+            });
+
+            allKeys.forEach(key => {
+                const originalChar = key.dataset.key;
+                if (shiftMap[originalChar]) {
+                    key.textContent = isShiftActive ? shiftMap[originalChar] : originalChar;
+                }
+            });
+        }
+
+        function handleKeyPress(key) {
+            if (!currentInput) return;
+
+            const cursorPos = currentInput.selectionStart;
+            const currentValue = currentInput.value;
+
+            switch (key) {
+                case 'backspace':
+                    if (cursorPos > 0) {
+                        currentInput.value = currentValue.substring(0, cursorPos - 1) + currentValue.substring(cursorPos);
+                        currentInput.setSelectionRange(cursorPos - 1, cursorPos - 1);
+                    }
+                    break;
+
+                case 'space':
+                    currentInput.value = currentValue.substring(0, cursorPos) + ' ' + currentValue.substring(cursorPos);
+                    currentInput.setSelectionRange(cursorPos + 1, cursorPos + 1);
+                    break;
+
+                case 'shift':
+                    isShiftActive = !isShiftActive;
+                    updateShiftState();
+                    break;
+
+                case 'symbol-toggle':
+                    toggleSymbolMode();
+                    break;
+
+                case 'accept':
+                case 'cancel':
+                    hideKeyboard();
+                    return;
+
+                case '@gmail.com':
+                case '@hotmail.com':
+                case '.cl':
+                case '.com':
+                    currentInput.value = currentValue.substring(0, cursorPos) + key + currentValue.substring(cursorPos);
+                    currentInput.setSelectionRange(cursorPos + key.length, cursorPos + key.length);
+                    break;
+
+                default:
+                    let charToInsert = key;
+                    if (isShiftActive && shiftMap[key]) {
+                        charToInsert = shiftMap[key];
+                        isShiftActive = false;
+                        updateShiftState();
+                    }
+                    currentInput.value = currentValue.substring(0, cursorPos) + charToInsert + currentValue.substring(cursorPos);
+                    currentInput.setSelectionRange(cursorPos + 1, cursorPos + 1);
+                    break;
+            }
+
+            // Mantener el foco en el input para que el cursor siga visible
+            if (currentInput && document.activeElement !== currentInput) {
+                currentInput.focus();
+            }
+
+            // Disparar evento input para validaciones en tiempo real
+            currentInput.dispatchEvent(new Event('input', {
+                bubbles: true
+            }));
+        }
+
+        function openEvaluationModal(departmentName) {
+            document.getElementById('departmentName').textContent = departmentName;
+            document.getElementById('selectedDepartment').value = departmentName;
+            document.getElementById('nombreOficina').value = departmentName;
+            const modal = new bootstrap.Modal(document.getElementById('modalEvaluacion'));
+            modal.show();
+            clearForm();
+        }
+
+        function selectRating(element) {
+            document.querySelectorAll('.face-button').forEach(btn => btn.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedRating = element.getAttribute('data-rating');
+            document.getElementById('selectedRating').value = selectedRating;
+        }
+
+        function clearForm() {
+            document.getElementById('formEvaluacion').reset();
+            document.getElementById('selectedRating').value = '';
+            document.querySelectorAll('.face-button').forEach(btn => btn.classList.remove('selected'));
+            selectedRating = null;
+            hideKeyboard();
+            symbolMode = false;
+            resetSymbolMode();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Teclado virtual inicializado. Ancho de ventana:', window.innerWidth);
+
+            // Event listeners para mostrar el teclado cuando se hace focus en inputs/textareas
+            document.querySelectorAll('.keyboard-input').forEach(input => {
+                // También al hacer clic por si acaso
+                input.addEventListener('click', function() {
+                    if (!keyboardVisible || currentInput !== this) {
+                        showKeyboard(this);
+                        positionKeyboard(this);
+                    }
+                });
+
+                // Reposicionar si se cambia de input sin cerrar el teclado
+                input.addEventListener('focus', function() {
+                    if (keyboardVisible && currentInput !== this) {
+                        setTimeout(() => {
+                            positionKeyboard(this);
+                        }, 50);
+                    }
+                });
+            });
+
+            // Event listeners para las teclas del teclado
+            document.querySelectorAll('.key').forEach(key => {
+                key.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleKeyPress(this.dataset.key);
+                });
+            });
+
+            // Ocultar teclado al hacer clic en el overlay
+            document.getElementById('keyboardOverlay').addEventListener('click', function() {
+                hideKeyboard();
+            });
+
+            // Ocultar teclado al redimensionar la ventana si es menor a 1080px
+            window.addEventListener('resize', function() {
+                if (window.innerWidth < 1080 && keyboardVisible) {
+                    hideKeyboard();
+                } else if (keyboardVisible && currentInput) {
+                    // Reposicionar el teclado si cambia el tamaño de ventana
+                    positionKeyboard(currentInput);
+                }
+            });
+
+            // Reposicionar teclado al hacer scroll (solo si está visible)
+            window.addEventListener('scroll', function() {
+                if (keyboardVisible && currentInput) {
+                    positionKeyboard(currentInput);
+                }
+            });
+
+            // Ocultar teclado al hacer clic fuera de inputs (excepto en el teclado mismo)
+            document.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('keyboard-input') &&
+                    !document.getElementById('virtualKeyboard').contains(e.target) &&
+                    !document.getElementById('keyboardOverlay').contains(e.target) &&
+                    keyboardVisible) {
+                    hideKeyboard();
+                }
+            });
+
+            // Inicializar estado del teclado
+            updateShiftState();
+
+            // Event listener para el formulario de evaluación
+            document.getElementById('formEvaluacion').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Validar calificación
+                if (!selectedRating) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Calificación requerida',
+                        text: 'Por favor seleccione una calificación antes de enviar.',
+                        confirmButtonColor: '#051c9c',
+                        confirmButtonText: 'Entendido'
+                    });
+                    return;
+                }
+
+                // Validar campos requeridos
+                const nombre = document.getElementById('inputNombre').value.trim();
+                const correo = document.getElementById('inputCorreo').value.trim();
+                const telefono = document.getElementById('inputTelefono').value.trim();
+                const comentario = document.getElementById('inputComentario').value.trim();
+
+                // Array para almacenar campos faltantes
+                let camposFaltantes = [];
+
+                if (!nombre) camposFaltantes.push('Nombre');
+                if (!correo) camposFaltantes.push('Correo electrónico');
+                if (!telefono) camposFaltantes.push('Teléfono');
+                if (!comentario) camposFaltantes.push('Comentarios adicionales');
+
+                // Si hay campos faltantes, mostrar mensaje y detener envío
+                if (camposFaltantes.length > 0) {
+                    const iconoCampo = '<i class="bi bi-exclamation-triangle-fill" style="color: #dc3545;"></i>';
+                    let mensajeHTML = `${iconoCampo} <strong>Por favor complete los siguientes campos:</strong><br><br>`;
+
+                    camposFaltantes.forEach(campo => {
+                        mensajeHTML += `<div style="text-align: left; margin: 8px 0; padding: 5px 10px; background: #fff3cd; border-left: 3px solid #ffc107; border-radius: 3px;">
+                            <i class="bi bi-arrow-right-circle-fill" style="color: #856404;"></i> <strong>${campo}</strong>
+                        </div>`;
+                    });
+
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Campos incompletos',
+                        html: mensajeHTML,
+                        confirmButtonColor: '#051c9c',
+                        confirmButtonText: 'Completar campos',
+                        width: '500px'
+                    });
+                    return;
+                }
+
+                // Validar formato de email básico
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(correo)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Correo inválido',
+                        html: `<div style="text-align: center;">
+                            <i class="bi bi-envelope-x" style="font-size: 48px; color: #dc3545; margin-bottom: 15px;"></i>
+                            <p>El correo electrónico <strong>"${correo}"</strong> no tiene un formato válido.</p>
+                            <p style="margin-top: 15px; color: #6c757d; font-size: 14px;">
+                                <i class="bi bi-info-circle"></i> Ejemplo de formato correcto: usuario@ejemplo.com
+                            </p>
+                        </div>`,
+                        confirmButtonColor: '#051c9c',
+                        confirmButtonText: 'Corregir email'
+                    });
+                    return;
+                }
+
+                const formData = new FormData(this);
+
+                // Debug: mostrar datos que se envían
+                console.log('Datos a enviar:');
+                for (let [key, value] of formData.entries()) {
+                    console.log(key, value);
+                }
+
+                // Deshabilitar botón de envío durante el proceso
+                const submitButton = this.querySelector('button[type="submit"]');
+                const originalText = submitButton.innerHTML;
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Enviando...';
+
+                fetch('/didecosistemas/public/departamentos/evaluacion/guardar', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Respuesta del servidor:', data);
+
+                        if (data.success) {
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: '¡Evaluación enviada!',
+                                    text: 'Gracias por su evaluación. Sus comentarios son muy valiosos.',
+                                    confirmButtonColor: '#28a745',
+                                    timer: 3000,
+                                    timerProgressBar: true
+                                }).then(() => {
+                                    window.location.href = "/didecosistemas/public/";
+                                });
+                            } else {
+                                alert('¡Evaluación enviada exitosamente!');
+                                window.location.href = "/didecosistemas/public/";
+                            }
+                        } else {
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: data.message || 'No se pudo guardar la evaluación.',
+                                    confirmButtonColor: '#dc3545',
+                                });
+                            } else {
+                                alert('Error: ' + (data.message || 'No se pudo guardar la evaluación.'));
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error de conexión',
+                                text: 'No se pudo conectar al servidor. Verifique su conexión.',
+                                confirmButtonColor: '#dc3545',
+                            });
+                        } else {
+                            alert('Error de conexión: No se pudo conectar al servidor.');
+                        }
+                    })
+                    .finally(() => {
+                        // Restaurar botón de envío
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalText;
+                    });
+            });
+
+            // Limpiar formulario al cerrar modal
+            document.getElementById('modalEvaluacion').addEventListener('hidden.bs.modal', function() {
+                clearForm();
+            });
+        });
+    </script>
+
+    <?= $this->inlineScript() ?>
+</body>
+
+</html>

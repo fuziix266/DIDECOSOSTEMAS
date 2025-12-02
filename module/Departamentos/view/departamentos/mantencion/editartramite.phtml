@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Trámite</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+        }
+        .navbar-custom {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        textarea {
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark navbar-custom mb-4">
+        <div class="container-fluid">
+            <a href="<?= $this->url('departamentos-mantencion', ['action' => 'tramites']) ?>" class="navbar-brand">
+                ← Volver a Trámites
+            </a>
+            <div class="d-flex align-items-center text-white">
+                <span class="me-3">
+                    👤 <?= $this->escapeHtml($this->usuario['nombre']) ?>
+                </span>
+                <a href="<?= $this->url('departamentos-mantencion', ['action' => 'logout']) ?>" class="btn btn-light btn-sm">
+                    Salir
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Editar Trámite</h4>
+                        <p class="text-muted">ID: <?= $this->tramite['id'] ?> | Slug: <code><?= $this->escapeHtml($this->tramite['slug']) ?></code></p>
+
+                        <?php if ($this->success): ?>
+                            <div class="alert alert-success alert-dismissible fade show">
+                                ✅ Trámite actualizado correctamente
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($this->error): ?>
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                ❌ <?= $this->escapeHtml($this->error) ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        <?php endif; ?>
+
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre del Trámite</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" 
+                                       value="<?= $this->escapeHtml($this->tramite['nombre']) ?>" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="documentos_requeridos" class="form-label">
+                                    Documentos Requeridos
+                                    <small class="text-muted">(un documento por línea)</small>
+                                </label>
+                                <textarea class="form-control" id="documentos_requeridos" name="documentos_requeridos" 
+                                          rows="6"><?= $this->escapeHtml($this->tramite['documentos_requeridos']) ?></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="requisitos_usuario" class="form-label">
+                                    Requisitos del Usuario
+                                    <small class="text-muted">(un requisito por línea)</small>
+                                </label>
+                                <textarea class="form-control" id="requisitos_usuario" name="requisitos_usuario" 
+                                          rows="6"><?= $this->escapeHtml($this->tramite['requisitos_usuario']) ?></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="instrucciones_paso_paso" class="form-label">
+                                    Instrucciones Paso a Paso
+                                    <small class="text-muted">(un paso por línea)</small>
+                                </label>
+                                <textarea class="form-control" id="instrucciones_paso_paso" name="instrucciones_paso_paso" 
+                                          rows="8"><?= $this->escapeHtml($this->tramite['instrucciones_paso_paso']) ?></textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="tiempo_estimado" class="form-label">Tiempo Estimado</label>
+                                    <input type="text" class="form-control" id="tiempo_estimado" name="tiempo_estimado" 
+                                           value="<?= $this->escapeHtml($this->tramite['tiempo_estimado']) ?>"
+                                           placeholder="Ej: 10 días hábiles">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="responsable_nombre" class="form-label">Responsable</label>
+                                    <input type="text" class="form-control" id="responsable_nombre" name="responsable_nombre" 
+                                           value="<?= $this->escapeHtml($this->tramite['responsable_nombre']) ?>"
+                                           placeholder="Nombre del responsable">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="observaciones" class="form-label">
+                                    Observaciones
+                                    <small class="text-muted">(opcional)</small>
+                                </label>
+                                <textarea class="form-control" id="observaciones" name="observaciones" 
+                                          rows="3"><?= $this->escapeHtml($this->tramite['observaciones'] ?? '') ?></textarea>
+                            </div>
+
+                            <div class="alert alert-info">
+                                <strong>💡 Importante:</strong> Los cambios se guardarán y se reflejarán inmediatamente en el sitio web.
+                                Los saltos de línea se preservarán automáticamente.
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    💾 Guardar Cambios
+                                </button>
+                                <a href="<?= $this->url('departamentos-mantencion', ['action' => 'tramites']) ?>?departamento=<?= $this->tramite['departamento_id'] ?>" 
+                                   class="btn btn-secondary">
+                                    Cancelar
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

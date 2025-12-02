@@ -1,0 +1,38 @@
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Programación</h2>
+        <a href="<?= $this->url('radio-programs', ['action' => 'add']) ?>" class="btn btn-primary">Nuevo Programa</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Conductor</th>
+                <th>Horario</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->programs as $item): ?>
+            <tr>
+                <td><?= $item['id'] ?></td>
+                <td><?= $this->escapeHtml($item['title']) ?></td>
+                <td><?= $this->escapeHtml($item['host']) ?></td>
+                <td><?= $item['start_time'] ?> - <?= $item['end_time'] ?></td>
+                <td>
+                    <?php if ($item['image_url']): ?>
+                        <img src="<?= $item['image_url'] ?>" alt="Img" style="height: 50px;">
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <a href="<?= $this->url('radio-programs', ['action' => 'edit', 'id' => $item['id']]) ?>" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="<?= $this->url('radio-programs', ['action' => 'delete', 'id' => $item['id']]) ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro?')">Eliminar</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

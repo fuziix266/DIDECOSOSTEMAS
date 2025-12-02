@@ -1,0 +1,137 @@
+<div class="container py-4">
+    <h2>Generador de Cartones de Bingo</h2>
+
+        <form id="formBingo" method="post" action="" enctype="multipart/form-data" novalidate>
+
+            <div class="row g-3">
+
+                <div class="col-md-3">
+
+                    <label for="cantidad" class="form-label">Número de cartones</label>
+
+                    <input type="number" id="cantidad" name="cantidad" class="form-control" min="1" value="1" required>
+
+                    <div class="invalid-feedback">Debes indicar cuántos cartones generar.</div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <label for="inicio" class="form-label">Contador de cartones</label>
+
+                    <input type="number" id="inicio" name="inicio" class="form-control" min="1" value="1" required>
+
+                    <div class="invalid-feedback">Debes indicar el folio de inicio.</div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">Información</label>
+
+                    <div id="editor-container" style="height: 150px; background-color: white;"></div>
+
+                    <input type="hidden" name="informacion" id="informacion">
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <label for="batchSize" class="form-label">Cada N cartones</label>
+
+                    <input type="number" id="batchSize" name="batchSize" class="form-control" min="1" value="50" required>
+
+                    <div class="invalid-feedback">Debes indicar cada cuántos cambias de color.</div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <label for="color" class="form-label">Color pastel</label>
+
+                    <input type="color" id="color" name="color" class="form-control form-control-color" value="#f8f0e3" required>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <label for="imagenCentro" class="form-label">Imagen centro (opcional)</label>
+
+                    <input type="file" id="imagenCentro" name="imagenCentro" class="form-control" accept="image/*" />
+
+                </div>
+
+            </div>
+
+            <div class="mt-4">
+
+                <button type="submit" class="btn btn-primary">Crear PDF</button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+
+    <script>
+
+        // Inicializar Quill
+
+        const quill = new Quill('#editor-container', {
+
+            theme: 'snow',
+
+            modules: {
+
+                toolbar: [
+
+                    ['bold', 'italic', 'underline'],
+
+                    [{
+
+                        'list': 'ordered'
+
+                    }, {
+
+                        'list': 'bullet'
+
+                    }],
+
+                    [{
+
+                        'align': []
+
+                    }]
+
+                ]
+
+            }
+
+        });
+
+
+
+        // Validación Bootstrap + transferencia del contenido
+
+        const form = document.getElementById('formBingo');
+
+        form.addEventListener('submit', function(event) {
+
+            if (!form.checkValidity()) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+            }
+
+            document.getElementById('informacion').value = quill.root.innerHTML;
+
+            form.classList.add('was-validated');
+
+        });
+
+    </script>
+</div>

@@ -1,0 +1,410 @@
+<?php
+
+/**
+ * Layout para páginas de menú - DIDECO
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var string $content
+ */
+?>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <?= $this->headTitle('DIDECO - Menú de Servicios')->setSeparator(' - ') ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <?php include 'includes.phtml'; ?>
+
+    <?= $this->headLink() ?>
+
+    <style>
+        /* CSS final unificado con prioridad a las correcciones más recientes */
+
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #051c9c 0%, #051c9c 100%);
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo-container img {
+            max-width: 21rem;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .breadcrumb-custom {
+            background: linear-gradient(135deg, #1e448c 0%, #15356c 100%);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .breadcrumb-custom .breadcrumb-item+.breadcrumb-item::before {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .breadcrumb-custom a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+        }
+
+        .breadcrumb-custom .active {
+            color: white;
+            font-weight: 500;
+        }
+
+        main {
+            padding: 2rem 0;
+            min-height: 60vh;
+            flex: 1 0 auto;
+        }
+
+        .back-button {
+            display: none !important;
+            position: fixed;
+            top: 4.5rem;
+            left: 1rem;
+            z-index: 1000;
+            background: linear-gradient(135deg, #1e448c 0%, #15356c 100%);
+            border: 1px solid white;
+            border-radius: 50px;
+            padding: 1rem 1.5rem;
+            color: white;
+            box-shadow: 0 4px 15px rgba(30, 68, 140, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 68, 140, 0.4);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .back-button {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.8rem 1.2rem;
+            }
+
+            .header-section {
+                padding: 1.5rem 0;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1rem;
+                padding: 0 0.5rem;
+            }
+
+            .card-departamento {
+                padding: 1.5rem;
+            }
+
+            .card-icon i {
+                font-size: 2.5rem;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .descripcion {
+                font-size: 0.9rem;
+            }
+
+            .info-banner {
+                padding: 1.5rem;
+                text-align: center;
+            }
+
+            .info-banner .row>div {
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 1081px) and (min-width: 1080px) {
+            .back-button {
+                display: block !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Estilos adicionales */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .card-departamento {
+            background: linear-gradient(145deg, #f0f6ff 0%, #e8f2ff 100%);
+            border: 2px solid #c7d9ff;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(21, 53, 108, 0.12);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .card-departamento::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #051c9c 0%, #051c9c 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .card-departamento:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(21, 53, 108, 0.25);
+            border-color: #15356c;
+            text-decoration: none;
+            color: white;
+        }
+
+        .card-departamento:hover::before {
+            opacity: 0.95;
+        }
+
+        .card-departamento:hover .card-content,
+        .card-departamento:hover .card-icon {
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-departamento:hover .card-title {
+            color: #dbe8ff !important;
+        }
+
+        .card-departamento:hover .descripcion {
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+
+        .card-departamento:hover .card-icon i {
+            color: white !important;
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .card-icon {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .card-icon i {
+            font-size: 3rem;
+            color: #15356c;
+            transition: all 0.4s ease;
+        }
+
+        .card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            transition: color 0.4s ease;
+        }
+
+        .card-title {
+            color: #2e5ea7;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .descripcion {
+            color: #6c757d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex: 1;
+            transition: color 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Info banner */
+        .info-banner {
+            background: linear-gradient(135deg, #dbe8ff 0%, #f0f4ff 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid #c7d9ff;
+            box-shadow: 0 4px 15px rgba(21, 53, 108, 0.08);
+        }
+
+        .info-icon {
+            font-size: 2.5rem;
+            color: #1e448c;
+        }
+    </style>
+
+    <?= $this->headStyle() ?>
+</head>
+
+<body>
+    <div class="header-section">
+        <div class="floating-elements"></div>
+        <div class="container header-content">
+            <div class="logo-container">
+                <img src="/didecosistemas/public/img/logo-dideco.png" alt="Logo DIDECO">
+            </div>
+
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb breadcrumb-custom mb-0">
+                    <li class="breadcrumb-item">
+                        <a href="/didecosistemas/public/"><i class="bi bi-house-door"></i> Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <?= $this->pageTitle ?? 'Menú Servicios' ?>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <main>
+        <?= $this->content ?>
+    </main>
+
+    <?= $this->partial('footer/footer') ?>
+
+    <a href="javascript:history.back()" class="back-button">
+        <i class="bi bi-arrow-left"></i>
+        <span>Volver</span>
+    </a>
+
+    <script>
+        let autoReturnTimer;
+        let confirmationTimer;
+
+        function startAutoReturnTimer() {
+            clearTimeout(autoReturnTimer);
+            clearTimeout(confirmationTimer);
+
+            autoReturnTimer = setTimeout(() => {
+                showConfirmationPrompt();
+            }, 4 * 60 * 1000); //4 minutos
+        }
+
+        function showConfirmationPrompt() {
+            let secondsLeft = 20;
+
+            const timerInterval = setInterval(() => {
+                secondsLeft--;
+                if (secondsLeft <= 0) {
+                    clearInterval(timerInterval);
+                }
+            }, 1000);
+
+            Swal.fire({
+                title: '¿Necesitas más tiempo?',
+                html: 'Estamos aquí para ayudarte.<br><strong>Volveremos a la página principal en 10 segundos.</strong>',
+                icon: 'info',
+                showCancelButton: false,
+                showConfirmButton: true,
+                confirmButtonText: 'Sí, estoy aquí',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                timer: 20000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    // iniciar conteo de redirección
+                    confirmationTimer = setTimeout(() => {
+                        window.location.href = "/didecosistemas/public/";
+                    }, 10000);
+                },
+                willClose: () => {
+                    clearTimeout(confirmationTimer);
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    startAutoReturnTimer(); // usuario está activo
+                }
+            });
+        }
+
+        // Detectar actividad para reiniciar contador
+        ["mousemove", "mousedown", "keydown", "touchstart"].forEach(evt => {
+            document.addEventListener(evt, startAutoReturnTimer);
+        });
+
+        // Iniciar al cargar
+        startAutoReturnTimer();
+    </script>
+
+</body>
+
+</html>

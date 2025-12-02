@@ -1,0 +1,1193 @@
+<?php
+
+/**
+ * DIDECO - Ilustre Municipalidad de Arica
+ */
+?>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <?= $this->headTitle('DIDECO - Trámites y Servicios')->setSeparator(' - ') ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <?php include 'includes.phtml'; ?>
+
+    <?= $this->headLink() ?>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
+
+        .logo-container {
+            text-align: center;
+            padding: 2rem 0 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(30,68,140,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .logo-container img {
+            max-width: 400px;
+            width: 80%;
+            height: auto;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.02);
+        }
+
+        .menu-cuadrado {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem auto 2rem;
+            gap: 15px;
+            padding: 0 1rem;
+        }
+
+        .menu-cuadrado .menu-btn {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 110px;
+            height: 110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            flex-shrink: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-cuadrado .menu-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--btn-color, #1e448c) 0%, var(--btn-color-light, #2e5ea7) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .menu-cuadrado .menu-btn:hover::before {
+            opacity: 0.95;
+        }
+
+        .menu-cuadrado .menu-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        .menu-cuadrado .menu-btn:hover i,
+        .menu-cuadrado .menu-btn:hover span {
+            color: white !important;
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu-cuadrado .menu-btn i {
+            font-size: 28px;
+            margin-bottom: 8px;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu-cuadrado .menu-btn span {
+            font-size: 0.85rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+            transition: color 0.4s ease;
+        }
+
+        .menu-cuadrado .muni {
+            --btn-color: #01a5e2;
+            --btn-color-light: #01a5e2;
+        }
+
+        .menu-cuadrado .muni i {
+            color: #051c9c;
+        }
+
+        .menu-cuadrado .dideco {
+            --btn-color: #00ac8e;
+            --btn-color-light: #00ac8e;
+        }
+
+        .menu-cuadrado .dideco i {
+            color: #051c9c;
+        }
+
+        .menu-cuadrado .insta {
+            --btn-color: #d1694e;
+            --btn-color-light: #d1694e;
+        }
+
+        .menu-cuadrado .insta i {
+            color: #051c9c;
+        }
+
+        .menu-cuadrado .aplicaciones {
+            --btn-color: #eec85d;
+            --btn-color-light: #eec85d;
+        }
+
+        .menu-cuadrado .aplicaciones i {
+            color: #051c9c;
+        }
+
+        .search-section {
+            background: #051c9c;
+            padding: 2rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .search-bar input {
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(30, 68, 140, 0.1);
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .search-bar input:focus {
+            border-color: #1e448c;
+            box-shadow: 0 6px 20px rgba(30, 68, 140, 0.2);
+            outline: none;
+            transform: translateY(-2px);
+        }
+
+        .titulo-sub {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #15356c;
+            margin-top: 1rem;
+            margin-bottom: 0;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        main {
+            padding: 3rem 0;
+            min-height: 50vh;
+        }
+
+        /* ESTILOS DEL TECLADO VIRTUAL ACTUALIZADO */
+        .virtual-keyboard {
+            position: fixed;
+            z-index: 9999;
+            background: #15356c;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(21, 53, 108, 0.4);
+            border: 4px solid #2e5ea7;
+            max-width: 95vw;
+            width: 950px;
+            display: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+            /* Se posicionará dinámicamente con JavaScript */
+        }
+
+        .virtual-keyboard.show {
+            display: block;
+            opacity: 1;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .keyboard-row {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .key {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            color: #15356c;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            min-height: 50px;
+            max-height: 50px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            user-select: none;
+        }
+
+        .key:hover {
+            background: linear-gradient(145deg, #e9ecef 0%, #dee2e6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            border-color: #1e448c;
+        }
+
+        .key:active {
+            background: linear-gradient(145deg, #1e448c 0%, #15356c 100%);
+            color: white;
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .key.special {
+            background: linear-gradient(145deg, #2e5ea7 0%, #1e448c 100%);
+            color: white;
+            font-weight: 700;
+        }
+
+        .key.special:hover {
+            background: linear-gradient(145deg, #1e448c 0%, #15356c 100%);
+        }
+
+        .key.shift.active {
+            background: linear-gradient(145deg, #ffc107 0%, #e0a800 100%);
+            color: #212529;
+        }
+
+        .key.accept {
+            background: linear-gradient(145deg, #28a745 0%, #20a038 100%);
+            color: white;
+        }
+
+        .key.cancel {
+            background: linear-gradient(145deg, #dc3545 0%, #c82333 100%);
+            color: white;
+        }
+
+        .key.symbol {
+            background: linear-gradient(145deg, #e3f2fd 0%, #bbdefb 100%);
+            color: #1565c0;
+            border-color: #90caf9;
+        }
+
+        .key.symbol:hover {
+            background: linear-gradient(145deg, #bbdefb 0%, #90caf9 100%);
+            border-color: #1565c0;
+        }
+
+        .key.symbol-toggle {
+            background: linear-gradient(145deg, #fff3e0 0%, #ffcc02 100%);
+            color: #e65100;
+        }
+
+        .key.symbol-toggle:hover {
+            background: linear-gradient(145deg, #ffcc02 0%, #ff9800 100%);
+        }
+
+        /* TAMAÑOS DE TECLAS */
+        .key.letter,
+        .key.number,
+        .key.symbol {
+            width: 50px;
+            height: 50px;
+        }
+
+        .key.backspace {
+            width: 85px;
+            height: 50px;
+        }
+
+        .key.shift {
+            width: 90px;
+            height: 50px;
+        }
+
+        .key.space {
+            width: 420px;
+            height: 50px;
+            font-size: 14px;
+        }
+
+        .key.control {
+            width: 95px;
+            height: 50px;
+        }
+
+        .key.symbol-toggle {
+            width: 70px;
+            height: 50px;
+            font-size: 14px;
+        }
+
+        /* Overlay de fondo */
+        .keyboard-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+            z-index: 9998;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .keyboard-overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* RESPONSIVE PARA EL TECLADO - Solo mostrar en 1080px */
+        @media (max-width: 1079px) {
+            .virtual-keyboard,
+            .keyboard-overlay {
+                display: none !important;
+            }
+        }
+
+        /* Optimización para pantallas de tótem (1080px ancho, muy altas) */
+        @media (width: 1080px) {
+            .virtual-keyboard {
+                width: 900px;
+                padding: 20px;
+            }
+            
+            .key {
+                height: 55px;
+                font-size: 18px;
+            }
+            
+            .key.space {
+                width: 350px;
+            }
+        }
+
+        @media (max-width: 1081px) and (min-width: 1080px) {
+            .menu-cuadrado {
+                display: none;
+            }
+
+            .logo-container {
+                padding: 3rem 0 3rem;
+            }
+
+            .logo-container img {
+                max-width: 600px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-container {
+                padding: 1.5rem 0 0.5rem;
+            }
+
+            .menu-cuadrado {
+                gap: 10px;
+                margin: 1rem auto;
+            }
+
+            .menu-cuadrado .menu-btn {
+                width: 100%;
+                max-width: 90px;
+                height: 90px;
+                border-radius: 15px;
+            }
+
+            .menu-cuadrado .menu-btn i {
+                font-size: 22px;
+                margin-bottom: 6px;
+            }
+
+            .menu-cuadrado .menu-btn span {
+                font-size: 0.75rem;
+            }
+
+            .search-section {
+                padding: 1.5rem 1rem;
+            }
+
+            .titulo-sub {
+                font-size: 1.2rem;
+            }
+
+            main {
+                padding: 2rem 0;
+            }
+        }
+
+        /* para ventana modal */
+        .aviso-texto {
+            font-size: 1.1rem;
+        }
+
+        @media (min-width: 768px) {
+            .aviso-texto {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .aviso-texto {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* screensaver */
+        .screensaver {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .screensaver.d-none {
+            display: none !important;
+        }
+
+        .screensaver-message {
+            position: absolute;
+            top: 40px;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+        }
+
+        .screensaver-logo {
+            filter: brightness(0) invert(1);
+            width: 500px;
+            height: auto;
+            position: absolute;
+        }
+
+        /* separador footer */
+        .separador-search {
+            margin-top: 0;
+        }
+
+        .celeste {
+            background-color: #01a5e2;
+            padding-top: 0.5rem;
+        }
+
+        .verde {
+            background-color: #00ac8e;
+            padding-top: 0.5rem;
+        }
+
+        .rojo {
+            background-color: #d1694e;
+            padding-top: 0.5rem;
+        }
+
+        .amarillo {
+            background-color: #eec85d;
+            padding-top: 0.5rem;
+        }
+
+        /* boton de evaluacion */
+
+        /* Botón de evaluación para totem */
+        .evaluacion-container {
+            display: none;
+            text-align: center;
+            padding-top: 1.5rem;
+            max-width: 960px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .btn-evaluacion {
+            background: linear-gradient(145deg, #01a5e2 0%, #03b3f0 100%);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(1, 165, 226, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-evaluacion:hover {
+            background: linear-gradient(145deg, #03b3f0 0%, #01a5e2 100%);
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 8px 20px rgba(1, 165, 226, 0.4);
+        }
+
+        .btn-evaluacion:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(1, 165, 226, 0.25);
+        }
+
+        /* Mostrar solo en pantallas de 1080px */
+        @media (width: 1080px) {
+            .evaluacion-container {
+                display: block;
+            }
+        }
+    </style>
+
+    <?= $this->headStyle() ?>
+</head>
+
+<body>
+    <div class="logo-container">
+        <img src="/didecosistemas/public/img/logo-dideco.png" alt="Logo DIDECO">
+    </div>
+
+    <div class="menu-cuadrado">
+        <a href="https://www.muniarica.cl" target="_blank" class="menu-btn muni">
+            <i class="fas fa-landmark"></i>
+            <span>Muni Arica</span>
+        </a>
+        <a href="/didecosistemas/public/departamentos/radio" target="_blank" class="menu-btn dideco">
+            <i class="fas fa-broadcast-tower"></i>
+            <span>Radio DIDECO</span>
+        </a>
+        <a href="https://www.instagram.com/dideco_ima/" target="_blank" class="menu-btn insta">
+            <i class="fab fa-instagram"></i>
+            <span>Instagram</span>
+        </a>
+        <a href="/didecosistemas/public/aplicaciones" target="_blank" class="menu-btn aplicaciones">
+            <i class="bi bi-person"></i>
+            <span>Aplicaciones</span>
+        </a>
+    </div>
+
+    <div class="separador-search d-flex">
+        <div class="flex-fill celeste"></div>
+        <div class="flex-fill verde"></div>
+        <div class="flex-fill rojo"></div>
+        <div class="flex-fill amarillo"></div>
+    </div>
+    <div class="search-section">
+        <div class="search-bar">
+            <input type="text" class="form-control keyboard-input" placeholder="¿Qué trámite estás buscando?" id="searchInput">
+        </div>
+    </div>
+    <h2 class="titulo-sub">Trámites y servicios DIDECO</h2>
+
+    <!-- Botón de evaluación solo para totem (1080px) -->
+    <div class="evaluacion-container">
+        <div class="container">
+            <div class="grid-container">
+                <div class="col-12">
+                    <button class="btn-evaluacion" onclick="window.location.href='/didecosistemas/public/departamentos/evaluacion'">
+                       Evalúa nuestra atención 😊
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <?= $this->content ?>
+    </main>
+
+    <!-- Overlay de fondo del teclado -->
+    <div class="keyboard-overlay" id="keyboardOverlay"></div>
+
+    <!-- TECLADO VIRTUAL ACTUALIZADO -->
+    <div class="virtual-keyboard" id="virtualKeyboard">
+        <!-- Fila 1: Números -->
+        <div class="keyboard-row">
+            <button class="key number" data-key="1">1</button>
+            <button class="key number" data-key="2">2</button>
+            <button class="key number" data-key="3">3</button>
+            <button class="key number" data-key="4">4</button>
+            <button class="key number" data-key="5">5</button>
+            <button class="key number" data-key="6">6</button>
+            <button class="key number" data-key="7">7</button>
+            <button class="key number" data-key="8">8</button>
+            <button class="key number" data-key="9">9</button>
+            <button class="key number" data-key="0">0</button>
+            <button class="key backspace special" data-key="backspace">← Borrar</button>
+        </div>
+
+        <!-- Fila 2: QWERTY -->
+        <div class="keyboard-row">
+            <button class="key letter" data-key="q">q</button>
+            <button class="key letter" data-key="w">w</button>
+            <button class="key letter" data-key="e">e</button>
+            <button class="key letter" data-key="r">r</button>
+            <button class="key letter" data-key="t">t</button>
+            <button class="key letter" data-key="y">y</button>
+            <button class="key letter" data-key="u">u</button>
+            <button class="key letter" data-key="i">i</button>
+            <button class="key letter" data-key="o">o</button>
+            <button class="key letter" data-key="p">p</button>
+        </div>
+
+        <!-- Fila 3: ASDF -->
+        <div class="keyboard-row">
+            <button class="key letter" data-key="a">a</button>
+            <button class="key letter" data-key="s">s</button>
+            <button class="key letter" data-key="d">d</button>
+            <button class="key letter" data-key="f">f</button>
+            <button class="key letter" data-key="g">g</button>
+            <button class="key letter" data-key="h">h</button>
+            <button class="key letter" data-key="j">j</button>
+            <button class="key letter" data-key="k">k</button>
+            <button class="key letter" data-key="l">l</button>
+            <button class="key letter" data-key="ñ">ñ</button>
+        </div>
+
+        <!-- Fila 4: ZXCV -->
+        <div class="keyboard-row">
+            <button class="key shift special" data-key="shift">⇧ May</button>
+            <button class="key letter" data-key="z">z</button>
+            <button class="key letter" data-key="x">x</button>
+            <button class="key letter" data-key="c">c</button>
+            <button class="key letter" data-key="v">v</button>
+            <button class="key letter" data-key="b">b</button>
+            <button class="key letter" data-key="n">n</button>
+            <button class="key letter" data-key="m">m</button>
+            <button class="key symbol-toggle special" data-key="symbol-toggle">?123</button>
+        </div>
+
+        <!-- Fila 5: Controles -->
+        <div class="keyboard-row">
+            <button class="key control accept" data-key="accept">🔍 Buscar</button>
+            <button class="key space special" data-key="space">Barra Espaciadora</button>
+            <button class="key control cancel" data-key="cancel">✖ Cerrar</button>
+        </div>
+
+        <!-- Sección de símbolos (oculta por defecto) -->
+        <div class="keyboard-symbols" id="keyboardSymbols" style="display: none;">
+            <!-- Fila 1: Símbolos comunes -->
+            <div class="keyboard-row">
+                <button class="key symbol" data-key="@">@</button>
+                <button class="key symbol" data-key="#">#</button>
+                <button class="key symbol" data-key="$">$</button>
+                <button class="key symbol" data-key="%">%</button>
+                <button class="key symbol" data-key="&">&</button>
+                <button class="key symbol" data-key="*">*</button>
+                <button class="key symbol" data-key="-">-</button>
+                <button class="key symbol" data-key="+">+</button>
+                <button class="key symbol" data-key="(">(</button>
+                <button class="key symbol" data-key=")">)</button>
+            </div>
+
+            <!-- Fila 2: Puntuación -->
+            <div class="keyboard-row">
+                <button class="key symbol" data-key="!">!</button>
+                <button class="key symbol" data-key='"'>"</button>
+                <button class="key symbol" data-key="'">´</button>
+                <button class="key symbol" data-key=":" ;">:</button>
+                <button class="key symbol" data-key=";">;</button>
+                <button class="key symbol" data-key="/">/</button>
+                <button class="key symbol" data-key="?">?</button>
+                <button class="key symbol" data-key=",">,</button>
+                <button class="key symbol" data-key=".">.</button>
+                <button class="key symbol" data-key="_">_</button>
+            </div>
+
+            <!-- Fila 3: Volver a letras -->
+            <div class="keyboard-row">
+                <button class="key symbol-toggle special" data-key="symbol-toggle">ABC</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Totem (1080px) -->
+    <div class="modal fade" id="popuptotem" tabindex="-1" aria-labelledby="popuptotemLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title" id="popuptotemLabel">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        Aviso Importante
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center aviso-texto">
+                    Algunos trámites y/o servicios están sujetos a evaluación según el <strong>Registro Social de Hogares (RSH)</strong> y pueden sufrir modificaciones sin previo aviso.
+                    <br>Gracias por su comprensión.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screensaver -->
+    <div id="screensaver" class="screensaver d-none">
+        <div class="screensaver-message">Toque la pantalla para comenzar</div>
+        <img src="/didecosistemas/public/img/logo-dideco.png" alt="Logo" class="screensaver-logo" />
+    </div>
+
+    <?= $this->partial('footer/footer') ?>
+
+    <script>
+        // Variables globales para el teclado virtual
+        let currentInput = null;
+        let isShiftActive = false;
+        let symbolMode = false;
+        let keyboardVisible = false;
+
+        // Mapeo de caracteres con shift
+        const shiftMap = {
+            '1': '!',
+            '2': '"',
+            '3': '#',
+            '4': '$',
+            '5': '%',
+            '6': '&',
+            '7': '/',
+            '8': '(',
+            '9': ')',
+            '0': '=',
+            'q': 'Q',
+            'w': 'W',
+            'e': 'E',
+            'r': 'R',
+            't': 'T',
+            'y': 'Y',
+            'u': 'U',
+            'i': 'I',
+            'o': 'O',
+            'p': 'P',
+            'a': 'A',
+            's': 'S',
+            'd': 'D',
+            'f': 'F',
+            'g': 'G',
+            'h': 'H',
+            'j': 'J',
+            'k': 'K',
+            'l': 'L',
+            'ñ': 'Ñ',
+            'z': 'Z',
+            'x': 'X',
+            'c': 'C',
+            'v': 'V',
+            'b': 'B',
+            'n': 'N',
+            'm': 'M'
+        };
+
+        function positionKeyboard(inputElement) {
+            const keyboard = document.getElementById('virtualKeyboard');
+            const rect = inputElement.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+            
+            // Dimensiones del teclado
+            const keyboardWidth = 950;
+            const keyboardHeight = 320; // Altura aproximada del teclado
+            
+            // Posición vertical: debajo del input con un pequeño margen
+            let top = rect.bottom + scrollTop + 15;
+            
+            // Posición horizontal: centrado respecto al input, pero ajustado a la pantalla
+            let left = rect.left + scrollLeft + (rect.width / 2) - (keyboardWidth / 2);
+            
+            // Ajustar si se sale por la izquierda
+            if (left < 20) {
+                left = 20;
+            }
+            
+            // Ajustar si se sale por la derecha
+            if (left + keyboardWidth > window.innerWidth - 20) {
+                left = window.innerWidth - keyboardWidth - 20;
+            }
+            
+            // Ajustar si se sale por abajo de la pantalla
+            if (top + keyboardHeight > window.innerHeight + scrollTop - 20) {
+                // Posicionar arriba del input si no cabe abajo
+                top = rect.top + scrollTop - keyboardHeight - 15;
+                
+                // Si tampoco cabe arriba, ponerlo en el centro de la pantalla visible
+                if (top < scrollTop + 20) {
+                    top = scrollTop + (window.innerHeight / 2) - (keyboardHeight / 2);
+                }
+            }
+            
+            keyboard.style.top = `${top}px`;
+            keyboard.style.left = `${left}px`;
+            
+            console.log(`Posicionando teclado - Input: ${inputElement.id}, Top: ${top}, Left: ${left}`);
+        }
+
+        function showKeyboard(inputElement) {
+            // Solo mostrar en pantallas de 1080px o más
+            if (window.innerWidth < 1080) return;
+            document.body.style.overflow = 'hidden';
+
+
+            currentInput = inputElement;
+            keyboardVisible = true;
+            
+            const keyboard = document.getElementById('virtualKeyboard');
+            const overlay = document.getElementById('keyboardOverlay');
+            
+            // Posicionar el teclado antes de mostrarlo
+            positionKeyboard(inputElement);
+            
+            keyboard.classList.add('show');
+            overlay.classList.add('show');
+            
+            console.log('Mostrando teclado para:', inputElement.id, 'Ancho:', window.innerWidth);
+        }
+
+        function hideKeyboard() {
+            keyboardVisible = false;
+            currentInput = null;
+            
+            document.body.style.overflow = '';
+
+            const keyboard = document.getElementById('virtualKeyboard');
+            const overlay = document.getElementById('keyboardOverlay');
+            
+            keyboard.classList.remove('show');
+            overlay.classList.remove('show');
+            
+            // Resetear estados
+            isShiftActive = false;
+            symbolMode = false;
+            updateShiftState();
+            resetSymbolMode();
+        }
+
+        function toggleSymbolMode() {
+            symbolMode = !symbolMode;
+            const symbolSection = document.getElementById('keyboardSymbols');
+            const toggleButtons = document.querySelectorAll('.symbol-toggle');
+
+            if (symbolMode) {
+                symbolSection.style.display = 'block';
+                toggleButtons.forEach(btn => btn.textContent = 'ABC');
+            } else {
+                symbolSection.style.display = 'none';
+                toggleButtons.forEach(btn => btn.textContent = '?123');
+            }
+        }
+
+        function resetSymbolMode() {
+            const symbolSection = document.getElementById('keyboardSymbols');
+            const toggleButtons = document.querySelectorAll('.symbol-toggle');
+            
+            symbolSection.style.display = 'none';
+            toggleButtons.forEach(btn => btn.textContent = '?123');
+        }
+
+        function updateShiftState() {
+            const shiftKeys = document.querySelectorAll('.key.shift');
+            const allKeys = document.querySelectorAll('.key[data-key]:not(.shift):not(.special)');
+
+            shiftKeys.forEach(key => {
+                if (isShiftActive) {
+                    key.classList.add('active');
+                } else {
+                    key.classList.remove('active');
+                }
+            });
+
+            allKeys.forEach(key => {
+                const originalChar = key.dataset.key;
+                if (shiftMap[originalChar]) {
+                    key.textContent = isShiftActive ? shiftMap[originalChar] : originalChar;
+                }
+            });
+        }
+
+        function handleKeyPress(key) {
+            if (!currentInput) return;
+
+            const cursorPos = currentInput.selectionStart;
+            const currentValue = currentInput.value;
+
+            switch (key) {
+                case 'backspace':
+                    if (cursorPos > 0) {
+                        currentInput.value = currentValue.substring(0, cursorPos - 1) + currentValue.substring(cursorPos);
+                        currentInput.setSelectionRange(cursorPos - 1, cursorPos - 1);
+                    }
+                    break;
+
+                case 'space':
+                    currentInput.value = currentValue.substring(0, cursorPos) + ' ' + currentValue.substring(cursorPos);
+                    currentInput.setSelectionRange(cursorPos + 1, cursorPos + 1);
+                    break;
+
+                case 'shift':
+                    isShiftActive = !isShiftActive;
+                    updateShiftState();
+                    break;
+
+                case 'symbol-toggle':
+                    toggleSymbolMode();
+                    break;
+
+                case 'accept':
+                    // Ejecutar búsqueda y cerrar teclado
+                    performSearch();
+                    hideKeyboard();
+                    return;
+
+                case 'cancel':
+                    hideKeyboard();
+                    return;
+
+                default:
+                    let charToInsert = key;
+                    if (isShiftActive && shiftMap[key]) {
+                        charToInsert = shiftMap[key];
+                        isShiftActive = false;
+                        updateShiftState();
+                    }
+                    currentInput.value = currentValue.substring(0, cursorPos) + charToInsert + currentValue.substring(cursorPos);
+                    currentInput.setSelectionRange(cursorPos + 1, cursorPos + 1);
+                    break;
+            }
+
+            // Mantener el foco en el input para que el cursor siga visible
+            if (currentInput && document.activeElement !== currentInput) {
+                currentInput.focus();
+            }
+
+            // Disparar evento input para funcionalidad de búsqueda en tiempo real
+            currentInput.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+
+        // Función de búsqueda (funcionalidad original)
+        function performSearch() {
+            const searchTerm = currentInput.value.toLowerCase();
+            const cards = document.querySelectorAll('.card-departamento');
+
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                    card.style.animation = 'fadeInUp 0.3s ease-out';
+                } else {
+                    card.style.display = searchTerm === '' ? 'flex' : 'none';
+                }
+            });
+        }
+
+        // Mostrar modal según el ancho de pantalla
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.innerWidth === 1080) {
+                // Modal para totem (1080px)
+                const modalTotem = new bootstrap.Modal(document.getElementById('popuptotem'));
+                const modalTotemElement = document.getElementById('popuptotem');
+
+                modalTotem.show();
+
+                setTimeout(() => {
+                    bootstrap.Modal.getInstance(modalTotemElement).hide();
+                }, 8000);
+            } else {
+                // Modal normal (otras resoluciones)
+                const modalAviso = new bootstrap.Modal(document.getElementById('popuptotem'));
+                const modalElement = document.getElementById('popuptotem');
+
+                modalAviso.show();
+
+                setTimeout(() => {
+                    bootstrap.Modal.getInstance(modalElement).hide();
+                }, 8000);
+            }
+
+            // Inicialización del teclado virtual
+            const input = document.getElementById('searchInput');
+
+            console.log('Teclado virtual inicializado. Ancho de ventana:', window.innerWidth);
+
+            // Event listener para mostrar el teclado cuando se hace focus en el input de búsqueda
+            input.addEventListener('focus', function() {
+                showKeyboard(this);
+            });
+
+            // También al hacer clic por si acaso
+            input.addEventListener('click', function() {
+                showKeyboard(this);
+            });
+
+            // Event listeners para las teclas del teclado
+            document.querySelectorAll('.key').forEach(key => {
+                key.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleKeyPress(this.dataset.key);
+                });
+            });
+
+            // Ocultar teclado al hacer clic en el overlay
+            document.getElementById('keyboardOverlay').addEventListener('click', function() {
+                hideKeyboard();
+            });
+
+            // Ocultar teclado al redimensionar la ventana si es menor a 1080px
+            window.addEventListener('resize', function() {
+                if (window.innerWidth < 1080 && keyboardVisible) {
+                    hideKeyboard();
+                } else if (keyboardVisible && currentInput) {
+                    // Reposicionar el teclado si cambia el tamaño de ventana
+                    positionKeyboard(currentInput);
+                }
+            });
+
+            // Ocultar teclado al hacer clic fuera del input (excepto en el teclado mismo)
+            document.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('keyboard-input') && 
+                    !document.getElementById('virtualKeyboard').contains(e.target) &&
+                    !document.getElementById('keyboardOverlay').contains(e.target) &&
+                    keyboardVisible) {
+                    hideKeyboard();
+                }
+            });
+
+            // Inicializar estado del teclado
+            updateShiftState();
+
+            // Búsqueda en tiempo real con teclado físico (funcionalidad original)
+            input.addEventListener('input', performSearch);
+        });
+
+        //CODIGO PARA EL SCREENSAVER (funcionalidad original)
+        const screensaver = document.getElementById("screensaver");
+        const logo = document.querySelector(".screensaver-logo");
+
+        let screensaverTimeout;
+        let posX = 100;
+        let posY = 100;
+        let velX = 2;
+        let velY = 2;
+
+        function resetScreensaverTimer() {
+            clearTimeout(screensaverTimeout);
+
+            if (!screensaver.classList.contains("d-none")) {
+                hideScreensaver();
+            }
+
+            screensaverTimeout = setTimeout(() => {
+                if (window.innerWidth === 1080) {
+                    showScreensaver();
+                }
+            }, 5 * 60 * 1000); // 5 minutos
+        }
+
+        function showScreensaver() {
+            screensaver.classList.remove("d-none");
+            animateLogo();
+        }
+
+        function hideScreensaver() {
+            screensaver.classList.add("d-none");
+        }
+
+        function animateLogo() {
+            function move() {
+                if (screensaver.classList.contains("d-none")) return;
+
+                const rect = logo.getBoundingClientRect();
+                const cont = screensaver.getBoundingClientRect();
+
+                posX += velX;
+                posY += velY;
+
+                if (posX + rect.width >= cont.width || posX <= 0) velX *= -1;
+                if (posY + rect.height >= cont.height || posY <= 0) velY *= -1;
+
+                logo.style.left = posX + "px";
+                logo.style.top = posY + "px";
+
+                requestAnimationFrame(move);
+            }
+
+            requestAnimationFrame(move);
+        }
+
+        // Detectar actividad
+        ["mousemove", "mousedown", "keydown", "touchstart"].forEach(evt => {
+            document.addEventListener(evt, resetScreensaverTimer);
+        });
+
+        // Cierre al tocar el screensaver
+        screensaver.addEventListener("click", hideScreensaver);
+        screensaver.addEventListener("touchstart", hideScreensaver);
+
+        // Cierre si redimensiona la pantalla fuera de 1080px
+        window.addEventListener('resize', () => {
+            if (window.innerWidth !== 1080 && !screensaver.classList.contains("d-none")) {
+                hideScreensaver();
+            }
+        });
+
+        // Iniciar temporizador
+        resetScreensaverTimer();
+    </script>
+
+    <?= $this->inlineScript() ?>
+</body>
+
+</html>

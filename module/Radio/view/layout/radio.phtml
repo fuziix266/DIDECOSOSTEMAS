@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <?= $this->headTitle('Radio Admin')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <!-- Bootstrap 5 (local) -->
+    <link href="/didecosistemas/public/vehiculos/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="/didecosistemas/public/vehiculos/vendors/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- SweetAlert2 CSS (opcional) -->
+    <link rel="stylesheet" href="/didecosistemas/public/vehiculos/vendors/sweetalert2/sweetalert2.min.css">
+    <!-- DataTables CSS (global) -->
+    <link rel="stylesheet" href="/didecosistemas/public/vehiculos/vendors/datatables/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="/didecosistemas/public/vehiculos/vendors/datatables/css/responsive.bootstrap5.min.css">
+    <!-- Custom styles (mantener colores y forma del layout_web) -->
+    <link href="/didecosistemas/public/vehiculos/css/styles.css" rel="stylesheet">
+
+    <!-- Summernote CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
+    <style>
+        /* Paleta y ajustes similares a layout_web original */
+        :root {
+            --primary-color: #06048C;
+            --bg-light: #F8FAFC;
+        }
+
+        .topbar {
+            background: var(--primary-color);
+            color: #fff;
+            font-size: .9rem;
+        }
+
+        .topbar a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+        }
+
+        .navbar-municipal {
+            background: #ffffff;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-link.primary {
+            color: var(--primary-color) !important;
+            font-weight: 600;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .btn-rrhh {
+            color: #f97316;
+            border-color: #f97316;
+        }
+
+        .info-card {
+            background: rgba(248, 250, 252, 1);
+        }
+
+        .search-input .bi {
+            font-size: 1.1rem;
+        }
+
+        .linea-colores {
+            border-bottom: 6px solid;
+            border-image: linear-gradient(90deg, #00bb95 25%, #ffca48 25% 50%, #ff6948 50% 75%, #00a7e6 75%) 1;
+        }
+
+        .hero {
+            height: 260px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, .35);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-municipal {
+            background: #f8f9fa;
+            padding: 2rem 0;
+        }
+
+        .footer-municipal .footer-logo {
+            max-height: 50px;
+            opacity: 0.8;
+        }
+    </style>
+
+    <?= $this->headLink() ?>
+    <?= $this->headStyle() ?>
+</head>
+
+<body class="d-flex flex-column min-vh-100" style="background:var(--bg-light);">
+
+    <!-- Top thin bar (links + social) -->
+    <div class="topbar py-1">
+        <div class="container d-flex justify-content-between small pt-3 pb-3">
+            <div>
+                <a href="#" class="me-2">DIP</a>
+                <span class="text-white">|</span>
+                <a href="#" class="mx-2">Transformación Digital</a>
+                <span class="text-white">|</span>
+                <a href="#" class="ms-2">Ley del Lobby</a>
+            </div>
+            <div>
+                <a href="#" class="text-white me-2" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-white me-2" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-white me-2" aria-label="Flickr"><i class="bi bi-camera"></i></a>
+                <a href="#" class="text-white" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header with logo + nav -->
+    <header class="navbar-municipal">
+        <div class="container py-3 d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <img src="/didecosistemas/public/vehiculos/img/logo-azul.png" alt="Logo Municipalidad" style="height:56px;" class="me-3">
+            </div>
+
+            <nav class="d-none d-md-block">
+                <ul class="nav align-items-center">
+                    <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio') ?>"><i class="bi bi-house-door me-1"></i> Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio-news') ?>">Noticias</a></li>
+                    <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio-programs') ?>">Programación</a></li>
+                    <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio-team') ?>">Equipo</a></li>
+                    <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio') ?>" target="_blank">Ver Sitio</a></li>
+                </ul>
+            </nav>
+
+            <!-- Mobile toggle -->
+            <div class="d-md-none">
+                <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">Menú</button>
+            </div>
+        </div>
+        <div class="linea-colores"></div>
+
+        <div class="collapse" id="mobileMenu">
+            <div class="container pb-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="<?= $this->url('radio') ?>">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= $this->url('radio-news') ?>">Noticias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= $this->url('radio-programs') ?>">Programación</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= $this->url('radio-team') ?>">Equipo</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content area -->
+    <main class="flex-grow-1">
+        <div class=container>
+            <?= $this->content ?>
+        </div>
+    </main>
+
+    <!-- Footer Municipal -->
+    <footer class="footer-municipal mt-auto">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                    <img src="/didecosistemas/public/vehiculos/img/logo-azul.png"
+                        alt="Logo Municipalidad"
+                        class="footer-logo">
+                </div>
+                <div class="col-md-4 text-center mb-3 mb-md-0">
+                    <h6 class="fw-bold text-primary mb-2">Dirección de Desarrollo Comunitario</h6>
+                    <p class="text-muted small mb-0">
+                        Sistema de Identificación Vehicular
+                    </p>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <p class="text-muted small mb-1">
+                        <i class="bi bi-globe me-1"></i>
+                        <a href="https://www.didecoarica.cl" target="_blank" class="text-decoration-none text-primary">
+                            www.didecoarica.cl
+                        </a>
+                    </p>
+                    <p class="text-muted small mb-0">
+                        <i class="bi bi-diagram-2 me-1"></i>Control y Gestión Digital - <?= date('Y') ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/didecosistemas/public/vehiculos/vendors/jquery/jquery-3.7.1.min.js"></script>
+    <script src="/didecosistemas/public/vehiculos/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables JS (global) -->
+    <script src="/didecosistemas/public/vehiculos/vendors/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="/didecosistemas/public/vehiculos/vendors/datatables/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/didecosistemas/public/vehiculos/vendors/datatables/js/dataTables.responsive.min.js"></script>
+    <script src="/didecosistemas/public/vehiculos/vendors/datatables/js/responsive.bootstrap5.min.js"></script>
+    <script src="/didecosistemas/public/vehiculos/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="/didecosistemas/public/vehiculos/js/app.js"></script>
+    
+    <!-- Summernote JS -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.summernote').summernote({
+                placeholder: 'Escribe el contenido aquí...',
+                tabsize: 2,
+                height: 300,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+        });
+    </script>
+    
+    <?= $this->inlineScript() ?>
+</body>
+
+</html>

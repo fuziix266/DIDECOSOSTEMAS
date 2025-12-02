@@ -1,0 +1,37 @@
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h3 class="text-center mb-4">Radio Admin</h3>
+
+                    <?php if ($this->error): ?>
+                        <div class="alert alert-danger">
+                            <?= $this->error ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <form method="post" action="<?= $this->url('radio-auth', ['action' => 'login']) ?>">
+                        <div class="mb-3">
+                            <label for="correo" class="form-label">Correo Institucional</label>
+                            <input type="email" class="form-control" id="correo" name="correo" required
+                                placeholder="nombre@municipalidadarica.cl">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Ingresar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <a href="<?= $this->url('radio') ?>" class="text-muted text-decoration-none">
+                    <i class="bi bi-arrow-left"></i> Volver al sitio
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

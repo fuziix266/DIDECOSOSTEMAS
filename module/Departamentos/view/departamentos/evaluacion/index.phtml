@@ -1,0 +1,289 @@
+<?php
+$this->headTitle('Página Principal');
+?>
+
+<div class="container">
+    <div class="grid-container">
+
+        <!-- DIDECO -->
+        <div class="card-departamento" onclick="openEvaluationModal('DIDECO')">
+            <div class="card-icon">
+                <i class="bi bi-building"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">DIDECO <br> Atención General</div>
+            </div>
+        </div>
+
+        <!-- Dirección -->
+        <div class="card-departamento" onclick="openEvaluationModal('Dirección')">
+            <div class="card-icon">
+                <i class="bi bi-person-square"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Dirección</div>
+            </div>
+        </div>
+
+        <!-- Oficina de Partes -->
+        <div class="card-departamento" onclick="openEvaluationModal('Oficina de Partes')">
+            <div class="card-icon">
+                <i class="bi bi-envelope-arrow-down"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Oficina de Partes</div>
+            </div>
+        </div>
+
+        <!-- Enlace norte -->
+        <div class="card-departamento" onclick="openEvaluationModal('Enlace Norte')">
+            <div class="card-icon">
+                <i class="bi bi-signpost-2"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Enlace Norte</div>
+            </div>
+        </div>
+
+        <!-- Acción Social -->
+        <div class="card-departamento" onclick="openEvaluationModal('Acción Social')">
+            <div class="card-icon">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Acción Social</div>
+            </div>
+        </div>
+
+        <!-- Adulto Mayor -->
+        <div class="card-departamento" onclick="openEvaluationModal('Adulto Mayor')">
+            <div class="card-icon">
+                <i class="bi bi-person-arms-up"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Adulto Mayor (OCAM)</div>
+            </div>
+        </div>
+
+        <!-- RSH -->
+        <div class="card-departamento" onclick="openEvaluationModal('RSH')">
+            <div class="card-icon">
+                <i class="bi bi-people"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">RSH</div>
+            </div>
+        </div>
+
+        <!-- Subsidio y Pensiones -->
+        <div class="card-departamento" onclick="openEvaluationModal('Subsidio y Pensiones')">
+            <div class="card-icon">
+                <i class="bi bi-piggy-bank"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Subsidio y Pensiones</div>
+            </div>
+        </div>
+
+        <!-- Oficina Local de la Niñez -->
+        <div class="card-departamento" onclick="openEvaluationModal('Oficina Local de la Niñez')">
+            <div class="card-icon">
+                <i class="bi bi-person-hearts"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">OLN</div>
+            </div>
+        </div>
+
+        <!-- Mujer y Equidad de Género -->
+        <div class="card-departamento" onclick="openEvaluationModal('Mujer y Equidad de Género')">
+            <div class="card-icon">
+                <i class="bi bi-gender-female"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Mujer y Equidad de Género</div>
+            </div>
+        </div>
+
+        <!-- ODIMA -->
+        <div class="card-departamento" onclick="openEvaluationModal('ODIMA')">
+            <div class="card-icon">
+                <i class="bi bi-globe-americas"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">ODIMA</div>
+            </div>
+        </div>
+
+        <!-- Afrodescendiente -->
+        <div class="card-departamento" onclick="openEvaluationModal('Afrodescendientes')">
+            <div class="card-icon">
+                <i class="bi bi-person-badge"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Afrodescendientes</div>
+            </div>
+        </div>
+
+        <!-- Juventud -->
+        <div class="card-departamento" onclick="openEvaluationModal('Juventud')">
+            <div class="card-icon">
+                <i class="bi bi-lightning-charge"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Juventud</div>
+            </div>
+        </div>
+
+        <!-- Discapacidad -->
+        <div class="card-departamento" onclick="openEvaluationModal('Discapacidad')">
+            <div class="card-icon">
+                <i class="bi bi-person-wheelchair"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Discapacidad</div>
+            </div>
+        </div>
+
+        <!-- Gestión Habitacional -->
+        <div class="card-departamento" onclick="openEvaluationModal('Gestión Habitacional')">
+            <div class="card-icon">
+                <i class="bi bi-house-check"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Gestión Habitacional</div>
+            </div>
+        </div>
+
+        <!-- Comodatos -->
+        <div class="card-departamento" onclick="openEvaluationModal('Comodatos')">
+            <div class="card-icon">
+                <i class="bi bi-file-earmark-text"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Comodatos</div>
+            </div>
+        </div>
+
+        <!-- Omil -->
+        <div class="card-departamento" onclick="openEvaluationModal('OMIL')">
+            <div class="card-icon">
+                <i class="bi bi-briefcase"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">OMIL</div>
+            </div>
+        </div>
+
+        <!-- Fomento Productivo -->
+        <div class="card-departamento" onclick="openEvaluationModal('Fomento Productivo')">
+            <div class="card-icon">
+                <i class="bi bi-graph-up"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Fomento Productivo</div>
+            </div>
+        </div>
+
+        <!-- Derechos Humanos -->
+        <div class="card-departamento" onclick="openEvaluationModal('Derechos Humanos')">
+            <div class="card-icon">
+                <i class="bi bi-person-check"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">DDHH</div>
+            </div>
+        </div>
+
+        <!-- Defensoría Ciudadana -->
+        <div class="card-departamento" onclick="openEvaluationModal('Defensoría Ciudadana')">
+            <div class="card-icon">
+                <i class="bi bi-shield-check"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Defensoría Ciudadana</div>
+            </div>
+        </div>
+
+        <!-- Presupuesto Participativo -->
+        <div class="card-departamento" onclick="openEvaluationModal('Presupuesto Participativo')">
+            <div class="card-icon">
+                <i class="bi bi-cash-coin"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title mb-0">Presupuesto Participativo</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    .card-departamento {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f0f6ff;
+        border: 1px solid #c7d9ff;
+        border-radius: 15px;
+        padding: 1rem;
+        min-height: 120px;
+        text-decoration: none;
+        color: inherit;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+    }
+
+    .card-departamento:hover {
+        transform: scale(1.02);
+    }
+
+    .icon-text-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .card-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-icon i {
+        font-size: 2rem;
+        color: #15356c;
+        padding-right: 0.5rem;
+    }
+
+    .card-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #2e5ea7;
+        margin: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    @media (max-width: 992px) {
+        .grid-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 576px) {
+        .grid-container {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

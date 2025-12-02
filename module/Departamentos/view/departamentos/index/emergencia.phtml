@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contactos Recintos</title>
+
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+        }
+
+        .contact-card {
+            background: #1c1c1c;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .recinto {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #00e0ff;
+        }
+
+        .encargado {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+
+        .custom-contact-button {
+            display: flex;
+            align-items: stretch;
+            text-decoration: none;
+            height: 60px;
+            width: 100%;
+            max-width: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .custom-contact-button:hover {
+            transform: scale(1.01);
+        }
+
+        .btn-part {
+            display: block;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .btn-part.left {
+            flex-shrink: 0;
+        }
+
+        .btn-part.right {
+            flex-shrink: 0;
+        }
+
+        .btn-text {
+            flex-grow: 1;
+            background-color: white;
+            color: #000;
+            font-weight: bold;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            height: 100%;
+            padding: 0 10px;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Contacto 1 -->
+    <div class="contact-card">
+        <div class="recinto">Escuela Manuel Rodríguez</div>
+        <div class="encargado">Miriam López</div>
+        <a href="tel:+56967673740" class="custom-contact-button">
+            <img src="/didecosistemas/public/img/botones/radio/llamada-inicio.webp" alt="Teléfono inicio" class="btn-part left">
+            <div class="btn-text">Llamar</div>
+            <img src="/didecosistemas/public/img/botones/radio/llamada-final.webp" alt="Teléfono final" class="btn-part right">
+        </a>
+    </div>
+
+    <!-- Contacto 2 -->
+    <div class="contact-card">
+        <div class="recinto">Escuela Tucapel</div>
+        <div class="encargado">Anais Varos</div>
+        <a href="tel:+56940854779" class="custom-contact-button">
+            <img src="/didecosistemas/public/img/botones/radio/llamada-inicio.webp" alt="Teléfono inicio" class="btn-part left">
+            <div class="btn-text">Llamar</div>
+            <img src="/didecosistemas/public/img/botones/radio/llamada-final.webp" alt="Teléfono final" class="btn-part right">
+        </a>
+    </div>
+
+    <!-- Contacto 3 -->
+    <div class="contact-card">
+        <div class="recinto">Liceo B-4</div>
+        <div class="encargado">Karina Barría</div>
+        <a href="tel:+56934209945" class="custom-contact-button">
+            <img src="/didecosistemas/public/img/botones/radio/llamada-inicio.webp" alt="Teléfono inicio" class="btn-part left">
+            <div class="btn-text">Llamar</div>
+            <img src="/didecosistemas/public/img/botones/radio/llamada-final.webp" alt="Teléfono final" class="btn-part right">
+        </a>
+    </div>
+
+    <!-- Contacto 4 -->
+    <div class="contact-card">
+        <div class="recinto">Liceo Politécnico</div>
+        <div class="encargado">Tatiana Moreno</div>
+        <a href="tel:+56971389708" class="custom-contact-button">
+            <img src="/didecosistemas/public/img/botones/radio/llamada-inicio.webp" alt="Teléfono inicio" class="btn-part left">
+            <div class="btn-text">Llamar</div>
+            <img src="/didecosistemas/public/img/botones/radio/llamada-final.webp" alt="Teléfono final" class="btn-part right">
+        </a>
+    </div>
+
+    <!-- Contacto 5 -->
+    <div class="contact-card">
+        <div class="recinto">Escuela D-4 (Cerrada)</div>
+        <div class="encargado">Leonardo Ramírez</div>
+        <a href="tel:+56949601824" class="custom-contact-button">
+            <img src="/didecosistemas/public/img/botones/radio/llamada-inicio.webp" alt="Teléfono inicio" class="btn-part left">
+            <div class="btn-text">Llamar</div>
+            <img src="/didecosistemas/public/img/botones/radio/llamada-final.webp" alt="Teléfono final" class="btn-part right">
+        </a>
+    </div>
+
+    <!-- Contacto 6 -->
+    <div class="contact-card">
+        <div class="recinto">Escuela José Miguel Carrera</div>
+        <div class="encargado">Rudy Sasso</div>
+        <a href="tel:+56964586848" class="custom-contact-button">
+            <img src="/didecosistemas/public/img/botones/radio/llamada-inicio.webp" alt="Teléfono inicio" class="btn-part left">
+            <div class="btn-text">Llamar</div>
+            <img src="/didecosistemas/public/img/botones/radio/llamada-final.webp" alt="Teléfono final" class="btn-part right">
+        </a>
+    </div>
+
+    <!-- Contacto 7 -->
+    <div class="contact-card">
+        <div class="recinto">Villa Albergue</div>
+        <div class="encargado">Viviana Pedreros</div>
+        <a href="tel:+56989622997" class="custom-contact-button">
+            <img src="/didecosistemas/public/img/botones/radio/llamada-inicio.webp" alt="Teléfono inicio" class="btn-part left">
+            <div class="btn-text">Llamar</div>
+            <img src="/didecosistemas/public/img/botones/radio/llamada-final.webp" alt="Teléfono final" class="btn-part right">
+        </a>
+    </div>
+
+    <!-- Contacto 8 -->
+    <div class="contact-card">
+        <div class="recinto">Estadio Municipal</div>
+        <div class="encargado">Esteban Zambrano</div>
+        <a href="tel:+56966011478" class="custom-contact-button">
+            <img src="/didecosistemas/public/img/botones/radio/llamada-inicio.webp" alt="Teléfono inicio" class="btn-part left">
+            <div class="btn-text">Llamar</div>
+            <img src="/didecosistemas/public/img/botones/radio/llamada-final.webp" alt="Teléfono final" class="btn-part right">
+        </a>
+    </div>
+
+    <!-- Contacto 9 -->
+    <div class="contact-card">
+        <div class="recinto">Epicentro 1</div>
+        <div class="encargado">Rosario Paniagua</div>
+        <a href="tel:+56976972584" class="custom-contact-button">
+            <img src="/didecosistemas/public/img/botones/radio/llamada-inicio.webp" alt="Teléfono inicio" class="btn-part left">
+            <div class="btn-text">Llamar</div>
+            <img src="/didecosistemas/public/img/botones/radio/llamada-final.webp" alt="Teléfono final" class="btn-part right">
+        </a>
+    </div>
+
+    <!-- Contacto 10 NUEVO -->
+    <div class="contact-card">
+        <div class="recinto">DIDECO Camionetas</div>
+        <div class="encargado">Diego (Logística)</div>
+        <a href="tel:+56993606236" class="custom-contact-button">
+            <img src="/didecosistemas/public/img/botones/radio/llamada-inicio.webp" alt="Teléfono inicio" class="btn-part left">
+            <div class="btn-text">Llamar</div>
+            <img src="/didecosistemas/public/img/botones/radio/llamada-final.webp" alt="Teléfono final" class="btn-part right">
+        </a>
+    </div>
+
+</body>
+
+</html>

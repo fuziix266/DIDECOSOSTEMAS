@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+        }
+        .navbar-custom {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark navbar-custom mb-4">
+        <div class="container-fluid">
+            <a href="<?= $this->url('departamentos-mantencion', ['action' => 'dashboard']) ?>" class="navbar-brand">
+                ← Sistema de Mantención
+            </a>
+            <div class="d-flex align-items-center text-white">
+                <span class="me-3">
+                    👤 <?= $this->escapeHtml($this->usuario['nombre']) ?>
+                </span>
+                <a href="<?= $this->url('departamentos-mantencion', ['action' => 'logout']) ?>" class="btn btn-light btn-sm">
+                    Salir
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4 class="card-title mb-0">Gestión de Usuarios</h4>
+                            <a href="<?= $this->url('departamentos-mantencion', ['action' => 'agregarusuario']) ?>" class="btn btn-primary">
+                                ➕ Nuevo Usuario
+                            </a>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Email</th>
+                                        <th>Rol</th>
+                                        <th>Último Acceso</th>
+                                        <th class="text-center">Estado</th>
+                                        <th class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($this->usuarios as $user): ?>
+                                    <tr>
+                                        <td><?= $user['id'] ?></td>
+                                        <td><?= $this->escapeHtml($user['nombre']) ?></td>
+                                        <td><?= $this->escapeHtml($user['email']) ?></td>
+                                        <td>
+                                            <span class="badge bg-<?= $user['rol'] === 'administrador' ? 'danger' : 'primary' ?>">
+                                                <?= ucfirst($user['rol']) ?>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <?php if ($user['ultimo_acceso']): ?>
+                                                <?= date('d/m/Y H:i', strtotime($user['ultimo_acceso'])) ?>
+                                            <?php else: ?>
+                                                <span class="text-muted">Nunca</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php if ($user['activo']): ?>
+                                                <span class="badge bg-success">Activo</span>
+                                            <?php else: ?>
+                                                <span class="badge bg-secondary">Inactivo</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="<?= $this->url('departamentos-mantencion', ['action' => 'editarusuario', 'id' => $user['id']]) ?>" 
+                                               class="btn btn-sm btn-primary">
+                                                ✏️ Editar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

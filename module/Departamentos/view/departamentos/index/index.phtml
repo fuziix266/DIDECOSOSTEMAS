@@ -1,0 +1,1097 @@
+<?php
+/**
+ * Vista para la página principal de trámites DIDECO
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+// Configurar el título de la página
+$this->headTitle('Página Principal');
+?>
+
+<div class="container">
+    <div class="grid-container">
+        <!-- Enlace norte -->
+        <a href="/didecosistemas/public/departamentos/enlacenorte" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-signpost-2"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Enlace Norte</div>
+                <div class="descripcion">
+                    Enlace de dideco con la municipalidad de Arica en el sector norte de nuestra ciudad.
+                </div>
+            </div>
+        </a>
+
+        <!-- Acción Social -->
+        <a href="/didecosistemas/public/departamentos/serviciosocial" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Acción Social</div>
+                <div class="descripcion">
+                    Entrega apoyo directo a personas y familias vulnerables a través de beneficios sociales y orientación municipal.
+                </div>
+            </div>
+        </a>
+
+        <!-- Adulto Mayor -->
+        <a href="/didecosistemas/public/departamentos/ocam" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-person-arms-up"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Adulto Mayor (OCAM)</div>
+                <div class="descripcion">
+                    Servicios, talleres y asesorías orientadas al bienestar integral de personas mayores de nuestra comuna.
+                </div>
+            </div>
+        </a>
+
+        <!-- RSH -->
+        <a href="/didecosistemas/public/departamentos/rsh" class="card-departamento">
+
+            <div class="card-icon">
+
+                <i class="bi bi-people"></i>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-title">RSH</div>
+
+                <div class="descripcion">
+
+                    Gestiona la incorporación o actualización de tu hogar en el RSH para acceder a beneficios sociales del Estado.
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- Subsidio y Pensiones -->
+
+        <a href="/didecosistemas/public/departamentos/subsidioypensiones" class="card-departamento">
+
+            <div class="card-icon">
+
+                <i class="bi bi-cash-coin"></i>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-title">Subsidio y Pensiones</div>
+
+                <div class="descripcion">
+
+                    Accede a beneficios económicos para tu hogar, como pensiones y subsidios.
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- Oficina Local de la Niñez -->
+
+        <a href="/didecosistemas/public/departamentos/oln" class="card-departamento">
+
+            <div class="card-icon">
+
+                <i class="bi bi-person-hearts"></i>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-title">Oficina Local de la Niñez (OLN)</div>
+
+                <div class="descripcion">
+
+                    Promueve, protege y restituye los derechos de niños, niñas y adolescentes en el ámbito local.
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- Mujer y Equidad de Género -->
+
+        <a href="/didecosistemas/public/departamentos/mujeryequidad" class="card-departamento">
+
+            <div class="card-icon">
+
+                <i class="bi bi-gender-female"></i>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-title">Mujer y Equidad de Género</div>
+
+                <div class="descripcion">
+
+                    Impulsa la equidad, autonomía y derechos de las mujeres y diversidades.
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- ODIMA -->
+
+        <a href="/didecosistemas/public/departamentos/odima" class="card-departamento">
+
+            <div class="card-icon">
+
+                <i class="bi bi-globe-americas"></i>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-title">ODIMA</div>
+
+                <div class="descripcion">
+
+                    Orientación y asesoramiento para el fortalecimiento de la identidad cultural y el desarrollo de los pueblos indígenas.
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- Afrodescendiente -->
+
+        <a href="/didecosistemas/public/departamentos/afrodescendientes" class="card-departamento">
+
+            <div class="card-icon">
+
+                <i class="bi bi-person-badge"></i>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-title">Afrodescendientes</div>
+
+                <div class="descripcion">
+
+                    Promueve la identidad, visibilidad y derechos del pueblo tribal afrodescendiente.
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- Juventud -->
+
+        <a href="/didecosistemas/public/departamentos/juventud" class="card-departamento">
+
+            <div class="card-icon">
+
+                <i class="bi bi-lightning-charge"></i>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-title">Juventud</div>
+
+                <div class="descripcion">
+
+                    Desarrolla iniciativas para la inclusión y participación juvenil en la vida pública.
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- Discapacidad -->
+
+        <a href="/didecosistemas/public/departamentos/discapacidad" class="card-departamento">
+
+            <div class="card-icon">
+
+                <i class="bi bi-person-wheelchair"></i>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-title">Discapacidad</div>
+
+                <div class="descripcion">
+
+                    Impulsa acciones para la inclusión social y la accesibilidad de personas con discapacidad.
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- Gestión Habitacional -->
+
+        <a href="/didecosistemas/public/departamentos/gestionhabitacional" class="card-departamento">
+
+            <div class="card-icon">
+
+                <i class="bi bi-building"></i>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-title">Gestión Habitacional</div>
+
+                <div class="descripcion">
+
+                    Apoya a las familias en procesos de postulación y regularización habitacional.
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- Comodatos -->
+
+        <a href="/didecosistemas/public/departamentos/comodato" class="card-departamento">
+
+            <div class="card-icon">
+
+                <i class="bi bi-file-earmark-text"></i>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-title">Comodatos</div>
+
+                <div class="descripcion">
+
+                    Administra la entrega y uso de bienes municipales a organizaciones comunitarias.
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- Omil -->
+
+        <a href="/didecosistemas/public/departamentos/omil" class="card-departamento">
+
+            <div class="card-icon">
+
+                <i class="bi bi-briefcase"></i>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-title">OMIL</div>
+
+                <div class="descripcion">
+
+                    Oficina de Información Laboral (OMIL), que te ayuda en tu formación laboral y búsqueda de nuevas oportunidades de trabajo.
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- Derechos Humanos -->
+
+        <a href="/didecosistemas/public/departamentos/derechoshumanos" class="card-departamento">
+
+            <div class="card-icon">
+
+                <i class="bi bi-person-check"></i>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-title">Derechos Humanos (DDHH)</div>
+
+                <div class="descripcion">
+
+                    Promueve el respeto, educación y protección de los derechos fundamentales.
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- Defensoría Ciudadana -->
+
+        <a href="/didecosistemas/public/departamentos/defensoriaciudadana" class="card-departamento">
+
+            <div class="card-icon">
+
+                <i class="bi bi-shield-check"></i>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-title">Defensoría Ciudadana</div>
+
+                <div class="descripcion">
+
+                    Ofrece orientación legal gratuita en diversas áreas del derecho.
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- Presupuesto Participativo	 -->
+
+        <a href="/didecosistemas/public/departamentos/presupuestoparticipativo" class="card-departamento">
+
+            <div class="card-icon">
+
+                <i class="bi bi-cash-coin"></i>
+
+            </div>
+
+            <div class="card-content">
+
+                <div class="card-title">Presupuesto Participativo</div>
+
+                <div class="descripcion">
+
+                    Proyectos y programas que promueven la participación ciudadana en la toma de decisiones.
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
+<style>
+    .grid-container {
+
+        display: grid;
+
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+        gap: 1.5rem;
+
+        max-width: 1200px;
+
+        margin: 0 auto;
+
+        padding: 0 1rem;
+
+    }
+
+
+
+    .card-departamento {
+
+        background: linear-gradient(145deg, #f0f6ff 0%, #e8f2ff 100%);
+
+        border: 2px solid #c7d9ff;
+
+        border-radius: 20px;
+
+        padding: 2rem;
+
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        position: relative;
+
+        overflow: hidden;
+
+        box-shadow: 0 4px 20px rgba(21, 53, 108, 0.12);
+
+        display: flex;
+
+        flex-direction: column;
+
+        height: 100%;
+
+        text-decoration: none;
+
+        color: inherit;
+
+    }
+
+
+
+    .card-departamento::before {
+
+        content: '';
+
+        position: absolute;
+
+        top: 0;
+
+        left: 0;
+
+        right: 0;
+
+        bottom: 0;
+
+        background: linear-gradient(135deg, #051c9c 0%, #051c9c 100%);
+
+        opacity: 0;
+
+        transition: opacity 0.4s ease;
+
+        z-index: 1;
+
+    }
+
+
+
+    .card-departamento:hover::before {
+
+        opacity: 0.95;
+
+    }
+
+
+
+    .card-departamento:hover {
+
+        transform: translateY(-8px) scale(1.02);
+
+        box-shadow: 0 15px 40px rgba(21, 53, 108, 0.25);
+
+        border-color: #051c9c;
+
+        text-decoration: none;
+
+        color: white;
+
+    }
+
+
+
+    .card-departamento:hover .card-content,
+
+    .card-departamento:hover .card-icon {
+
+        color: white;
+
+        position: relative;
+
+        z-index: 2;
+
+    }
+
+
+
+    .card-departamento:hover .card-title {
+
+        color: #dbe8ff !important;
+
+    }
+
+
+
+    .card-departamento:hover .descripcion {
+
+        color: rgba(255, 255, 255, 0.9) !important;
+
+    }
+
+
+
+    .card-departamento:hover .card-icon i {
+
+        color: white !important;
+
+        transform: scale(1.1) rotate(5deg);
+
+    }
+
+
+
+    .card-icon {
+
+        text-align: center;
+
+        margin-bottom: 1.5rem;
+
+        transition: all 0.4s ease;
+
+    }
+
+
+
+    .card-icon i {
+
+        font-size: 3rem;
+
+        color: #15356c;
+
+        transition: all 0.4s ease;
+
+    }
+
+
+
+    .card-content {
+
+        flex: 1;
+
+        display: flex;
+
+        flex-direction: column;
+
+        transition: color 0.4s ease;
+
+    }
+
+
+
+    .card-title {
+
+        color: #2e5ea7;
+
+        font-weight: 700;
+
+        font-size: 1.25rem;
+
+        margin-bottom: 1rem;
+
+        transition: all 0.4s ease;
+
+        position: relative;
+
+        z-index: 2;
+
+    }
+
+
+
+    .descripcion {
+
+        color: #6c757d;
+
+        font-size: 0.95rem;
+
+        line-height: 1.6;
+
+        flex: 1;
+
+        transition: color 0.4s ease;
+
+        position: relative;
+
+        z-index: 2;
+
+    }
+
+
+
+    /* Animación de entrada */
+
+    .card-departamento {
+
+        animation: fadeInUp 0.6s ease-out;
+
+        animation-fill-mode: both;
+
+    }
+
+
+
+    .card-departamento:nth-child(1) {
+
+        animation-delay: 0.1s;
+
+    }
+
+
+
+    .card-departamento:nth-child(2) {
+
+        animation-delay: 0.15s;
+
+    }
+
+
+
+    .card-departamento:nth-child(3) {
+
+        animation-delay: 0.2s;
+
+    }
+
+
+
+    .card-departamento:nth-child(4) {
+
+        animation-delay: 0.25s;
+
+    }
+
+
+
+    .card-departamento:nth-child(5) {
+
+        animation-delay: 0.3s;
+
+    }
+
+
+
+    .card-departamento:nth-child(6) {
+
+        animation-delay: 0.35s;
+
+    }
+
+
+
+    .card-departamento:nth-child(7) {
+
+        animation-delay: 0.4s;
+
+    }
+
+
+
+    .card-departamento:nth-child(8) {
+
+        animation-delay: 0.45s;
+
+    }
+
+
+
+    .card-departamento:nth-child(9) {
+
+        animation-delay: 0.5s;
+
+    }
+
+
+
+    .card-departamento:nth-child(10) {
+
+        animation-delay: 0.55s;
+
+    }
+
+
+
+    .card-departamento:nth-child(11) {
+
+        animation-delay: 0.6s;
+
+    }
+
+
+
+    .card-departamento:nth-child(12) {
+
+        animation-delay: 0.65s;
+
+    }
+
+
+
+    .card-departamento:nth-child(13) {
+
+        animation-delay: 0.7s;
+
+    }
+
+
+
+    .card-departamento:nth-child(14) {
+
+        animation-delay: 0.75s;
+
+    }
+
+
+
+    @keyframes fadeInUp {
+
+        from {
+
+            opacity: 0;
+
+            transform: translateY(30px);
+
+        }
+
+
+
+        to {
+
+            opacity: 1;
+
+            transform: translateY(0);
+
+        }
+
+    }
+
+
+
+    /* Efectos especiales en hover para íconos específicos */
+
+    .card-departamento:hover .bi-people-fill {
+
+        animation: bounce 0.6s ease;
+
+    }
+
+
+
+    .card-departamento:hover .bi-geo-alt {
+
+        animation: shake 0.6s ease;
+
+    }
+
+
+
+    .card-departamento:hover .bi-people {
+
+        animation: pulse 0.6s ease;
+
+    }
+
+
+
+    .card-departamento:hover .bi-gender-female {
+
+        animation: swing 0.6s ease;
+
+    }
+
+
+
+    .card-departamento:hover .bi-house-heart {
+
+        animation: heartbeat 0.8s ease;
+
+    }
+
+
+
+    .card-departamento:hover .bi-tree {
+
+        animation: sway 0.8s ease;
+
+    }
+
+
+
+    @keyframes bounce {
+
+
+
+        0%,
+
+        20%,
+
+        60%,
+
+        100% {
+
+            transform: translateY(0) scale(1.1);
+
+        }
+
+
+
+        40% {
+
+            transform: translateY(-10px) scale(1.1);
+
+        }
+
+
+
+        80% {
+
+            transform: translateY(-5px) scale(1.1);
+
+        }
+
+    }
+
+
+
+    @keyframes shake {
+
+
+
+        0%,
+
+        100% {
+
+            transform: translateX(0) scale(1.1);
+
+        }
+
+
+
+        10%,
+
+        30%,
+
+        50%,
+
+        70%,
+
+        90% {
+
+            transform: translateX(-5px) scale(1.1);
+
+        }
+
+
+
+        20%,
+
+        40%,
+
+        60%,
+
+        80% {
+
+            transform: translateX(5px) scale(1.1);
+
+        }
+
+    }
+
+
+
+    @keyframes pulse {
+
+
+
+        0%,
+
+        100% {
+
+            transform: scale(1.1);
+
+        }
+
+
+
+        50% {
+
+            transform: scale(1.3);
+
+        }
+
+    }
+
+
+
+    @keyframes swing {
+
+
+
+        0%,
+
+        100% {
+
+            transform: rotate(5deg) scale(1.1);
+
+        }
+
+
+
+        50% {
+
+            transform: rotate(-5deg) scale(1.1);
+
+        }
+
+    }
+
+
+
+    @keyframes heartbeat {
+
+
+
+        0%,
+
+        100% {
+
+            transform: scale(1.1);
+
+        }
+
+
+
+        25% {
+
+            transform: scale(1.2);
+
+        }
+
+
+
+        75% {
+
+            transform: scale(1.15);
+
+        }
+
+    }
+
+
+
+    @keyframes sway {
+
+
+
+        0%,
+
+        100% {
+
+            transform: rotate(5deg) scale(1.1);
+
+        }
+
+
+
+        50% {
+
+            transform: rotate(-5deg) scale(1.1);
+
+        }
+
+    }
+
+
+
+    /* Totem a 1080px */
+
+    @media (min-width: 1079px) and (max-width: 1081px) {
+
+        .grid-container {
+
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+        }
+
+    }
+
+
+
+    @media (max-width: 768px) {
+
+        .grid-container {
+
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 1rem;
+
+            padding: 0 0.5rem;
+
+        }
+
+
+
+        .card-departamento {
+
+            padding: 1.5rem;
+
+        }
+
+
+
+        .card-icon i {
+
+            font-size: 2.5rem;
+
+        }
+
+
+
+        .card-title {
+
+            font-size: 1.1rem;
+
+        }
+
+
+
+        .descripcion {
+
+            font-size: 0.9rem;
+
+        }
+
+    }
+
+
+
+    @media (max-width: 480px) {
+
+        .grid-container {
+
+            grid-template-columns: 1fr;
+
+        }
+
+    }
+</style>

@@ -1,0 +1,129 @@
+<?php
+
+/**
+ * Vista de detalle de trámite - Oficina Municipal de la Juventud
+ * @var array $tramite Información completa del trámite desde BD
+ */
+
+?>
+
+<div class="container py-5">
+    <h2 class="mb-4">DIDECO - Oficina Municipal de la Juventud</h2>
+
+    <?php if (empty($tramite)): ?>
+        <div class="alert alert-warning">
+            <p>No hay información adicional disponible para este trámite en este momento.</p>
+        </div>
+    <?php else: ?>
+        <div class="mb-4">
+            <h4><?= htmlspecialchars($tramite['nombre']) ?></h4>
+            <?php if (!empty($tramite['descripcion_corta'])): ?>
+                <p><?= nl2br(htmlspecialchars($tramite['descripcion_corta'])) ?></p>
+            <?php endif; ?>
+        </div>
+
+        <div class="accordion" id="accordionTramite">
+            <?php if (!empty($tramite['documentos_requeridos'])): ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingDoc">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseDoc" aria-expanded="false" aria-controls="collapseDoc">
+                            Documentos Requeridos
+                        </button>
+                    </h2>
+                    <div id="collapseDoc" class="accordion-collapse collapse" aria-labelledby="headingDoc"
+                        data-bs-parent="#accordionTramite">
+                        <div class="accordion-body">
+                            <?= nl2br(htmlspecialchars($tramite['documentos_requeridos'])) ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($tramite['requisitos_usuario'])): ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingReq">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseReq" aria-expanded="false" aria-controls="collapseReq">
+                            Requisitos del Usuario
+                        </button>
+                    </h2>
+                    <div id="collapseReq" class="accordion-collapse collapse" aria-labelledby="headingReq"
+                        data-bs-parent="#accordionTramite">
+                        <div class="accordion-body">
+                            <?= nl2br(htmlspecialchars($tramite['requisitos_usuario'])) ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($tramite['instrucciones_paso_paso'])): ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingPaso">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapsePaso" aria-expanded="false" aria-controls="collapsePaso">
+                            Instrucciones Paso a Paso
+                        </button>
+                    </h2>
+                    <div id="collapsePaso" class="accordion-collapse collapse" aria-labelledby="headingPaso"
+                        data-bs-parent="#accordionTramite">
+                        <div class="accordion-body">
+                            <?= nl2br(htmlspecialchars($tramite['instrucciones_paso_paso'])) ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($tramite['tiempo_estimado'])): ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTiempo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTiempo" aria-expanded="false" aria-controls="collapseTiempo">
+                            Tiempo Estimado
+                        </button>
+                    </h2>
+                    <div id="collapseTiempo" class="accordion-collapse collapse" aria-labelledby="headingTiempo"
+                        data-bs-parent="#accordionTramite">
+                        <div class="accordion-body">
+                            <?= nl2br(htmlspecialchars($tramite['tiempo_estimado'])) ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($tramite['responsable_nombre'])): ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingResp">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseResp" aria-expanded="false" aria-controls="collapseResp">
+                            Responsable
+                        </button>
+                    </h2>
+                    <div id="collapseResp" class="accordion-collapse collapse" aria-labelledby="headingResp"
+                        data-bs-parent="#accordionTramite">
+                        <div class="accordion-body">
+                            <?= nl2br(htmlspecialchars($tramite['responsable_nombre'])) ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($tramite['observaciones'])): ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingObs">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseObs" aria-expanded="false" aria-controls="collapseObs">
+                            Observaciones
+                        </button>
+                    </h2>
+                    <div id="collapseObs" class="accordion-collapse collapse" aria-labelledby="headingObs"
+                        data-bs-parent="#accordionTramite">
+                        <div class="accordion-body">
+                            <?= nl2br(htmlspecialchars($tramite['observaciones'])) ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+</div>

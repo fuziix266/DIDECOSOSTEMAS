@@ -1,0 +1,39 @@
+<div class="container mt-4">
+    <h2><?= $this->program ? 'Editar' : 'Nuevo' ?> Programa</h2>
+    
+    <form method="post" enctype="multipart/form-data" class="mt-4">
+        <div class="mb-3">
+            <label class="form-label">Título</label>
+            <input type="text" name="title" class="form-control" value="<?= $this->program ? $this->escapeHtmlAttr($this->program['title']) : '' ?>" required>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Conductor</label>
+            <input type="text" name="host" class="form-control" value="<?= $this->program ? $this->escapeHtmlAttr($this->program['host']) : '' ?>">
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Hora Inicio (HH:MM:SS)</label>
+                <input type="time" step="1" name="start_time" class="form-control" value="<?= $this->program ? $this->program['start_time'] : '' ?>" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Hora Fin (HH:MM:SS)</label>
+                <input type="time" step="1" name="end_time" class="form-control" value="<?= $this->program ? $this->program['end_time'] : '' ?>" required>
+            </div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Imagen</label>
+            <?php if ($this->program && $this->program['image_url']): ?>
+                <div class="mb-2">
+                    <img src="<?= $this->program['image_url'] ?>" alt="Current Image" style="height: 100px;">
+                </div>
+            <?php endif; ?>
+            <input type="file" name="image" class="form-control" accept="image/*">
+        </div>
+        
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="<?= $this->url('radio-programs') ?>" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

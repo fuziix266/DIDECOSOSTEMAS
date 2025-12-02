@@ -1,0 +1,66 @@
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 text-center">
+        <h1 class="display-4 mb-4 text-primary fw-bold">Panel de Edición Radio Municipal</h1>
+        <p class="lead mb-5 text-muted">Seleccione una opción para administrar el contenido de la aplicación móvil.</p>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <!-- Noticias Card -->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0 hover-shadow transition-all">
+            <div class="card-body text-center p-5">
+                <div class="mb-4 text-primary">
+                    <i class="bi bi-newspaper display-1"></i>
+                </div>
+                <h3 class="card-title fw-bold mb-3">Noticias</h3>
+                <p class="card-text text-muted mb-4">Administrar noticias y comunicados.</p>
+                <a href="<?= $this->url('radio-news') ?>" class="btn btn-primary btn-lg w-100 rounded-pill">
+                    Gestionar Noticias
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Programación Card -->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0 hover-shadow transition-all">
+            <div class="card-body text-center p-5">
+                <div class="mb-4 text-success">
+                    <i class="bi bi-mic-fill display-1"></i>
+                </div>
+                <h3 class="card-title fw-bold mb-3">Programación</h3>
+                <p class="card-text text-muted mb-4">Administrar parrilla programática y conductores.</p>
+                <a href="<?= $this->url('radio-programs') ?>" class="btn btn-success btn-lg w-100 rounded-pill">
+                    Gestionar Programas
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Equipo Card -->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0 hover-shadow transition-all">
+            <div class="card-body text-center p-5">
+                <div class="mb-4 text-warning">
+                    <i class="bi bi-people-fill display-1"></i>
+                </div>
+                <h3 class="card-title fw-bold mb-3">Equipo</h3>
+                <p class="card-text text-muted mb-4">Gestionar integrantes del equipo.</p>
+                <a href="<?= $this->url('radio-team') ?>" class="btn btn-warning btn-lg w-100 rounded-pill text-white">
+                    Gestionar Equipo
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+    .transition-all {
+        transition: all .3s ease;
+    }
+</style>

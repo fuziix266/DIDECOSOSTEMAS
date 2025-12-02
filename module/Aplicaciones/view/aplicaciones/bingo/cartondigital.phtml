@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cartón Bingo Digital</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .carton {
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--fondo-pastel);
+        }
+
+        .carton-info {
+            text-align: center;
+            font-size: 10pt;
+            margin-bottom: 10px;
+        }
+
+        .bingo-grid {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .bingo-grid thead td {
+            font-size: 24pt;
+            font-weight: bold;
+            text-align: center;
+            height: 50px;
+            padding: 5px;
+        }
+
+        .bingo-grid tbody td {
+            width: 20%;
+            height: 70px;
+            font-size: 20pt;
+            font-weight: bold;
+            text-align: center;
+            border: 2px solid #000;
+            background-color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .bingo-grid td.marcado {
+            background-color: #2ecc71 !important;
+            color: #fff;
+        }
+
+        .bingo-grid .estrella {
+            font-size: 26pt;
+            color: #000;
+            background-color: #f1c40f;
+            cursor: default;
+        }
+    </style>
+</head>
+
+<body>
+
+    <?php
+    $datos = $this->datos ?? [];
+    $numeros = isset($datos['numeros']) ? explode(',', $datos['numeros']) : [];
+    $folio   = $datos['folio'] ?? '';
+    $serie   = $datos['serie'] ?? '';
+    ?>
+
+    <script>
+        const numeros = <?= json_encode($numeros) ?>;
+        const folio = <?= json_encode($folio) ?>;
+        const serie = <?= json_encode($serie) ?>;
+
+        const coloresPastel = ['#f8e8d0', '#d0f0e8', '#f0d0e8', '#e8f0d0', '#d0e0f8', '#f8d8d0'];
+        document.documentElement.style.setProperty('--fondo-pastel', coloresPastel[Math.floor(Math.random() * coloresPastel.length)]);
+    </script>
+
+    <div class="carton" id="carton">
+        <div class="carton-info">
+            <strong>Folio:</strong> <span id="folio"></span> &nbsp;&nbsp;
+            <strong>Serie:</strong> <span id="serie"></span>
+        </div>
+        <table class="bingo-grid">
+            <thead>
+                <tr>
+                    <td>B</td>
+                    <td>I</td>
+                    <td>N</td>
+                    <td>G</td>
+                    <td>O</td>
+                </tr>
+            </thead>
+            <tbody id="grid-body">
+                <!-- Se inserta desde JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById("folio").textContent = folio;
+        document.getElementById("serie").textContent = serie;
+
+        const cuerpo = document.getElementById("grid-body");
+        for (let fila = 0; fila < 5; fila++) {
+            const tr = document.createElement("tr");
+            for (let col = 0; col < 5; col++) {
+                const td = document.createElement("td");
+                const valor = numeros[fila * 5 + col];
+
+                td.textContent = valor;
+                if (valor === '★') {
+                    td.classList.add("estrella");
+                } else {
+                    td.addEventListener("click", () => td.classList.toggle("marcado"));
+                }
+
+                tr.appendChild(td);
+            }
+            cuerpo.appendChild(tr);
+        }
+    </script>
+
+</body>
+
+</html>

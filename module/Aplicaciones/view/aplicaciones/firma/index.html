@@ -1,0 +1,766 @@
+<head></head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Dashboard">
+<meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+<title>DOM - Sistemas</title>
+
+<!-- Favicons -->
+<link href="img/favicon.png" rel="icon">
+
+<!-- CSS Esenciales -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.5/sweetalert2.min.css" rel="stylesheet">
+
+<!-- JavaScript Esenciales -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+
+
+
+<!-- <script src="/domsistemas/public/lib/common-scripts.js"></script> -->
+<style>
+    .loader {
+        border: 5px solid #f3f3f3;
+        /* Light grey */
+        border-top: 5px solid #3498db;
+        /* Blue */
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    #pantallaCarga .modal-content {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+    }
+
+    #pantallaCarga .spinner-border {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    body {
+        background-color: #f4f4f4;
+        font-family: Arial, sans-serif;
+    }
+
+    #canvas-container {
+        margin: auto;
+        overflow: hidden;
+        position: relative;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    canvas {
+        width: 100%;
+        height: auto;
+        border: 1px solid #ddd;
+    }
+
+    @media (max-width: 767px) {
+        .btn_izquierda {
+            padding-right: 0;
+        }
+
+        .btn_derecha {
+            padding-left: 0;
+        }
+    }
+
+    .margen-formulario {
+        margin-top: 1em;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .checkbox .custom-checkbox-label {
+        display: flex;
+        align-items: center;
+        font-size: 1.2em;
+        height: 100%;
+    }
+
+    .checkbox input[type="checkbox"] {
+        width: 1.2em;
+        height: 1.2em;
+        margin-right: 15px;
+        vertical-align: middle;
+    }
+
+    .btn_ver {
+        margin-bottom: 1em;
+    }
+
+    .container {
+        padding-top: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .control-label {
+        font-weight: 600;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-weight: 600;
+    }
+
+    .modal-content {
+        border-radius: 8px;
+    }
+
+    .embed-responsive {
+        border-radius: 4px;
+        overflow: hidden;
+    }
+</style>
+</head>
+
+<body>
+    <section id="container">
+        <div class="container">
+            <div id="canvas-container">
+                <canvas id="canvas" width="1660" height="850"></canvas>
+            </div>
+            <form id="membreteForm" class="form-horizontal margen-formulario">
+                <div class="form-group">
+                    <label for="nombre" class="col-sm-2 control-label">*Nombre:</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="nombre" name="nombre" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="titulo" class="col-sm-2 control-label">*Título / Cargo:</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="titulo" name="titulo" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cargo" class="col-sm-2 control-label">*Departamento / Oficina:</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="cargo" name="cargo" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="direccion" class="col-sm-2 control-label">Dirección Municipal:</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="direccion" name="direccion" class="form-control" value="DIDECO">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="telefono_fijo1" class="col-sm-2 control-label">Teléfono Fijo 1:</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="telefono_fijo1" name="telefono_fijo1" class="form-control">
+                    </div>
+                    <label for="anexo1" class="col-sm-2 control-label">Anexo:</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="anexo1" name="anexo1" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="telefono_celular" class="col-sm-2 control-label">Teléfono Celular:</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="telefono_celular" name="telefono_celular" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="correo" class="col-sm-2 control-label">Correo electrónico:</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="correo" name="correo" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6 btn_izquierda" style="padding-left: 0; text-align: center;">
+                            <label>Previsualizar cambios</label>
+                            <button type="button" id="ver" class="btn btn-primary btn-block btn_ver">Ver</button>
+                        </div>
+                        <div class="col-sm-6 btn_derecha" style="padding-right: 0; text-align: center;">
+                            <label>Descargar imagen</label>
+                            <button type="button" id="descargar" class="btn btn-success btn-block"
+                                disabled>Descargar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal Bootstrap -->
+        <div class="modal fade" id="tutorialModal" tabindex="-1" role="dialog" aria-labelledby="tutorialModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="tutorialModalLabel">Cómo configurar mi firma</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>A continuación se muestra un video tutorial para configurar la firma en Gmail.</p>
+                        <p>Debe abrir esta aplicación en su navegador de internet (mismo navegador que el correo
+                            electrónico institucional) y seguir los pasos indicados en el video.</p>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item"
+                                src="https://www.youtube.com/embed/Kh5DIkRQj7Q?si=ClOqOSKrrKa-mG04"
+                                allowfullscreen></iframe>
+                        </div>
+                        <br>
+                        <button type="button" class="btn btn-success" style="display: block; margin: 20px auto;"
+                            onclick="window.location.href='https://mail.google.com/mail/u/0/#settings/general'">Ir a
+                            la configuración</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                // Activar elementos de navegación
+                $("#extras").addClass("active");
+                $("#crearFirmaCorreo").addClass("active");
+                $("#crearFirmaCorreo").parent().attr("style", "display: block");
+
+                // Constantes globales
+                const originalWidth = 2000;
+                const originalHeight = 850;
+                const minFontSize = 1;
+                const distanciaInicial = 300;
+
+                // Mapa de URLs para las fuentes
+                const urlMap = {
+                    MuseoSans700: 'url(./fonts/MuseoSans_700.otf)',
+                    MuseoSans500: 'url(./fonts/MuseoSans_500.otf)',
+                    MuseoSans300: 'url(./fonts/MuseoSans_300.otf)',
+                    MuseoSans100: 'url(./fonts/MuseoSans_100.otf)',
+                };
+
+                // Inicializar el canvas de Fabric.js
+                const canvas = new fabric.Canvas('canvas');
+                const imageUrl = './firmas/membrete.jpg';
+
+                // Función para ajustar el nombre en el canvas (permitiendo múltiples líneas)
+                function fitNameToCanvas(text, options, maxWidth) {
+                    if (!text) return {
+                        fontSize: options.fontSize,
+                        height: 0,
+                        lines: 0
+                    };
+
+                    const textObj = new fabric.Textbox(text, {
+                        ...options,
+                        width: maxWidth,
+                        breakWords: true,
+                        textAlign: 'left'
+                    });
+
+                    // Si el texto cabe en una línea, mantenerlo así
+                    if (textObj.getLineWidth(0) <= maxWidth) {
+                        return {
+                            fontSize: options.fontSize,
+                            height: textObj.height,
+                            lines: 1
+                        };
+                    }
+
+                    // Si no cabe, dividir en dos líneas
+                    textObj.set({
+                        width: maxWidth
+                    });
+
+                    return {
+                        fontSize: options.fontSize,
+                        height: textObj.height,
+                        lines: textObj.getLineHeight() * textObj._textLines.length
+                    };
+                }
+
+                // Función para ajustar el texto normal
+                function fitTextToCanvas(text, options, maxWidth) {
+                    if (!text) return {
+                        fontSize: options.fontSize,
+                        height: 0
+                    };
+
+                    const textObj = new fabric.Text(text, options);
+                    let fontSize = options.fontSize;
+                    let textWidth = textObj.width;
+
+                    while (textWidth > maxWidth && fontSize > minFontSize) {
+                        fontSize -= 1;
+                        textObj.set('fontSize', fontSize);
+                        textWidth = textObj.width;
+                    }
+
+                    return {
+                        fontSize: fontSize,
+                        height: textObj.height
+                    };
+                }
+
+                // Función para calcular distancias entre elementos
+                function calculateDistances(textHeights) {
+                    const baseSpacing = 20;
+
+                    // Calcular altura total del bloque de texto
+                    let alturaTotal = 0;
+
+                    // Sumar alturas de todos los elementos que existen
+                    if (textHeights.nombre) alturaTotal += textHeights.nombre + baseSpacing;
+                    if (textHeights.titulo) alturaTotal += textHeights.titulo + baseSpacing;
+                    if (textHeights.cargo) alturaTotal += textHeights.cargo + baseSpacing;
+                    if (textHeights.direccion) alturaTotal += textHeights.direccion + baseSpacing;
+                    if (textHeights.telefonoFijo) alturaTotal += textHeights.telefonoFijo + baseSpacing;
+                    if (textHeights.telefonoCelular) alturaTotal += textHeights.telefonoCelular + baseSpacing;
+                    if (textHeights.correo) alturaTotal += textHeights.correo +
+                    baseSpacing; // Añadir baseSpacing también al último elemento
+
+                    // Calcular punto de inicio para centrar verticalmente
+                    const espacioDisponible = originalHeight; // Altura total de la imagen
+                    let inicioVertical = (espacioDisponible - alturaTotal) / 2;
+
+                    // Asegurar un mínimo de margen superior
+                    inicioVertical = Math.max(inicioVertical, 50); // Mínimo 50px desde arriba
+
+                    // Calcular posiciones a partir del punto central
+                    let currentTop = inicioVertical;
+                    let distances = {};
+
+                    // Asignar posiciones para cada elemento con espaciado consistente
+                    if (textHeights.nombre) {
+                        distances.nombre = currentTop;
+                        currentTop += textHeights.nombre + baseSpacing;
+                    }
+
+                    if (textHeights.titulo) {
+                        distances.titulo = currentTop;
+                        currentTop += textHeights.titulo + baseSpacing;
+                    }
+
+                    if (textHeights.cargo) {
+                        distances.cargo = currentTop;
+                        currentTop += textHeights.cargo + baseSpacing;
+                    }
+
+                    if (textHeights.direccion) {
+                        distances.direccion = currentTop;
+                        currentTop += textHeights.direccion + baseSpacing;
+                    }
+
+                    if (textHeights.telefonoFijo) {
+                        distances.telefonoFijo = currentTop;
+                        currentTop += textHeights.telefonoFijo + baseSpacing;
+                    }
+
+                    if (textHeights.telefonoCelular) {
+                        distances.telefonoCelular = currentTop;
+                        currentTop += textHeights.telefonoCelular + baseSpacing;
+                    }
+
+                    if (textHeights.correo) {
+                        distances.correo = currentTop;
+                        currentTop += textHeights.correo +
+                        baseSpacing; // Añadimos el baseSpacing también al último elemento
+                    }
+
+                    return distances;
+                }
+                // Función para ajustar el tamaño del canvas
+                function adjustCanvasSize() {
+                    const containerWidth = $('#canvas-container').width();
+                    const scaleFactor = containerWidth / originalWidth;
+                    canvas.setWidth(containerWidth);
+                    canvas.setHeight(originalHeight * scaleFactor);
+
+                    if (canvas.backgroundImage) {
+                        canvas.backgroundImage.scaleToWidth(containerWidth);
+                        canvas.backgroundImage.scaleToHeight(originalHeight * scaleFactor);
+                    }
+
+                    canvas.getObjects().forEach(obj => {
+                        obj.scaleX = obj.originalScaleX * scaleFactor;
+                        obj.scaleY = obj.originalScaleY * scaleFactor;
+                        obj.left = obj.originalLeft * scaleFactor;
+                        obj.top = obj.originalTop * scaleFactor;
+                        obj.setCoords();
+                    });
+
+                    canvas.renderAll();
+                }
+
+                // Función para cargar la imagen de fondo
+                function loadBackgroundImage(callback) {
+                    fabric.Image.fromURL(imageUrl, function (img) {
+                        const containerWidth = $('#canvas-container').width();
+                        const scaleFactor = containerWidth / originalWidth;
+
+                        img.scaleToWidth(containerWidth);
+                        img.scaleToHeight(originalHeight * scaleFactor);
+
+                        canvas.setBackgroundImage(img, () => {
+                            canvas.renderAll();
+                            if (callback) callback();
+                        });
+                        canvas.setWidth(containerWidth);
+                        canvas.setHeight(originalHeight * scaleFactor);
+                    });
+                }
+
+                // Función principal para ejecutar los cambios
+                function continuarEjecucion() {
+                    // Obtener valores de los campos
+                    const nombre = $('#nombre').val();
+                    const titulo = $('#titulo').val();
+                    const cargo = $('#cargo').val();
+                    const direccion = $('#direccion').val();
+                    const telefonoFijo1 = $('#telefono_fijo1').val();
+                    const anexo1 = $('#anexo1').val();
+                    const telefonoCelular = $('#telefono_celular').val();
+                    const correo = $('#correo').val();
+
+                    const margenLeft = 750;
+                    const maxWidth = 1200;
+                    const margin = 5;
+
+                    // Definir las fuentes
+                    const MuseoSans700 = new FontFace('MuseoSans_700', urlMap.MuseoSans700, {
+                        style: 'normal',
+                        weight: 'normal',
+                    });
+                    const MuseoSans500 = new FontFace('MuseoSans_500', urlMap.MuseoSans500, {
+                        style: 'normal',
+                        weight: 'normal',
+                    });
+                    const MuseoSans300 = new FontFace('MuseoSans_300', urlMap.MuseoSans300, {
+                        style: 'normal',
+                        weight: 'normal',
+                    });
+                    const MuseoSans100 = new FontFace('MuseoSans_100', urlMap.MuseoSans100, {
+                        style: 'normal',
+                        weight: 'normal',
+                    });
+
+                    canvas.clear();
+                    loadBackgroundImage(() => {
+                        const textHeights = {};
+                        let distances;
+
+                        Promise.all([
+                            MuseoSans700.load(),
+                            MuseoSans500.load(),
+                            MuseoSans300.load(),
+                            MuseoSans100.load(),
+                        ]).then(() => {
+                            document.fonts.add(MuseoSans700);
+                            document.fonts.add(MuseoSans500);
+                            document.fonts.add(MuseoSans300);
+                            document.fonts.add(MuseoSans100);
+
+                            // Calcular dimensiones del nombre
+                            const nombreConfig = fitNameToCanvas(nombre, {
+                                fontFamily: 'MuseoSans_700',
+                                fontSize: 80,
+                                fill: '#041d9b'
+                            }, maxWidth - margin);
+                            textHeights.nombre = nombreConfig.height;
+
+                            // Calcular dimensiones para dirección
+                            const direccionConfig = fitTextToCanvas(direccion, {
+                                fontFamily: 'MuseoSans_300',
+                                fontSize: 60,
+                                fill: '#041d9b'
+                            }, maxWidth - margin);
+                            textHeights.direccion = direccionConfig.height;
+
+                            // Calcular dimensiones para título
+                            const tituloConfig = fitTextToCanvas(titulo, {
+                                fontFamily: 'MuseoSans_300',
+                                fontSize: 60,
+                                fill: '#041d9b'
+                            }, maxWidth - margin);
+                            textHeights.titulo = tituloConfig.height;
+
+                            // Calcular dimensiones para cargo
+                            const cargoConfig = fitTextToCanvas(cargo, {
+                                fontFamily: 'MuseoSans_300',
+                                fontSize: 60,
+                                fill: '#041d9b'
+                            }, maxWidth - margin);
+                            textHeights.cargo = cargoConfig.height;
+
+                            // Calcular dimensiones para teléfono fijo
+                            if (telefonoFijo1) {
+                                const telefonoConfig = fitTextToCanvas(
+                                    telefonoFijo1 + ' Anexo: ' + anexo1, {
+                                        fontFamily: 'MuseoSans_300',
+                                        fontSize: 60,
+                                        fill: '#041d9b'
+                                    }, maxWidth - margin);
+                                textHeights.telefonoFijo = telefonoConfig.height;
+                            }
+                            else if (!telefonoFijo1 && anexo1) {
+                                const telefonoConfig = fitTextToCanvas(
+                                    'Anexo: ' + anexo1, {
+                                        fontFamily: 'MuseoSans_300',
+                                        fontSize: 60,
+                                        fill: '#041d9b'
+                                    }, maxWidth - margin);
+                                textHeights.telefonoFijo = telefonoConfig.height;
+                            }
+
+
+                            // Calcular dimensiones para celular
+                            if (telefonoCelular) {
+                                const celularConfig = fitTextToCanvas(
+                                    telefonoCelular, {
+                                        fontFamily: 'MuseoSans_300',
+                                        fontSize: 60,
+                                        fill: '#041d9b'
+                                    }, maxWidth - margin);
+                                textHeights.telefonoCelular = celularConfig.height;
+                            }
+
+                            // Calcular dimensiones para correo
+                            if (correo) {
+                                const correoConfig = fitTextToCanvas(correo, {
+                                    fontFamily: 'MuseoSans_300',
+                                    fontSize: 60,
+                                    fill: '#041d9b'
+                                }, maxWidth - margin);
+                                textHeights.correo = correoConfig.height;
+                            }
+
+                            // Calcular las distancias basadas en los altos reales
+                            distances = calculateDistances(textHeights);
+
+                            // Añadir los elementos al canvas
+                            // Nombre
+                            const nombreText = new fabric.Textbox(nombre, {
+                                left: margenLeft,
+                                top: distances.nombre,
+                                fontFamily: 'MuseoSans_700',
+                                fontSize: nombreConfig.fontSize,
+                                width: maxWidth - margin,
+                                breakWords: true,
+                                fill: '#041d9b'
+                            });
+                            canvas.add(nombreText);
+
+                            // Título
+                            if (titulo) {
+                                const tituloText = new fabric.Text(titulo, {
+                                    left: margenLeft,
+                                    top: distances.titulo,
+                                    fontFamily: 'MuseoSans_300',
+                                    fontSize: tituloConfig.fontSize,
+                                    fill: '#041d9b'
+                                });
+                                canvas.add(tituloText);
+                            }
+
+                            // Cargo
+                            if (cargo) {
+                                const cargoText = new fabric.Text(cargo, {
+                                    left: margenLeft,
+                                    top: distances.cargo,
+                                    fontFamily: 'MuseoSans_300',
+                                    fontSize: cargoConfig.fontSize,
+                                    fill: '#041d9b'
+                                });
+                                canvas.add(cargoText);
+                            }
+
+                            // Dirección
+                            if (direccion) {
+                                const direccionText = new fabric.Text(direccion, {
+                                    left: margenLeft,
+                                    top: distances.direccion,
+                                    fontFamily: 'MuseoSans_300',
+                                    fontSize: direccionConfig.fontSize,
+                                    fill: '#041d9b'
+                                });
+                                canvas.add(direccionText);
+                            }
+
+                            // Teléfono fijo
+                            if (telefonoFijo1) {
+                                const telefonoText = new fabric.Text('Teléfono: ' +
+                                    telefonoFijo1 +
+                                    ' Anexo: ' + anexo1, {
+                                        left: margenLeft,
+                                        top: distances.telefonoFijo,
+                                        fontFamily: 'MuseoSans_300',
+                                        fontSize: 60,
+                                        fill: '#041d9b'
+                                    });
+                                canvas.add(telefonoText);
+                            }
+                            else if (!telefonoFijo1 && anexo1) {
+                                const telefonoText = new fabric.Text(
+                                    'Anexo: ' + anexo1, {
+                                        left: margenLeft,
+                                        top: distances.telefonoFijo,
+                                        fontFamily: 'MuseoSans_300',
+                                        fontSize: 60,
+                                        fill: '#041d9b'
+                                    });
+                                canvas.add(telefonoText);
+                            }
+
+                            // Celular
+                            if (telefonoCelular) {
+                                const celularText = new fabric.Text('Celular: ' +
+                                    telefonoCelular, {
+                                        left: margenLeft,
+                                        top: distances.telefonoCelular,
+                                        fontFamily: 'MuseoSans_300',
+                                        fontSize: 60,
+                                        fill: '#041d9b'
+                                    });
+                                canvas.add(celularText);
+                            }
+
+                            // Correo
+                            if (correo) {
+                                const correoText = new fabric.Text(correo, {
+                                    left: margenLeft,
+                                    top: distances.correo,
+                                    fontFamily: 'MuseoSans_300',
+                                    fontSize: 60,
+                                    fill: '#041d9b'
+                                });
+                                canvas.add(correoText);
+                            }
+
+                            // Guardar propiedades originales para el redimensionamiento
+                            canvas.getObjects().forEach(obj => {
+                                obj.originalScaleX = obj.scaleX;
+                                obj.originalScaleY = obj.scaleY;
+                                obj.originalLeft = obj.left;
+                                obj.originalTop = obj.top;
+                            });
+
+                            // Ajustar el tamaño del canvas
+                            adjustCanvasSize();
+                        }).catch(error => {
+                            console.error('Error al cargar las fuentes:', error);
+                        });
+                    });
+                }
+
+                // Event listeners
+                $(window).resize(adjustCanvasSize);
+
+                // Manejar el evento de click en el botón "Ver"
+                $('#ver').on('click', function () {
+                    continuarEjecucion();
+                    $('html, body').animate({
+                        scrollTop: 0
+                    }, 'slow');
+                    $("#descargar").attr("disabled", false);
+
+                });
+
+                // Manejar el evento de click en el botón "Descargar"
+                $('#descargar').on('click', function () {
+
+                    // Guardar el tamaño actual del canvas
+                    const currentWidth = canvas.width;
+                    const currentHeight = canvas.height;
+
+                    // Redimensionar el canvas al tamaño de descarga
+                    const anchoDescarga = 706; //(originalWidth);
+                    const altoDescarga = 300; //(originalHeight);
+
+                    canvas.setWidth(anchoDescarga);
+                    canvas.setHeight(altoDescarga);
+
+                    if (canvas.backgroundImage) {
+                        canvas.backgroundImage.scaleToWidth(anchoDescarga);
+                        canvas.backgroundImage.scaleToHeight(altoDescarga);
+                    }
+
+                    // Redimensionar los objetos en el canvas
+                    canvas.getObjects().forEach(obj => {
+                        obj.scaleX *= (anchoDescarga / currentWidth);
+                        obj.scaleY *= (altoDescarga / currentHeight);
+                        obj.left *= (anchoDescarga / currentWidth);
+                        obj.top *= (altoDescarga / currentHeight);
+                        obj.setCoords();
+                    });
+
+                    // Renderizar el canvas redimensionado
+                    canvas.renderAll();
+
+                    // Generar la imagen en tamaño de descarga
+                    const dataURL = canvas.toDataURL({
+                        format: 'jpeg',
+                        quality: 1.0
+                    });
+
+                    // Crear un enlace para descargar la imagen
+                    const link = document.createElement('a');
+                    link.href = dataURL;
+                    link.download = 'firma.jpg';
+                    link.click();
+
+                    // Restaurar el tamaño del canvas
+                    canvas.setWidth(currentWidth);
+                    canvas.setHeight(currentHeight);
+
+                    if (canvas.backgroundImage) {
+                        canvas.backgroundImage.scaleToWidth(currentWidth);
+                        canvas.backgroundImage.scaleToHeight(currentHeight);
+                    }
+
+                    // Redimensionar los objetos en el canvas al tamaño original
+                    canvas.getObjects().forEach(obj => {
+                        obj.scaleX /= (anchoDescarga / currentWidth);
+                        obj.scaleY /= (altoDescarga / currentHeight);
+                        obj.left /= (anchoDescarga / currentWidth);
+                        obj.top /= (altoDescarga / currentHeight);
+                        obj.setCoords();
+                    });
+
+                    // Renderizar el canvas restaurado
+                    canvas.renderAll();
+                });
+
+                // Cargar la imagen de fondo inicialmente
+                loadBackgroundImage();
+            });
+        </script>
+    </section>
+
+
+
+</body>
+<script>
+
+</script>
+
+</html>

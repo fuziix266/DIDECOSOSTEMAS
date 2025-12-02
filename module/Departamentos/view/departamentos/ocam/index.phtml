@@ -1,0 +1,127 @@
+<?php
+
+/**
+ * Vista para el menú de Servicios OCAM
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+// Configurar el título de la página y breadcrumb
+$this->headTitle('Servicios Adulto Mayor');
+$this->pageTitle = 'Servicios Adulto Mayor';
+?>
+
+<div class="container">
+    <!-- Encabezado de la sección -->
+    <div class="text-center mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold mb-3" style="color: #15356c;">
+                    <i class="fas fa-user-clock me-3" style="color: #6537b6;"></i>
+                    Servicios para Personas Mayores
+                </h1>
+                <p class="lead text-muted">
+                    La Oficina Comunal del Adulto Mayor ofrece orientación y servicios para mejorar la calidad de vida de personas mayores de nuestra comuna.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid de servicios OCAM -->
+    <div class="grid-container">
+
+        <!-- Atención Psicológica -->
+        <a href="/didecosistemas/public/departamentos/ocam/atencionpsicologica" class="card-departamento">
+            <div class="card-icon"><i class="bi bi-emoji-smile"></i></div>
+            <div class="card-content">
+                <div class="card-title">Atención Psicológica</div>
+                <div class="descripcion">Sesiones de apoyo psicológico en casos de crisis o vulnerabilidad.</div>
+            </div>
+        </a>
+
+        <!-- Atención Social -->
+        <a href="/didecosistemas/public/departamentos/ocam/atencionsocial" class="card-departamento">
+            <div class="card-icon"><i class="bi bi-people"></i></div>
+            <div class="card-content">
+                <div class="card-title">Atención Social</div>
+                <div class="descripcion">Apoyo social personalizado para personas mayores en situación de necesidad.</div>
+            </div>
+        </a>
+
+        <!-- Talleres Profesores -->
+        <a href="/didecosistemas/public/departamentos/ocam/atencionprofesores" class="card-departamento">
+            <div class="card-icon"><i class="bi bi-journal-richtext"></i></div>
+            <div class="card-content">
+                <div class="card-title">Talleres y Profesores</div>
+                <div class="descripcion">Participa en talleres recreativos, culturales y físicos impartidos por profesores especializados.</div>
+            </div>
+        </a>
+
+        <!-- Gestores en Terreno -->
+        <a href="/didecosistemas/public/departamentos/ocam/gestoresenterreno" class="card-departamento">
+            <div class="card-icon"><i class="bi bi-person-walking"></i></div>
+            <div class="card-content">
+                <div class="card-title">Gestores en Terreno</div>
+                <div class="descripcion">Solicita visitas a domicilio para resolver dudas y recibir orientación en terreno.</div>
+            </div>
+        </a>
+
+        <!-- Uso de Salones -->
+        <a href="/didecosistemas/public/departamentos/ocam/atencionsalones" class="card-departamento">
+            <div class="card-icon"><i class="bi bi-door-open"></i></div>
+            <div class="card-content">
+                <div class="card-title">Uso de Salones</div>
+                <div class="descripcion">Solicita salones para actividades y reuniones de adultos mayores.</div>
+            </div>
+        </a>
+
+        <!-- Atención Kinésica -->
+        <a href="/didecosistemas/public/departamentos/ocam/atencionkinesica" class="card-departamento">
+            <div class="card-icon"><i class="bi bi-heart-pulse"></i></div>
+            <div class="card-content">
+                <div class="card-title">Atención Kinésica</div>
+                <div class="descripcion">Atención kinésica personalizada con profesionales para tu bienestar físico.</div>
+            </div>
+        </a>
+
+        <!-- Clases Personalizadas -->
+        <a href="/didecosistemas/public/departamentos/ocam/clasespersonalizadas" class="card-departamento">
+            <div class="card-icon"><i class="bi bi-calendar-check"></i></div>
+            <div class="card-content">
+                <div class="card-title">Clases Personalizadas</div>
+                <div class="descripcion">Organización de clases personalizadas para clubes de adulto mayor.</div>
+            </div>
+        </a>
+
+        <!-- Asesorías en Subsidios -->
+        <a href="/didecosistemas/public/departamentos/ocam/asesorias" class="card-departamento">
+            <div class="card-icon"><i class="bi bi-cash-coin"></i></div>
+            <div class="card-content">
+                <div class="card-title">Asesorías en Subsidios</div>
+                <div class="descripcion">Apoyo profesional para postular a subsidios y programas de beneficios.</div>
+            </div>
+        </a>
+
+    </div>
+
+    <!-- Banner de contacto -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-10">
+            <div class="info-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <i class="bi bi-info-circle info-icon"></i>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="mb-2 fw-bold">¿Tienes dudas o necesitas ayuda?</h6>
+                        <p class="mb-0">
+                            El equipo de la Oficina Comunal del Adulto Mayor está disponible para brindarte apoyo y asesoramiento.
+                        </p>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <a href="/didecosistemas/public/departamentos/correos?correo=oficinaadultomayor@municipalidadarica.cl" class="btn btn-outline-primary btn-sm">Contactar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

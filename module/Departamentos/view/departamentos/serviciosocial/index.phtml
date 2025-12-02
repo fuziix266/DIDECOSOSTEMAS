@@ -1,0 +1,159 @@
+<?php
+
+/**
+ * Vista para el menú de Servicios de Acción Social
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+// Configurar el título de la página y breadcrumb
+$this->headTitle('Servicios de Acción Social');
+$this->pageTitle = 'Servicios de Acción Social';
+?>
+
+<div class="container">
+    <!-- Encabezado de la sección -->
+    <div class="text-center mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold mb-3" style="color: #15356c;">
+                    <i class="fas fa-hands-helping me-3" style="color: #6537b6;"></i>
+                    Servicios de Acción Social
+                </h1>
+                <p class="lead text-muted">
+                    Brindamos apoyo integral a personas y familias en situación de vulnerabilidad
+                    a través de diversos beneficios sociales y programas de asistencia municipal.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid de servicios con estilos unificados -->
+    <div class="grid-container">
+
+        <!-- Alimentos -->
+        <a href="/didecosistemas/public/departamentos/serviciosocial/alimentos" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-basket"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Alimentos</div>
+                <div class="descripcion">
+                    Entrega de canastas familiares y/o GiftCard para cubrir necesidades alimentarias básicas.
+                </div>
+            </div>
+        </a>
+
+        <!-- Materiales de construcción -->
+        <a href="/didecosistemas/public/departamentos/serviciosocial/materialesconstruccion" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-hammer"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Materiales de Construcción</div>
+                <div class="descripcion">
+                    Apoyo con materiales para mejoramiento y reparación de viviendas familiares.
+                </div>
+            </div>
+        </a>
+
+        <!-- Piezas prefabricadas -->
+        <a href="/didecosistemas/public/departamentos/serviciosocial/piezasprefabricadas" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-bricks"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Piezas Prefabricadas</div>
+                <div class="descripcion">
+                    Entrega de elementos prefabricados para construcción y mejoramiento habitacional.
+                </div>
+            </div>
+        </a>
+
+        <!-- Ayuda en materias de salud -->
+        <a href="/didecosistemas/public/departamentos/serviciosocial/ayudasalud" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-heart-pulse"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Ayuda en Materias de Salud</div>
+                <div class="descripcion">
+                    Apoyo económico para gastos médicos, medicamentos y tratamientos de salud.
+                </div>
+            </div>
+        </a>
+
+        <!-- Pasajes -->
+        <a href="/didecosistemas/public/departamentos/serviciosocial/pasajes" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-bus-front"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Pasajes</div>
+                <div class="descripcion">
+                    Financiamiento de pasajes para traslados por motivos de salud, trabajo o emergencias.
+                </div>
+            </div>
+        </a>
+
+        <!-- Pago de servicios básicos -->
+        <a href="/didecosistemas/public/departamentos/serviciosocial/serviciosbasicos" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-receipt"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Pago de Servicios Básicos</div>
+                <div class="descripcion">
+                    Apoyo para el pago de servicios básicos domiciliarios como luz, agua y gas.
+                </div>
+            </div>
+        </a>
+
+        <!-- Agua potable por camión aljibe -->
+        <a href="/didecosistemas/public/departamentos/serviciosocial/camionaljibe" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-truck"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Agua Potable por Camión Aljibe</div>
+                <div class="descripcion">
+                    Servicio de abastecimiento de agua potable a través de camiones aljibe.
+                </div>
+            </div>
+        </a>
+
+        <!-- Canon de arrendamiento -->
+        <a href="/didecosistemas/public/departamentos/serviciosocial/canonarrendamiento" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-house-heart"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Canon de Arrendamiento</div>
+                <div class="descripcion">
+                    Apoyo económico para el pago de arriendos en situaciones de emergencia social o vulnerabilidad habitacional.
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-10">
+            <div class="info-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <i class="bi bi-info-circle info-icon"></i>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="mb-2 fw-bold">¿Tienes dudas o quieres postular?</h6>
+                        <p class="mb-0">
+                            El equipo de la Oficina de Servicios Sociales está disponible para orientarte y acompañarte en tu proceso.
+                        </p>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <a href="/didecosistemas/public/departamentos/correos?correo=serviciosocial@municipalidadarica.cl" class="btn btn-outline-primary btn-sm">Contactar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

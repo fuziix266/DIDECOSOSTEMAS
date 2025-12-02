@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * Vista para el menú de la Oficina Municipal de la Juventud
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+// Configurar el título de la página y breadcrumb
+$this->headTitle('Oficina Municipal de la Juventud');
+$this->pageTitle = 'Oficina Municipal de la Juventud';
+?>
+
+<div class="container">
+    <!-- Encabezado de la sección -->
+    <div class="text-center mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold mb-3" style="color: #15356c;">
+                    <i class="fas fa-user-graduate me-3" style="color: #2ecc71;"></i>
+                    Oficina Municipal de la Juventud
+                </h1>
+                <p class="lead text-muted">
+                    Servicios, capacitaciones y programas dirigidos a fortalecer las oportunidades y el desarrollo de los y las jóvenes de Arica.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid de servicios OMJ -->
+    <div class="grid-container">
+        <!-- Voluntariado Juvenil -->
+        <a href="/didecosistemas/public/departamentos/juventud/voluntariado" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-people"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Voluntariado Juvenil</div>
+                <div class="descripcion">
+                    Participa en operativos comunitarios, medioambientales y de emergencia con formación especializada.
+                </div>
+            </div>
+        </a>
+
+        <!-- Iniciativas Juveniles -->
+        <a href="/didecosistemas/public/departamentos/juventud/apoyoiniciativas" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-lightbulb"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Iniciativas Comunitarias</div>
+                <div class="descripcion">
+                    Apoyo a proyectos impulsados por agrupaciones juveniles con o sin personalidad jurídica.
+                </div>
+            </div>
+        </a>
+
+        <!-- Fortalecimiento a Centros de Alumnos -->
+        <a href="/didecosistemas/public/departamentos/juventud/centrosdealumnos" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-person-lines-fill"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Fortalecimiento Centros de Alumnos</div>
+                <div class="descripcion">
+                    Capacitaciones en liderazgo, salud mental y gestión de emergencias para estudiantes secundarios.
+                </div>
+            </div>
+        </a>
+
+        <!-- Aprende y Emprende -->
+        <a href="/didecosistemas/public/departamentos/juventud/aprendeyemprende" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-tools"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Aprende y Emprende</div>
+                <div class="descripcion">
+                    Cursos de barbería y maquillaje para jóvenes en situación de vulnerabilidad.
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-10">
+            <div class="info-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <i class="bi bi-info-circle info-icon"></i>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="mb-2 fw-bold">¿Tienes dudas o quieres participar?</h6>
+                        <p class="mb-0">
+                            Visita la Oficina Municipal de la Juventud y descubre todas las oportunidades disponibles para ti.
+                        </p>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <a href="/didecosistemas/public/departamentos/correos?correo=juventud@municipalidadarica.cl" class="btn btn-outline-primary btn-sm">Contactar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

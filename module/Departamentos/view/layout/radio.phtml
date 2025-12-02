@@ -1,0 +1,261 @@
+<?php
+
+/**
+ * Layout principal para DIDECO - Servicios
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var string $content
+ */
+?>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <?= $this->headTitle('DIDECO - Radio')->setSeparator(' - ') ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <?php include 'includes.phtml'; ?>
+
+    <?= $this->headLink() ?>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #051c9c 0%, #051c9c 100%);
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo-container img {
+            max-width: 21rem;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .breadcrumb-custom {
+            background: linear-gradient(135deg, #1e448c 0%, #15356c 100%);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .breadcrumb-custom .breadcrumb-item+.breadcrumb-item::before {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .breadcrumb-custom a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+        }
+
+        .breadcrumb-custom .active {
+            color: white;
+            font-weight: 500;
+        }
+
+        main {
+            flex: 1;
+            background-color: #1c1c1c !important;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Estilos específicos para servicios - Bootstrap 5 */
+        .accordion-item {
+            border: 1px solid #dee2e6;
+            margin-bottom: 0.5rem;
+        }
+
+        .accordion-header {
+            margin-bottom: 0;
+        }
+
+        .accordion-button {
+            background-color: #ffffff;
+            border-left: 6px solid #1e448c;
+            color: #000;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-decoration: none;
+            padding: 1rem 1.25rem;
+        }
+
+        .accordion-button:hover {
+            text-decoration: underline;
+            background-color: #f8f9fa;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #f8f9fa;
+            border-left: 6px solid #1e448c;
+        }
+
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(30, 68, 140, 0.25);
+            border-color: #1e448c;
+        }
+
+        /* Compatibilidad con Bootstrap 4 (por si tienes estructura antigua) */
+        .accordion .card-header {
+            background-color: #ffffff;
+            border-left: 6px solid #1e448c;
+            padding: 0;
+            /* Eliminar padding del header */
+        }
+
+        .accordion .btn-link {
+            color: #000;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-decoration: none;
+            width: 100%;
+            /* Ocupar todo el ancho */
+            height: 100%;
+            /* Ocupar toda la altura */
+            padding: 1rem 1.25rem;
+            /* Aplicar padding al botón */
+            text-align: left;
+            /* Alinear texto a la izquierda */
+            border: none;
+            /* Sin bordes */
+            background: transparent;
+            /* Fondo transparente */
+            display: block;
+            /* Mostrar como bloque */
+        }
+
+        .accordion .btn-link:hover {
+            text-decoration: underline;
+            background-color: #f8f9fa;
+        }
+
+        .accordion .btn-link:focus {
+            box-shadow: 0 0 0 0.25rem rgba(30, 68, 140, 0.25);
+            outline: none;
+        }
+
+        /* Asegurar que el h2 no tenga margin */
+        .accordion .card-header h2 {
+            margin: 0;
+        }
+
+        .descripcion-box {
+            background: #fff;
+            border-left: 6px solid #1e448c;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 1.5rem 0;
+            }
+        }
+
+    </style>
+
+    <?= $this->headStyle() ?>
+</head>
+
+<body>
+    <div class="header-section">
+        <div class="container header-content">
+            <div class="logo-container">
+                <img src="/didecosistemas/public/img/logo-dideco.png" alt="Logo DIDECO">
+            </div>
+
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb breadcrumb-custom mb-0">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <a href="/didecosistemas/public/"><i class="bi bi-house-door"></i> Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Radio
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <main>
+        <?= $this->content ?>
+    </main>
+
+    <?= $this->partial('footer/footer') ?>
+
+    <script>
+        // Script de compatibilidad Bootstrap 4 -> Bootstrap 5
+        document.addEventListener('DOMContentLoaded', function() {
+            // Convertir data-toggle a data-bs-toggle
+            const toggleElements = document.querySelectorAll('[data-toggle="collapse"]');
+            toggleElements.forEach(element => {
+                element.setAttribute('data-bs-toggle', 'collapse');
+                element.removeAttribute('data-toggle');
+            });
+
+            // Convertir data-target a data-bs-target
+            const targetElements = document.querySelectorAll('[data-target]');
+            targetElements.forEach(element => {
+                const target = element.getAttribute('data-target');
+                if (target) {
+                    element.setAttribute('data-bs-target', target);
+                    element.removeAttribute('data-target');
+                }
+            });
+
+            // Convertir data-parent a data-bs-parent
+            const parentElements = document.querySelectorAll('[data-parent]');
+            parentElements.forEach(element => {
+                const parent = element.getAttribute('data-parent');
+                if (parent) {
+                    element.setAttribute('data-bs-parent', parent);
+                    element.removeAttribute('data-parent');
+                }
+            });
+        });
+    </script>
+
+    <?= $this->inlineScript() ?>
+</body>
+
+</html>

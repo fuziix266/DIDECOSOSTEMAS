@@ -1,0 +1,146 @@
+<?php
+
+/**
+ * Vista para el menú de Servicios Indígenas
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+// Configurar el título de la página y breadcrumb
+$this->headTitle('Servicios Indígenas');
+$this->pageTitle = 'Servicios Indígenas';
+?>
+
+<div class="container">
+    <!-- Encabezado de la sección -->
+    <div class="text-center mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold mb-3" style="color: #15356c;">
+                    <i class="fas fa-feather-alt me-3" style="color: #6537b6;"></i>
+                    Servicios para Pueblos Indígenas
+                </h1>
+                <p class="lead text-muted">
+                    Ofrecemos orientación y asesoramiento especializado para el fortalecimiento
+                    de la identidad cultural y el desarrollo de los pueblos indígenas en nuestra comuna.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid de servicios con estilos unificados -->
+    <div class="grid-container">
+
+        <!-- Acreditación Indígena -->
+        <a href="/didecosistemas/public/departamentos/odima/acreditacionindigena" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-award"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Acreditación Indígena</div>
+                <div class="descripcion">
+                    Asesoramiento completo para obtener tu acreditación indígena y acceder a beneficios específicos.
+                </div>
+            </div>
+        </a>
+
+        <!-- Beca Indígena -->
+        <a href="/didecosistemas/public/departamentos/odima/becaindigena" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-mortarboard"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Beca Indígena</div>
+                <div class="descripcion">
+                    Orientación para postular a becas educacionales destinadas a estudiantes indígenas.
+                </div>
+            </div>
+        </a>
+
+        <!-- Asociación Indígena - Conformación -->
+        <a href="/didecosistemas/public/departamentos/odima/informacionasociacionindigena" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Conformar Asociación Indígena</div>
+                <div class="descripcion">
+                    Información detallada sobre cómo formar una asociación indígena y sus beneficios.
+                </div>
+            </div>
+        </a>
+
+        <!-- Asociación Indígena - Inscripción -->
+        <a href="/didecosistemas/public/departamentos/odima/inscribirasociacionindigena" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-journal-plus"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Inscribir Asociación Indígena</div>
+                <div class="descripcion">
+                    Asesoramiento para el proceso de inscripción oficial de tu asociación indígena.
+                </div>
+            </div>
+        </a>
+
+        <!-- Micro Emprendimiento -->
+        <a href="/didecosistemas/public/departamentos/odima/microemprendimiento" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-shop"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Micro Emprendimiento CONADI</div>
+                <div class="descripcion">
+                    Orientación para postular a fondos de micro emprendimiento indígena de CONADI.
+                </div>
+            </div>
+        </a>
+
+        <!-- Subsidio Habitacional -->
+        <a href="/didecosistemas/public/departamentos/odima/subsidiohabitacional" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-house-heart"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Subsidio Habitacional</div>
+                <div class="descripcion">
+                    Información sobre subsidios habitacionales específicos para pueblos indígenas.
+                </div>
+            </div>
+        </a>
+
+        <!-- Actividades Culturales -->
+        <a href="/didecosistemas/public/departamentos/odima/actividadesculturales" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-calendar-event"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Actividades Culturales Indígenas</div>
+                <div class="descripcion">
+                    Participa en actividades, ceremonias y eventos que celebran y fortalecen la cultura indígena. Mantente informado sobre talleres, encuentros culturales y celebraciones.
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-10">
+            <div class="info-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <i class="bi bi-info-circle info-icon"></i>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="mb-2 fw-bold">¿Tienes dudas o quieres postular?</h6>
+                        <p class="mb-0">
+                            El equipo de ODIMA está disponible para orientarte y acompañarte en tu proceso.
+                        </p>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <a href="/didecosistemas/public/departamentos/correos?correo=desarrollo.indigena@municipalidadarica.cl" class="btn btn-outline-primary btn-sm">Contactar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

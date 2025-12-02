@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title><?= $this->headTitle() ?></title>
+    <?= $this->headLink() ?>
+    <?= $this->headScript() ?>
+</head>
+<body>
+    <header>
+        <h1>Layout de Departamentos</h1>
+    </header>
+
+    <main>
+        <?= $this->content ?>
+    </main>
+
+    <footer>
+        <p>© <?= date('Y') ?> Municipalidad</p>
+    </footer>
+</body>
+</html>

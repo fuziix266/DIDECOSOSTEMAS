@@ -1,0 +1,68 @@
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="h3">Panel de Administración</h1>
+            <p class="text-muted">Bienvenido, <?= $this->escapeHtml($this->user['nombre']) ?></p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Noticias -->
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3 text-primary">
+                        <i class="bi bi-newspaper fs-1"></i>
+                    </div>
+                    <h5 class="card-title">Noticias</h5>
+                    <p class="card-text text-muted">Gestionar noticias y artículos publicados.</p>
+                    <a href="<?= $this->url('radio-news') ?>" class="btn btn-outline-primary stretched-link">Gestionar</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Programación -->
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3 text-success">
+                        <i class="bi bi-calendar-week fs-1"></i>
+                    </div>
+                    <h5 class="card-title">Programación</h5>
+                    <p class="card-text text-muted">Administrar la parrilla programática.</p>
+                    <a href="<?= $this->url('radio-programs') ?>" class="btn btn-outline-success stretched-link">Gestionar</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Equipo -->
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3 text-info">
+                        <i class="bi bi-people fs-1"></i>
+                    </div>
+                    <h5 class="card-title">Equipo</h5>
+                    <p class="card-text text-muted">Gestionar miembros del equipo.</p>
+                    <a href="<?= $this->url('radio-team') ?>" class="btn btn-outline-info stretched-link">Gestionar</a>
+                </div>
+            </div>
+        </div>
+
+        <?php if ($this->user['rol'] === 'ADMIN'): ?>
+            <!-- Usuarios -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3 text-warning">
+                            <i class="bi bi-person-gear fs-1"></i>
+                        </div>
+                        <h5 class="card-title">Usuarios</h5>
+                        <p class="card-text text-muted">Administrar usuarios y permisos.</p>
+                        <a href="<?= $this->url('radio-admin-usuarios') ?>" class="btn btn-outline-warning stretched-link">Gestionar</a>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

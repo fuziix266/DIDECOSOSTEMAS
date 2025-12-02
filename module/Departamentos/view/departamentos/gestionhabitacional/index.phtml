@@ -1,0 +1,131 @@
+<?php
+
+/**
+ * Vista para el menú de Trámites de Organizaciones de Vivienda
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+$this->headTitle('Trámites Organizaciones de Vivienda');
+$this->pageTitle = 'Trámites Organizaciones de Vivienda';
+?>
+
+<div class="container">
+    <!-- Encabezado de la sección -->
+    <div class="text-center mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold mb-3" style="color: #15356c;">
+                    <i class="fas fa-home me-3" style="color: #3498db;"></i>
+                    Organizaciones de Vivienda
+                </h1>
+                <p class="lead text-muted">
+                    Trámites relacionados a la constitución y formalización de organizaciones funcionales y territoriales vinculadas a vivienda y participación ciudadana.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid de trámites Vivienda -->
+    <div class="grid-container">
+
+        <!-- Trámite 1 -->
+        <a href="/didecosistemas/public/departamentos/gestionhabitacional/comitevivienda" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-building"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Organizaciones Funcionales</div>
+                <div class="descripcion">
+                    Constitución de comités de vivienda según Decreto Ley 19.418, con presencia de ministro de fe.
+                </div>
+            </div>
+        </a>
+
+        <!-- Trámite 2 -->
+        <a href="/didecosistemas/public/departamentos/gestionhabitacional/juntavecinal" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-people"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Junta de Vecinos</div>
+                <div class="descripcion">
+                    Constitución de organizaciones territoriales bajo Ley 19.418, con requisitos por zona urbana o rural.
+                </div>
+            </div>
+        </a>
+
+        <!-- Trámite 3 -->
+        <a href="/didecosistemas/public/departamentos/gestionhabitacional/fundacion" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-journal-text"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Fundación (Ley 20.500)</div>
+                <div class="descripcion">
+                    Trámite para constitución de fundaciones según normativa vigente.
+                </div>
+            </div>
+        </a>
+
+        <!-- Trámite 4 -->
+        <a href="/didecosistemas/public/departamentos/gestionhabitacional/ong" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-file-earmark-person"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">ONG / Corporación / Asociación Cultural</div>
+                <div class="descripcion">
+                    Apoyo para la constitución de organizaciones civiles sin fines de lucro.
+                </div>
+            </div>
+        </a>
+
+        <!-- Trámite 5 -->
+        <a href="/didecosistemas/public/departamentos/gestionhabitacional/adultomayor" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-person-arms-up"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Asociación de Adultos Mayores</div>
+                <div class="descripcion">
+                    Apoyo a la formalización de asociaciones de clubes de adultos mayores.
+                </div>
+            </div>
+        </a>
+
+        <!-- Trámite 6 -->
+        <a href="/didecosistemas/public/departamentos/gestionhabitacional/padresyapoderados" class="card-departamento">
+            <div class="card-icon">
+                <i class="bi bi-person-vcard"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">Centro de Padres y Apoderados</div>
+                <div class="descripcion">
+                    Formalización de centros de padres en establecimientos de enseñanza media.
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-10">
+            <div class="info-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <i class="bi bi-info-circle info-icon"></i>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="mb-2 fw-bold">¿Tienes dudas o quieres postular?</h6>
+                        <p class="mb-0">
+                            El equipo de la Oficina de Gestión Habitacional está disponible para orientarte y acompañarte en tu proceso.
+                        </p>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <a href="/didecosistemas/public/departamentos/correos?correo=dideco@municipalidadarica.cl" class="btn btn-outline-primary btn-sm">Contactar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+<?php
+/**
+ * Vista para el menú de Participación Ciudadana
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+$this->headTitle('Presupuesto Participativo');
+$this->pageTitle = 'Presupuesto Participativo';
+?>
+
+<div class="container">
+  <div class="text-center mb-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h1 class="display-5 fw-bold mb-3" style="color: #15356c;">
+          <i class="fas fa-handshake me-3" style="color: #2d9cdb;"></i>
+          Presupuesto Participativo
+        </h1>
+        <p class="lead text-muted">
+          Accede a los fondos y programas de apoyo a organizaciones comunitarias, territoriales y funcionales.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-container">
+    <!-- FONDEVE -->
+    <a href="/didecosistemas/public/departamentos/presupuestoparticipativo/fondeve" class="card-departamento">
+      <div class="card-icon">
+        <i class="bi bi-cash-coin"></i>
+      </div>
+      <div class="card-content">
+        <div class="card-title">FONDEVE</div>
+        <div class="descripcion">
+          Fondo de desarrollo vecinal dirigido a organizaciones territoriales como juntas de vecinos y uniones comunales.
+        </div>
+      </div>
+    </a>
+
+    <!-- FONDECO -->
+    <a href="/didecosistemas/public/departamentos/presupuestoparticipativo/fondeco" class="card-departamento">
+      <div class="card-icon">
+        <i class="bi bi-piggy-bank"></i>
+      </div>
+      <div class="card-content">
+        <div class="card-title">FONDECO</div>
+        <div class="descripcion">
+          Fondo de desarrollo comunitario para organizaciones funcionales como clubes deportivos y de adultos mayores.
+        </div>
+      </div>
+    </a>
+
+    <!-- Presupuesto Participativo -->
+    <a href="/didecosistemas/public/departamentos/presupuestoparticipativo/presupuestoparticipativo" class="card-departamento">
+      <div class="card-icon">
+        <i class="bi bi-bar-chart-steps"></i>
+      </div>
+      <div class="card-content">
+        <div class="card-title">Presupuesto Participativo</div>
+        <div class="descripcion">
+          Proceso de elección ciudadana para decidir en qué proyectos invertir fondos comunales en distintas zonas.
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="row justify-content-center mt-5">
+    <div class="col-lg-10">
+      <div class="info-banner">
+        <div class="row align-items-center">
+          <div class="col-md-2 text-center">
+            <i class="bi bi-info-circle info-icon"></i>
+          </div>
+          <div class="col-md-8">
+            <h6 class="mb-2 fw-bold">Revisa los requisitos y tiempos de cada fondo</h6>
+            <p class="mb-0">
+              Cada programa tiene procesos de capacitación, postulación y rendición específicos. Asegúrate de revisar los detalles antes de postular.
+            </p>
+          </div>
+          <div class="col-md-2 text-center">
+            <a href="/didecosistemas/public/departamentos/correos?correo=fondos.participativos@municipalidadarica.cl" class="btn btn-outline-primary btn-sm">Contactar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

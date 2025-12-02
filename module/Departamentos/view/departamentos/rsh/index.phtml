@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * Vista para el menú de Registro Social de Hogares (RSH)
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+// Configurar el título de la página y breadcrumb
+$this->headTitle('Registro Social de Hogares');
+$this->pageTitle = 'Registro Social de Hogares';
+?>
+
+<div class="container">
+  <!-- Encabezado de la sección -->
+  <div class="text-center mb-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h1 class="display-5 fw-bold mb-3" style="color: #15356c;">
+          <i class="bi bi-people-fill me-2" style="color: #6537b6;"></i>
+          Registro Social de Hogares
+        </h1>
+        <p class="lead text-muted">
+          Gestiona la incorporación o actualización de tu hogar en el RSH para acceder a beneficios sociales del Estado.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid de servicios -->
+  <div class="grid-container">
+    <!-- Solicitud de RSH -->
+    <a href="/didecosistemas/public/departamentos/rsh/solicitud" class="card-departamento">
+      <div class="card-icon">
+        <i class="bi bi-card-list"></i>
+      </div>
+      <div class="card-content">
+        <div class="card-title">Solicitud de Registro Social de Hogares</div>
+        <div class="descripcion">
+          Solicita la incorporación de tu hogar al sistema RSH o actualiza tus datos para acceder a beneficios.
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="row justify-content-center mt-5">
+    <div class="col-lg-10">
+      <div class="info-banner">
+        <div class="row align-items-center">
+          <div class="col-md-2 text-center">
+            <i class="bi bi-info-circle info-icon"></i>
+          </div>
+          <div class="col-md-8">
+            <h6 class="mb-2 fw-bold">¿Tienes dudas o quieres postular?</h6>
+            <p class="mb-0">
+              El equipo de la Oficina de Registro Social de Hogares está disponible para orientarte y acompañarte en tu proceso.
+            </p>
+          </div>
+          <div class="col-md-2 text-center">
+            <a href="/didecosistemas/public/departamentos/correos?correo=registrosocialhogares@municipalidadarica.cl" class="btn btn-outline-primary btn-sm">Contactar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

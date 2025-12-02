@@ -1,0 +1,110 @@
+<?php
+/**
+ * Template dinámico para mostrar detalles de trámites de RSH
+ */
+$this->headTitle($tramite['nombre'] . ' - Registro Social de Hogares');
+?>
+
+<div class="container mt-4">
+    <h2 class="mb-4"><?= $this->escapeHtml($tramite['nombre']) ?></h2>
+    
+    <div class="accordion" id="accordionTramite">
+        
+        <?php if (!empty($tramite['documentos_requeridos'])): ?>
+        <!-- Documentos Requeridos -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDocumentos">
+                    Documentos Requeridos
+                </button>
+            </h2>
+            <div id="collapseDocumentos" class="accordion-collapse collapse show" data-bs-parent="#accordionTramite">
+                <div class="accordion-body">
+                    <?= nl2br($this->escapeHtml($tramite['documentos_requeridos'])) ?>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if (!empty($tramite['requisitos_usuario'])): ?>
+        <!-- Requisitos del Usuario -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRequisitos">
+                    Requisitos del Usuario
+                </button>
+            </h2>
+            <div id="collapseRequisitos" class="accordion-collapse collapse" data-bs-parent="#accordionTramite">
+                <div class="accordion-body">
+                    <?= nl2br($this->escapeHtml($tramite['requisitos_usuario'])) ?>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if (!empty($tramite['instrucciones_paso_paso'])): ?>
+        <!-- Instrucciones Paso a Paso -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstrucciones">
+                    Instrucciones Paso a Paso
+                </button>
+            </h2>
+            <div id="collapseInstrucciones" class="accordion-collapse collapse" data-bs-parent="#accordionTramite">
+                <div class="accordion-body">
+                    <?= nl2br($this->escapeHtml($tramite['instrucciones_paso_paso'])) ?>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if (!empty($tramite['tiempo_estimado'])): ?>
+        <!-- Tiempo Estimado -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTiempo">
+                    Tiempo Estimado
+                </button>
+            </h2>
+            <div id="collapseTiempo" class="accordion-collapse collapse" data-bs-parent="#accordionTramite">
+                <div class="accordion-body">
+                    <?= nl2br($this->escapeHtml($tramite['tiempo_estimado'])) ?>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if (!empty($tramite['responsable_nombre'])): ?>
+        <!-- Responsable -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseResponsable">
+                    Responsable
+                </button>
+            </h2>
+            <div id="collapseResponsable" class="accordion-collapse collapse" data-bs-parent="#accordionTramite">
+                <div class="accordion-body">
+                    <?= nl2br($this->escapeHtml($tramite['responsable_nombre'])) ?>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if (!empty($tramite['observaciones'])): ?>
+        <!-- Observaciones -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseObservaciones">
+                    Observaciones
+                </button>
+            </h2>
+            <div id="collapseObservaciones" class="accordion-collapse collapse" data-bs-parent="#accordionTramite">
+                <div class="accordion-body">
+                    <?= nl2br($this->escapeHtml($tramite['observaciones'])) ?>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
+    </div>
+</div>
