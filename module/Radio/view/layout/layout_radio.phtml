@@ -101,23 +101,7 @@
 <body class="d-flex flex-column min-vh-100" style="background:var(--bg-light);">
 
     <!-- Top thin bar (links + social) -->
-    <div class="topbar py-1">
-        <div class="container d-flex justify-content-between small pt-3 pb-3">
-            <div>
-                <a href="#" class="me-2">DIP</a>
-                <span class="text-white">|</span>
-                <a href="#" class="mx-2">Transformación Digital</a>
-                <span class="text-white">|</span>
-                <a href="#" class="ms-2">Ley del Lobby</a>
-            </div>
-            <div>
-                <a href="#" class="text-white me-2" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="text-white me-2" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="text-white me-2" aria-label="Flickr"><i class="bi bi-camera"></i></a>
-                <a href="#" class="text-white" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-            </div>
-        </div>
-    </div>
+    <?= $this->partial('layout/top_links_social') ?>
 
     <!-- Header with logo + nav -->
     <header class="navbar-municipal">
@@ -126,13 +110,36 @@
                 <img src="/didecosistemas/public/vehiculos/img/logo-azul.png" alt="Logo Municipalidad" style="height:56px;" class="me-3">
             </div>
 
+            <?php
+            $session = new \Laminas\Session\Container('radio_auth');
+            $isLogged = isset($session->user_id);
+            $isAdmin = ($isLogged && isset($session->rol) && $session->rol === 'ADMIN');
+            ?>
+
             <nav class="d-none d-md-block">
                 <ul class="nav align-items-center">
-                    <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio') ?>"><i class="bi bi-house-door me-1"></i> Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio-news') ?>">Noticias</a></li>
-                    <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio-programs') ?>">Programación</a></li>
-                    <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio-team') ?>">Equipo</a></li>
-                    <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio') ?>" target="_blank">Ver Sitio</a></li>
+                    <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('aplicaciones') ?>"><i class="bi bi-house-door me-1"></i> Inicio</a></li>
+
+                    <?php if ($isLogged): ?>
+                        <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio-news') ?>">Noticias</a></li>
+                        <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio-programs') ?>">Programación</a></li>
+                        <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio-team') ?>">Equipo</a></li>
+
+                        <?php if ($isAdmin): ?>
+                            <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio-admin-usuarios') ?>">Usuarios</a></li>
+                        <?php endif; ?>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-person-circle"></i> <?= $this->escapeHtml($session->nombre) ?>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="<?= $this->url('radio-auth', ['action' => 'logout']) ?>">Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio-auth', ['action' => 'login']) ?>"><i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión</a></li>
+                    <?php endif; ?>
                 </ul>
             </nav>
 
@@ -147,9 +154,18 @@
             <div class="container pb-3">
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link" href="<?= $this->url('radio') ?>">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= $this->url('radio-news') ?>">Noticias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= $this->url('radio-programs') ?>">Programación</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= $this->url('radio-team') ?>">Equipo</a></li>
+
+                    <?php if ($isLogged): ?>
+                        <li class="nav-item"><a class="nav-link" href="<?= $this->url('radio-news') ?>">Noticias</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= $this->url('radio-programs') ?>">Programación</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= $this->url('radio-team') ?>">Equipo</a></li>
+                        <?php if ($isAdmin): ?>
+                            <li class="nav-item"><a class="nav-link" href="<?= $this->url('radio-admin-usuarios') ?>">Usuarios</a></li>
+                        <?php endif; ?>
+                        <li class="nav-item"><a class="nav-link text-danger" href="<?= $this->url('radio-auth', ['action' => 'logout']) ?>">Cerrar Sesión</a></li>
+                    <?php else: ?>
+                        <li class="nav-item"><a class="nav-link" href="<?= $this->url('radio-auth', ['action' => 'login']) ?>">Iniciar Sesión</a></li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -163,34 +179,7 @@
     </main>
 
     <!-- Footer Municipal -->
-    <footer class="footer-municipal mt-auto">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <img src="/didecosistemas/public/vehiculos/img/logo-azul.png"
-                        alt="Logo Municipalidad"
-                        class="footer-logo">
-                </div>
-                <div class="col-md-4 text-center mb-3 mb-md-0">
-                    <h6 class="fw-bold text-primary mb-2">Dirección de Desarrollo Comunitario</h6>
-                    <p class="text-muted small mb-0">
-                        Sistema de Identificación Vehicular
-                    </p>
-                </div>
-                <div class="col-md-4 text-center text-md-end">
-                    <p class="text-muted small mb-1">
-                        <i class="bi bi-globe me-1"></i>
-                        <a href="https://www.didecoarica.cl" target="_blank" class="text-decoration-none text-primary">
-                            www.didecoarica.cl
-                        </a>
-                    </p>
-                    <p class="text-muted small mb-0">
-                        <i class="bi bi-diagram-2 me-1"></i>Control y Gestión Digital - <?= date('Y') ?>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <?= $this->partial('layout/footer') ?>
 
     <!-- Scripts -->
     <script src="/didecosistemas/public/vehiculos/vendors/jquery/jquery-3.7.1.min.js"></script>
@@ -202,7 +191,7 @@
     <script src="/didecosistemas/public/vehiculos/vendors/datatables/js/responsive.bootstrap5.min.js"></script>
     <script src="/didecosistemas/public/vehiculos/vendors/sweetalert2/sweetalert2.all.min.js"></script>
     <script src="/didecosistemas/public/vehiculos/js/app.js"></script>
-    
+
     <!-- Summernote JS -->
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
@@ -224,7 +213,7 @@
             });
         });
     </script>
-    
+
     <?= $this->inlineScript() ?>
 </body>
 

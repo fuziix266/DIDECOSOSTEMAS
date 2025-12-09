@@ -178,7 +178,7 @@ return [
             'ViewJsonStrategy',
         ],
         'template_map' => [
-            'layout/radio' => __DIR__ . '/../view/layout/radio.phtml',
+            'layout/radio' => __DIR__ . '/../view/layout/layout_radio.phtml',
         ],
         'template_path_stack' => [
             'radio' => __DIR__ . '/../view',

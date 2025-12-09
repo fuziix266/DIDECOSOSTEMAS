@@ -15,8 +15,8 @@ class IndexController extends AbstractActionController
         $this->layout()->setVariable('heroSubtitle', 'Lista de códigos registradssos.');
 
         // Usar layout específico para el index
-        $this->layout('layout/layout_index');
-        
+        $this->layout('layout/layout_principal');
+
         return new ViewModel();
     }
 }
