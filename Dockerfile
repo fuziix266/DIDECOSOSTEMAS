@@ -24,6 +24,9 @@ RUN a2enmod rewrite
 # 4. Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# 4.5. Configurar PHP para mostrar errores (debugging)
+COPY docker/php/error-reporting.ini /usr/local/etc/php/conf.d/error-reporting.ini
+
 # 5. Configurar Apache para que apunte a la carpeta /public
 # Esto hace la magia: cambia la configuración de Apache sin necesidad de archivos externos
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
