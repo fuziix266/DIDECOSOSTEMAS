@@ -1,0 +1,17 @@
+.git
+.gitignore
+.gitattributes
+.phpstorm.meta.php
+.psalm-stubs.phpstub
+README.md
+phpcs.xml
+phpunit.xml.dist
+psalm.xml
+renovate.json
+vendor/
+node_modules/
+*.log
+.env
+.env.*
+data/cache/*
+!data/cache/.gitkeep
