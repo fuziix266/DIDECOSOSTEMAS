@@ -22,15 +22,15 @@ class Module implements ConfigProviderInterface
                 'VehiculosDbAdapter' => function ($container) {
                     return new \Laminas\Db\Adapter\Adapter([
                         'driver'   => 'Pdo',
-                        'dsn'      => 'mysql:dbname=qr_vehiculos_municipal;host=localhost;charset=utf8',
-                        'username' => 'root',
-                        'password' => '',
+                        'dsn'      => 'mysql:dbname=' . (getenv('DB_NAME') ?: 'qr_vehiculos_municipal') . ';host=' . (getenv('DB_HOST') ?: 'localhost') . ';charset=utf8',
+                        'username' => getenv('DB_USER') ?: 'root',
+                        'password' => getenv('DB_PASS') ?: '',
                         'driver_options' => [
                             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
                         ],
                     ]);
                 },
-                
+
                 // TableGateways
                 'QrCodigosTableGateway' => function ($container) {
                     $dbAdapter = $container->get('VehiculosDbAdapter');
