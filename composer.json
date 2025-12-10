@@ -30,17 +30,17 @@
     },
     "autoload": {
         "psr-4": {
-            "Application\\": "module/Application/src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "ApplicationTest\\": "module/Application/test/",
+            "Application\\": "module/Application/src/",
             "Departamentos\\": "module/Departamentos/src/",
             "Tarjetasenior\\": "module/Tarjetasenior/src/",
             "Aplicaciones\\": "module/Aplicaciones/src/",
             "Vehiculos\\": "module/Vehiculos/src/",
             "Radio\\": "module/Radio/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ApplicationTest\\": "module/Application/test/"
         }
     },
     "scripts": {
