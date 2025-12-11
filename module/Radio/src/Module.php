@@ -20,15 +20,9 @@ class Module implements ConfigProviderInterface
             'factories' => [
                 // Adaptador específico para Radio
                 'RadioDbAdapter' => function ($container) {
-                    return new \Laminas\Db\Adapter\Adapter([
-                        'driver'   => 'Pdo',
-                        'dsn'      => 'mysql:dbname=' . (getenv('DB_NAME') ?: 'radio_app') . ';host=' . (getenv('DB_HOST') ?: 'localhost') . ';charset=utf8',
-                        'username' => getenv('DB_USER') ?: 'root',
-                        'password' => getenv('DB_PASS') ?: '',
-                        'driver_options' => [
-                            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-                        ],
-                    ]);
+                    $config = $container->get('config');
+                    $dbConfig = $config['db_radio'] ?? [];
+                    return new \Laminas\Db\Adapter\Adapter($dbConfig);
                 },
 
                 // TableGateways
