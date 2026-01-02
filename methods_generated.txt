@@ -1,0 +1,90 @@
+    public function devoluciondeayudatecnicaAction()
+    {
+        return $this->getTramiteView('devolucion-de-ayuda-tecnica');
+    }
+
+    public function informesdeayudastecnicasAction()
+    {
+        return $this->getTramiteView('informes-de-ayudas-tecnicas');
+    }
+
+    public function informessocialesparacomprasdeayudastecnicasAction()
+    {
+        return $this->getTramiteView('informes-sociales-para-compras-de-ayudas-tecnicas');
+    }
+
+    public function infornesparatribunalesAction()
+    {
+        return $this->getTramiteView('infornes-para-tribunales');
+    }
+
+    public function orientacionsobreelestipendioAction()
+    {
+        return $this->getTramiteView('orientacion-sobre-el-estipendio');
+    }
+
+    public function orientacionsobreelsubsidiodediscapacidadparamenoresde18anosAction()
+    {
+        return $this->getTramiteView('orientacion-sobre-el-subsidio-de-discapacidad-para-menores-de-18-anos');
+    }
+
+    public function orientacionsobrelapensionbasicasolidariadeinvalidezpbsiAction()
+    {
+        return $this->getTramiteView('orientacion-sobre-la-pension-basica-solidaria-de-invalidez-pbsi');
+    }
+
+    public function orientacionesgeneralessobrebeneficiossemestralesdelestadocontempladosantelaley20422Action()
+    {
+        return $this->getTramiteView('orientaciones-generales-sobre-beneficios-semestrales-del-estado-contemplados-ante-la-ley-20-422');
+    }
+
+    public function solicituddeapoyoenpostulaciondeayudastecnicasasenadisAction()
+    {
+        return $this->getTramiteView('solicitud-de-apoyo-en-postulacion-de-ayudas-tecnicas-a-senadis');
+    }
+
+    public function solicitudinformeayudasocialAction()
+    {
+        return $this->getTramiteView('solicitud-informe-ayuda-social');
+    }
+
+    public function solicitudinformeorasmiAction()
+    {
+        return $this->getTramiteView('solicitud-informe-orasmi');
+    }
+
+    public function solicitudinformesocialyredesdeapoyoAction()
+    {
+        return $this->getTramiteView('solicitud-informe-social-y-redes-de-apoyo');
+    }
+
+    public function solicitudivadecAction()
+    {
+        return $this->getTramiteView('solicitud-ivadec');
+    }
+
+    public function solicitudprestamodeayudatecnicaAction()
+    {
+        return $this->getTramiteView('solicitud-prestamo-de-ayuda-tecnica');
+    }
+
+    public function solicitudtallerdehablaylenguajeAction()
+    {
+        return $this->getTramiteView('solicitud-taller-de-habla-y-lenguaje');
+    }
+
+    public function solicitudtallerdeportivorecreativoAction()
+    {
+        return $this->getTramiteView('solicitud-taller-deportivo-recreativo');
+    }
+
+    public function solicitudterapiakinesicaAction()
+    {
+        return $this->getTramiteView('solicitud-terapia-kinesica');
+    }
+
+    public function solicitudterapiaocupacionalAction()
+    {
+        return $this->getTramiteView('solicitud-terapia-ocupacional');
+    }
+

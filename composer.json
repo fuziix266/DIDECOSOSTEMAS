@@ -18,7 +18,8 @@
         "laminas/laminas-mvc": "^3.7.0",
         "laminas/laminas-session": "^2.25",
         "laminas/laminas-skeleton-installer": "^1.3.0",
-        "mpdf/mpdf": "^8.2"
+        "mpdf/mpdf": "^8.2",
+        "phpoffice/phpspreadsheet": "^5.3"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
@@ -35,7 +36,8 @@
             "Tarjetasenior\\": "module/Tarjetasenior/src/",
             "Aplicaciones\\": "module/Aplicaciones/src/",
             "Vehiculos\\": "module/Vehiculos/src/",
-            "Radio\\": "module/Radio/src/"
+            "Radio\\": "module/Radio/src/",
+            "Geoportal\\": "module/Geoportal/src/"
         }
     },
     "autoload-dev": {

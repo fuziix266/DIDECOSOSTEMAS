@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><?= $this->headTitle('Sistema de Mantención')->setSeparator(' - ')->setAutoEscape(false) ?></title>
+
+    <!-- Reuse Vehiculos assets for consistency as requested -->
+    <link href="/didecosistemas/public/vehiculos/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/didecosistemas/public/vehiculos/vendors/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="/didecosistemas/public/vehiculos/css/styles.css" rel="stylesheet">
+
+    <style>
+        /* Paleta y ajustes similares a layout_web original */
+        :root {
+            --primary-color: #06048C;
+            --bg-light: #F8FAFC;
+        }
+
+        .topbar {
+            background: var(--primary-color);
+            color: #fff;
+            font-size: .9rem;
+        }
+
+        .topbar a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+        }
+
+        .navbar-municipal {
+            background: #ffffff;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-link.primary {
+            color: var(--primary-color) !important;
+            font-weight: 600;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .btn-rrhh {
+            color: #f97316;
+            border-color: #f97316;
+        }
+
+        .linea-colores {
+            border-bottom: 6px solid;
+            border-image: linear-gradient(90deg, #00bb95 25%, #ffca48 25% 50%, #ff6948 50% 75%, #00a7e6 75%) 1;
+        }
+
+        .footer-municipal {
+            background: #f8f9fa;
+            padding: 2rem 0;
+        }
+
+        .footer-municipal .footer-logo {
+            max-height: 50px;
+            opacity: 0.8;
+        }
+    </style>
+
+    <?= $this->headLink() ?>
+    <?= $this->headStyle() ?>
+</head>
+
+<body class="d-flex flex-column min-vh-100" style="background:var(--bg-light);">
+
+    <?php $session = new \Laminas\Session\Container('mantencion_auth'); ?>
+
+    <!-- Top thin bar (links + social) -->
+    <!-- Assuming this partial exists in the shared path or we need to point to it correctly. 
+         Vehiculos layout used 'layout/top_links_social'. If it's in module/Application/view/layout/top_links_social.phtml it should work. -->
+    <?= $this->partial('layout/top_links_social') ?>
+
+    <!-- Header with logo + nav -->
+    <header class="navbar-municipal">
+        <div class="container py-3 d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <img src="/didecosistemas/public/vehiculos/img/logo-azul.png" alt="Logo Municipalidad" style="height:56px;" class="me-3">
+            </div>
+
+            <nav class="d-none d-md-block">
+                <ul class="nav align-items-center">
+                    <li class="nav-item"><a class="nav-link text-muted" href="/didecosistemas/public"><i class="bi bi-house-door me-1"></i> Inicio</a></li>
+
+                    <?php if (isset($session->user_id)): ?>
+                        <li class="nav-item"><a class="nav-link primary" href="<?= $this->url('departamentos-mantencion', ['action' => 'dashboard']) ?>"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a></li>
+                        <?php if ($session->rol === 'administrador'): ?>
+                            <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('departamentos-mantencion', ['action' => 'usuarios']) ?>"><i class="bi bi-people me-1"></i> Usuarios</a></li>
+                        <?php endif; ?>
+                    <?php endif; ?>
+
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                        <?php if (isset($session->user_id)): ?>
+                            <li class="nav-item dropdown ms-2">
+                                <a class="btn btn-outline-warning btn-sm btn-rrhh dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle me-2 fs-5"></i>
+                                    <span class="badge text-dark"><?= $this->escapeHtml($session->rol) ?></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li class="px-3">
+                                        <small class="text-muted">Sesión iniciada como</small>
+                                        <div class="fw-bold"><?= $this->escapeHtml($session->email ?? 'Usuario') ?></div>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item text-danger" href="<?= $this->url('departamentos-mantencion', ['action' => 'logout']) ?>"><i class="bi bi-box-arrow-right me-2"></i> Cerrar Sesión</a></li>
+                                </ul>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </ul>
+            </nav>
+
+            <div class="d-md-none">
+                <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">Menú</button>
+            </div>
+        </div>
+        <div class="linea-colores"></div>
+
+
+        <div class="collapse" id="mobileMenu">
+            <div class="container pb-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link text-muted" href="/didecosistemas/public/aplicaciones">Inicio</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="mb-4"></div>
+    <main class="flex-grow-1">
+        <div class=container>
+            <?= $this->content ?>
+        </div>
+    </main>
+
+    <?= $this->partial('layout/footer') ?>
+
+    <script src="/didecosistemas/public/vehiculos/vendors/jquery/jquery-3.7.1.min.js"></script>
+    <script src="/didecosistemas/public/vehiculos/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <?= $this->inlineScript() ?>
+</body>
+
+</html>

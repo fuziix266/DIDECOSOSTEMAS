@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <title>DOM - Sistemas</title>
+
+
+    <!-- Custom styles for this template -->
+    <!--<link href="/domsistemas/public//css/style.css" rel="stylesheet">
+        <link href="/domsistemas/public//css/style-responsive.css" rel="stylesheet">-->
+    <!-- Select2 -->
+    <link href="<?= $this->basePath('public/lib/select2/dist/css/select2.css') ?>" rel="stylesheet">
+
+    <!--js-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!--bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <!-- select2 -->
+    <script src="<?= $this->basePath('public/lib/select2/dist/js/select2.full.js') ?>"></script>
+
+    <!-- Mapas -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+    <!-- Spin.js -->
+    <script src="<?= $this->basePath('public/spin/spin.js') ?>"></script>
+
+    <!-- Leaflet-Spin -->
+    <script src="<?= $this->basePath('public/leaflet-spin/leaflet.spin.js') ?>"></script>
+
+    <!--alertas llamativas-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+
+    <!-- QR Code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-size: 0.9rem;
+            /* ajusta según necesidad */
+        }
+
+        #osmMap {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        #logo {
+            max-height: 9vh;
+        }
+
+        .titulo,
+        h2 {
+            font-size: 1rem;
+            padding: 0;
+            margin: 0;
+        }
+
+        #subttulo {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+
+        /*para las tablas de reportes*/
+        table {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #e9ecef;
+            font-weight: bold;
+        }
+
+        .header2 {
+            background-color: #d1d1d1;
+            font-weight: bold;
+        }
+
+        /*para la botonera del menu principal*/
+        .btn-menu-principal {
+            display: flex;
+            flex-direction: column;
+            /* Hace que los hijos se apilen verticalmente */
+            align-items: center;
+            /* Centra los hijos horizontalmente */
+            justify-content: center;
+            /* Centra los hijos verticalmente */
+        }
+
+        /* Color por defecto (no activo) */
+        .btn-menu-principal {
+            color: grey;
+            font-weight: bold;
+        }
+
+        /* Color cuando el botón está activo */
+        .btn-menu-principal.active {
+            color: grey;
+        }
+
+        .section-border {
+            border: 1px solid #ddd;
+            margin: 5px 0;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .show>.nav-link {
+            color: #000;
+        }
+
+
+
+
+        #espacio-logo {
+            max-height: 10vh;
+        }
+
+        .btn-icon {
+            font-size: 2rem;
+            /* Ajusta este valor según el tamaño que desees para el ícono */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rol-btn {
+            background: none;
+            border: none;
+            text-align: center;
+            width: 100%;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            display: block;
+        }
+
+        .rol-seleccionado {
+            background: none;
+            border: none;
+            text-align: left;
+            width: 80%;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            display: inline;
+            padding: 5px;
+        }
+
+        .rol-reporte {
+            background: #b0b0b0;
+            /* Fondo gris claro */
+            border: none;
+            text-align: center;
+            /* Texto centrado */
+            width: 20%;
+            text-decoration: none;
+            color: white;
+            /* Texto blanco */
+            font-weight: normal;
+            /* Texto sin negrita */
+            cursor: pointer;
+            display: inline-block;
+            /* Cambiado a inline-block para que el padding funcione correctamente */
+            padding: 5px;
+            border-radius: 5px;
+            /* Puntas redondeadas */
+        }
+
+        .cerrar-ventana-custom {
+            color: #000;
+            font-weight: bold;
+            /* texto en negrita */
+            opacity: 0.8;
+            /* hace que el color sea un poco más oscuro */
+        }
+
+        .rol-btn:hover {
+            background-color: #e9ecef;
+            /* Color de fondo al pasar el mouse */
+        }
+
+        /* Pantalla negra semi-transparente */
+        .modal-backdrop.show {
+            opacity: 0.7;
+            background-color: #000;
+        }
+
+        #pantallaCarga .modal-content {
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        #pantallaCarga .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        /* Asegúrate de que el contenedor del tab tenga una posición relativa */
+        .tab-content {
+            position: relative;
+        }
+
+        #informacion-roles {
+            background-color: rgba(255, 255, 0, 0.5);
+            border-radius: 1rem;
+        }
+
+        #informacion-roles-text {
+            color: black;
+        }
+
+        /* Mantén los estilos para el botón de cierre */
+        .cerrar-ventana {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+        }
+
+        .obtenerCertificado {
+            font-size: 0.8rem;
+            /* Tamaño de fuente pequeño */
+            display: block;
+            margin: 0 auto;
+            /* Centrar el botón */
+            padding: 0.25rem 0.5rem;
+            /* Espaciado interno del botón */
+            text-align: center;
+        }
+
+        @media (max-width: 992px) {
+            #espacio-izquierda {
+                padding: 0 !important;
+            }
+
+            #menu {
+                padding: 0 !important;
+            }
+
+            #espacio-logo {
+                margin-top: 0;
+            }
+
+            #espacio-menu {
+                background-color: transparent;
+                border: 0px;
+                padding: 0px 0px 0px 0px;
+                margin: 0;
+            }
+
+            .btn-menu-principal {
+                background-color: white !important;
+                margin: 0px 5px;
+                /* Margen alrededor de los botones */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                /* Sombra sutil para dar efecto elevado */
+                transition: box-shadow 0.3s ease;
+                /* Transición suave al pasar el mouse sobre el botón */
+            }
+
+            .cerrar-ventana {
+                display: block;
+                /* Muestra el botón en pantallas pequeñas */
+            }
+
+            .btn-menu-principal:hover {
+                box-shadow: 0 6px 8px rgba(0, 0, 0, 0.12);
+                /* Sombra más pronunciada al pasar el mouse */
+            }
+
+            .table-responsive {
+                font-size: 0.4rem;
+            }
+
+            #pills-tabContent {
+                display: none;
+                margin: 5px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                /* Sombra sutil para dar efecto elevado */
+            }
+
+            #pills-footer {
+                display: none;
+            }
+
+            body {
+                font-size: 1.2rem;
+                /* Ajusta este valor según la necesidad */
+            }
+
+            p {
+                font-size: 1rem;
+                text-align: justify;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+                /* Ajusta este valor según la necesidad */
+                font-weight: bold;
+            }
+
+            h4 {
+                font-size: 1.8rem;
+                /* Ajusta este valor según la necesidad */
+            }
+
+            .resultados-busqueda-rol {
+                font-size: 1rem;
+            }
+
+
+            input[type="checkbox"] {
+                transform: scale(1.2);
+                /* Ajusta este valor según la necesidad */
+            }
+        }
+
+        @media (min-width: 992px) {
+            .cerrar-ventana {
+                display: none;
+                /* Esconde el botón en pantallas grandes */
+            }
+
+            #menu {
+                /*position: absolute;*/
+                z-index: 10;
+                height: calc(100vh - 2 * 24px);
+            }
+        }
+
+        /*Tamaños de fuente para pantallas extra grandes (xl)*/
+        @media (min-width: 1200px) {
+            .table-responsive {
+                font-size: 0.8rem;
+            }
+
+            /*
+            #espacio-logo {
+                background-color: red;
+            }
+            */
+
+            #pills-tabContent {
+                display: block;
+            }
+
+            #pills-footer {
+                display: block;
+            }
+        }
+
+        .leaflet-popup-content p {
+            margin: 10px 0;
+        }
+
+        /* Estilos para controles de informe SNE */
+        .checkbox-revisado,
+        .checkbox-reavaluo,
+        .checkbox-sobretasa {
+            width: 20px !important;
+            height: 20px !important;
+            cursor: pointer;
+            transform: scale(1.3);
+            margin: 0 8px;
+        }
+
+        .select-causal-eliminacion {
+            font-size: 14px !important;
+            height: 36px !important;
+            padding: 6px 12px !important;
+            min-width: 200px;
+            font-weight: 500;
+        }
+
+        .select-causal-eliminacion option {
+            padding: 8px;
+            font-size: 13px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!--sidebar end-->
+    <?php echo $this->layout()->content; ?>
+</body>
+<!--scripts-->
+<script type="text/javascript" src="<?= $this->basePath('public/js/mapa/script_mapa.js') ?>"></script>
+
+
+</html>

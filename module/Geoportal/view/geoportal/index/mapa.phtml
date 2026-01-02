@@ -1,0 +1,478 @@
+<!-- SweetAlert2 -->
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- html2canvas para capturas de mapa -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+
+
+<div class="modal" tabindex="-1" id="pantallaCarga">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="contenedor-principal" class="container-fluid">
+    <div class="row">
+        <!-- Mapa como fondo completo -->
+        <div id="mapa-fondo" class="col-lg-12 transparent-bg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
+            <div id="osmMap" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></div>
+        </div>
+
+        <!-- Columna izquierda -->
+        <div id="espacio-izquierda" class="col-lg-4" style="z-index: 10;">
+            <!-- Ventana flotante principal transparente -->
+            <div id="menu" class="rounded d-flex p-3 flex-column transparent-bg">
+
+                <!-- 1. Cabecera: Logo y Título -->
+                <div id="espacio-logo" class="d-flex align-items-center section-border">
+                    <div class="col-12 container-fluid" style="text-align: center; max-width: 60%;">
+                        <a href="#">
+                            <img id="logo" src="/didecosistemas/public/img/logo-municipalidad-azul.webp" alt="Logo" class="img-fluid" style="cursor: pointer;">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. Menú: Botones como Pestañas -->
+                <div id="espacio-menu" class="section-border">
+                    <ul class="nav nav-pills" role="tablist">
+                        <li class="nav-item col-6">
+                            <a class="a-menu-principal nav-link active btn btn-icon btn-menu-principal" id="pills-buscar-tab" data-bs-toggle="pill" data-bs-target="#pills-buscar" role="tab" aria-controls="pills-buscar" aria-selected="true">
+                                <i class="bi bi-search"></i>
+                                <span class="fs-6">Direcciones</span>
+                            </a>
+                        </li>
+                        <li class="nav-item col-6">
+                            <a href="/didecosistemas/public/" class="a-menu-principal nav-link btn btn-icon btn-menu-principal">
+                                <i class="bi bi-house-door-fill"></i>
+                                <span class="fs-6">Home</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 3. Contenido: Sección de contenido que cambiará según la pestaña activa -->
+                <div class="tab-content flex-grow-1 section-border" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-buscar" role="tabpanel" aria-labelledby="pills-buscar-tab">
+
+                        <!-- Grid de Unidades Municipales -->
+                        <div id="contenedor-unidades-grid" class="row mb-3">
+                            <div class="container">
+                                <div class="col-lg-12">
+                                    <h4 class="mb-3">Unidades Municipales</h4>
+                                    <div id="grid-unidades" class="row g-2">
+                                        <!-- Botones generados por JS -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 4. Pie de página: Leyenda o texto en el footer -->
+                <div id="pills-footer" class="text-muted small section-border">
+                    Desarrollado por Catastro Digital - Dirección de Obras Municipaes Arica, 2023
+                </div>
+
+            </div>
+        </div>
+        <div id="espacio-derecha" class="col-lg-8">
+
+        </div>
+
+
+    </div>
+
+    <!-- Botón flotante Información Unidad (Amarillo) -->
+    <div id="boton-info-unidad" class="position-fixed bottom-0 end-0 m-4" style="z-index: 1000; display: none;">
+        <button class="btn btn-warning rounded-pill px-4 py-3 text-dark shadow fw-bold" style="opacity: 0.9; font-size: 1.2rem;">
+            <i class="bi bi-info-lg me-2"></i>Más Información
+        </button>
+    </div>
+
+    <!-- Modal RESPUESTA -->
+    <div class="modal fade" id="modalRespuesta" tabindex="-1" aria-labelledby="modalRespuestaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalRespuestaLabel">Resultados</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body" id="respuestaModal">
+                    <!-- Contenido del modal -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- fin modal RESPUESTA -->
+
+    <!-- Modal rol dirección -->
+    <div class="modal fade" id="rol-direccion-modal" tabindex="-1" aria-labelledby="rolDireccionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rolDireccionModalLabel">Resultados</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body" id="respuestaModalRolDireccion">
+                    <!-- Contenido generado dinámicamente por JavaScript -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal rol dirección -->
+
+    <!-- Modal Selector de Año para Cargar Informe -->
+    <div class="modal fade" id="modal-selector-anio-informe" tabindex="-1" aria-labelledby="modalSelectorAnioLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="modalSelectorAnioLabel">
+                        <i class="bi bi-folder-open"></i> Cargar Informe Guardado
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Paso 1: Selección de año -->
+                    <div class="mb-4">
+                        <label for="select-anio-informe" class="form-label fw-bold">
+                            <i class="bi bi-calendar3"></i> Paso 1: Selecciona el año del informe
+                        </label>
+                        <div class="input-group input-group-lg">
+                            <select class="form-select" id="select-anio-informe">
+                                <!-- Opciones generadas dinámicamente por JavaScript -->
+                            </select>
+                            <button type="button" class="btn btn-primary" id="btn-verificar-informe-anio">
+                                <i class="bi bi-search"></i> Buscar
+                            </button>
+                        </div>
+                        <div class="form-text">
+                            <i class="bi bi-info-circle"></i> Se buscará el informe más reciente del año seleccionado.
+                        </div>
+                    </div>
+
+                    <!-- Información del informe encontrado -->
+                    <div id="info-informe-encontrado" class="mb-4" style="display:none;">
+                        <div class="alert alert-success">
+                            <h6 class="alert-heading"><i class="bi bi-check-circle"></i> Informe Encontrado</h6>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mb-1 small"><strong>Estado:</strong> <span id="info-estado"></span></p>
+                                    <p class="mb-1 small"><strong>Progreso:</strong> <span id="info-progreso"></span></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-1 small"><strong>Sitios:</strong> <span id="info-sitios"></span></p>
+                                    <p class="mb-1 small"><strong>Revisión:</strong> <span id="info-revisados"></span></p>
+                                </div>
+                            </div>
+                            <p class="mb-0 small"><strong>Última modificación:</strong> <span id="info-fecha"></span></p>
+                        </div>
+
+                        <!-- Paso 2: Acciones disponibles -->
+                        <div class="border rounded p-3 bg-light">
+                            <label class="form-label fw-bold mb-3">
+                                <i class="bi bi-gear"></i> Paso 2: Selecciona una acción
+                            </label>
+
+                            <!-- Sección: Visualizar -->
+                            <div class="mb-3">
+                                <h6 class="text-muted small mb-2">
+                                    <i class="bi bi-eye"></i> VISUALIZAR INFORME
+                                </h6>
+                                <div class="d-grid gap-2">
+                                    <button type="button" class="btn btn-info text-white" id="btn-cargar-informe-completo">
+                                        <i class="bi bi-file-text"></i> Ver Informe Completo
+                                        <span class="badge bg-white text-info ms-2" data-bs-toggle="tooltip" title="Muestra todos los sitios del informe">?</span>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-info" id="btn-cargar-informe-faltantes">
+                                        <i class="bi bi-filter"></i> Ver Solo Pendientes
+                                        <span class="badge bg-info text-white ms-2" data-bs-toggle="tooltip" title="Muestra únicamente los sitios no marcados como revisados">?</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <!-- Sección: Procesar -->
+                            <div class="mb-3">
+                                <h6 class="text-muted small mb-2">
+                                    <i class="bi bi-cpu"></i> PROCESAMIENTO AUTOMÁTICO
+                                </h6>
+                                <div class="d-grid gap-2">
+                                    <button type="button" class="btn btn-warning text-white" id="btn-procesar-informe">
+                                        <i class="bi bi-gear-fill"></i> Procesar Reavalúo/Sobretasa
+                                        <span class="badge bg-white text-warning ms-2" data-bs-toggle="tooltip" title="Marca automáticamente los sitios que cumplen condiciones (agua, alcantarillado, urbano, sin DOM)">?</span>
+                                    </button>
+                                    <button type="button" class="btn btn-info text-white" id="btn-actualizar-transparencia">
+                                        <i class="bi bi-file-earmark-text"></i> Actualizar desde Transparencia Activa
+                                        <span class="badge bg-white text-info ms-2" data-bs-toggle="tooltip" title="Cruza ROLes con BD OCR para obtener permisos de construcción y recepciones finales (máx 100 registros)">?</span>
+                                    </button>
+                                    <small class="text-muted mt-1">
+                                        <i class="bi bi-info-circle"></i> Procesa sitios automáticamente o actualiza datos desde OCR
+                                    </small>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <!-- Sección: Actualizar -->
+                            <div>
+                                <h6 class="text-muted small mb-2">
+                                    <i class="bi bi-arrow-repeat"></i> ACTUALIZAR DATOS
+                                </h6>
+                                <div class="d-grid gap-2">
+                                    <button type="button" class="btn btn-success text-white" id="btn-actualizar-datos-informe">
+                                        <i class="bi bi-cloud-download"></i> Reconsultar Datos
+                                        <span class="badge bg-white text-success ms-2" data-bs-toggle="tooltip" title="Vuelve a consultar SII, DOM y capas GIS para todos los sitios">?</span>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-success" id="btn-regenerar-capturas-informe">
+                                        <i class="bi bi-camera"></i> Regenerar Capturas
+                                        <span class="badge bg-success text-white ms-2" data-bs-toggle="tooltip" title="Vuelve a generar las capturas satelitales con zoom 22 para todos los sitios">?</span>
+                                    </button>
+                                    <small class="text-muted mt-1">
+                                        <i class="bi bi-info-circle"></i> Actualiza información de SII, DOM, Aguas, PRCA, o regenera imágenes
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mensaje: No encontrado -->
+                    <div id="info-informe-no-encontrado" class="alert alert-warning" style="display:none;">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        No se encontró ningún informe para el año seleccionado.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal Selector de Año -->
+
+    <!-- Modal Informe SNE -->
+    <div class="modal fade" id="modal-informe-sne" tabindex="-1" aria-labelledby="modalInformeSNELabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalInformeSNELabel">
+                        <i class="bi bi-file-earmark-text"></i> Informe SNE
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body" id="contenido-informe-sne">
+                    <!-- Contenido del informe será generado dinámicamente -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btn-exportar-informe">
+                        <i class="bi bi-download"></i> Exportar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal Informe SNE -->
+
+    <!-- Modal Selección de Datos a Actualizar -->
+    <div class="modal fade" id="modal-seleccion-datos-actualizar" tabindex="-1" aria-labelledby="modalSeleccionDatosLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="modalSeleccionDatosLabel">
+                        <i class="bi bi-arrow-repeat"></i> Actualizar Datos del Informe
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted small mb-3">
+                        <i class="bi bi-info-circle"></i> Selecciona los datos que deseas volver a consultar y actualizar en el informe guardado.
+                    </p>
+
+                    <div class="alert alert-warning small" role="alert">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <strong>Nota:</strong> Las capturas de pantalla NO se volverán a tomar. Solo se actualizarán los datos seleccionados.
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="mb-2"><i class="bi bi-database"></i> Consultas a Base de Datos:</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check-actualizar-dom">
+                            <label class="form-check-label" for="check-actualizar-dom">
+                                <strong>Datos DOM</strong> <span class="text-muted small">(Archivos municipales por ROL)</span>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check-actualizar-sii">
+                            <label class="form-check-label" for="check-actualizar-sii">
+                                <strong>Datos SII</strong> <span class="text-muted small">(Servicio GetPredioNacional por ROL)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="mb-2"><i class="bi bi-map"></i> Intersección con Capas GIS:</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check-actualizar-aguas">
+                            <label class="form-check-label" for="check-actualizar-aguas">
+                                <strong>Capa AGUAS</strong> <span class="text-muted small">(Dotación de servicios)</span>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check-actualizar-alcantarillado">
+                            <label class="form-check-label" for="check-actualizar-alcantarillado">
+                                <strong>Capa ALCANTARILLADO</strong> <span class="text-muted small">(Red de alcantarillado)</span>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check-actualizar-loteos">
+                            <label class="form-check-label" for="check-actualizar-loteos">
+                                <strong>Capa LOTEOS</strong> <span class="text-muted small">(Loteos municipales)</span>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check-actualizar-prca">
+                            <label class="form-check-label" for="check-actualizar-prca">
+                                <strong>Capa PRCA</strong> <span class="text-muted small">(Plan Regulador)</span>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check-actualizar-predios">
+                            <label class="form-check-label" for="check-actualizar-predios">
+                                <strong>Capa PREDIOS</strong> <span class="text-muted small">(Catastro de predios)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </button>
+                    <button type="button" class="btn btn-success" id="btn-iniciar-actualizacion">
+                        <i class="bi bi-play-fill"></i> Iniciar Actualización
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal Selección de Datos -->
+
+    <!-- Modal Progreso de Actualización -->
+    <div class="modal fade" id="modal-progreso-actualizacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalProgresoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="modalProgresoLabel">
+                        <i class="bi bi-hourglass-split"></i> Actualizando Datos del Informe
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <!-- Estado general -->
+                    <div class="mb-3">
+                        <h6 id="progreso-titulo">Procesando sitios...</h6>
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                id="progreso-barra"
+                                role="progressbar"
+                                style="width: 0%"
+                                aria-valuenow="0"
+                                aria-valuemin="0"
+                                aria-valuemax="100">
+                                0%
+                            </div>
+                        </div>
+                        <p class="text-muted small mt-2 mb-0" id="progreso-detalle">
+                            Iniciando proceso...
+                        </p>
+                    </div>
+
+                    <!-- Estadísticas -->
+                    <div class="row text-center mb-3">
+                        <div class="col-4">
+                            <div class="border rounded p-2">
+                                <h3 class="mb-0 text-primary" id="stat-procesados">0</h3>
+                                <small class="text-muted">Procesados</small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="border rounded p-2">
+                                <h3 class="mb-0 text-success" id="stat-actualizados">0</h3>
+                                <small class="text-muted">Actualizados</small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="border rounded p-2">
+                                <h3 class="mb-0 text-danger" id="stat-errores">0</h3>
+                                <small class="text-muted">Errores</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Log de actividad -->
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <i class="bi bi-list-ul"></i> Log de Actividad
+                        </div>
+                        <div class="card-body p-2" style="max-height: 200px; overflow-y: auto;" id="log-actividad">
+                            <p class="text-muted small mb-0">Esperando inicio...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" id="btn-pausar-actualizacion">
+                        <i class="bi bi-pause-fill"></i> Detener
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btn-continuar-actualizacion" style="display:none;">
+                        <i class="bi bi-play-fill"></i> Continuar
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="btn-cerrar-progreso" data-bs-dismiss="modal" disabled>
+                        <i class="bi bi-x-circle"></i> Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal Progreso -->
+
+    <!-- Modal Detalle Unidad -->
+    <div class="modal fade" id="modalDetalleUnidad" tabindex="-1" aria-labelledby="modalDetalleUnidadLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white" style="border-bottom: none;">
+                    <h5 class="modal-title" id="modalDetalleUnidadLabel">Título Unidad</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="d-flex" style="height: 8px; width: 100%;">
+                    <div class="flex-fill" style="background-color: #01a5e2;"></div>
+                    <div class="flex-fill" style="background-color: #00ac8e;"></div>
+                    <div class="flex-fill" style="background-color: #d1694e;"></div>
+                    <div class="flex-fill" style="background-color: #eec85d;"></div>
+                </div>
+                <div class="modal-body" id="modalDetalleUnidadBody">
+                    <!-- Contenido dinámico -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -240,6 +240,17 @@ return [
                     ],
                 ],
             ],
+            // Ruta para búsqueda de trámites
+            'search' => [
+                'type'    => \Laminas\Router\Http\Segment::class,
+                'options' => [
+                    'route'    => '/search',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'search',
+                    ],
+                ],
+            ],
         ],
     ],
 

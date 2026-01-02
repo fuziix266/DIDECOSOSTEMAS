@@ -80,6 +80,30 @@ class IndexController extends AbstractActionController
         }
     }
 
+    /**
+     * Endpoint AJAX para búsqueda de trámites
+     */
+    public function searchAction()
+    {
+        $request = $this->getRequest();
+
+        if (!$request->isXmlHttpRequest()) {
+            return new \Laminas\View\Model\JsonModel(['error' => 'Invalid request']);
+        }
+
+        $query = $request->getQuery('q', '');
+
+        // Obtener el adaptador de base de datos y crear instancia del modelo
+        $dbAdapter = $this->getEvent()->getApplication()->getServiceManager()->get('db_departamentos');
+        $tramiteModel = new \Application\Model\TramiteModel($dbAdapter);
+        $results = $tramiteModel->searchTramites($query);
+
+        return new \Laminas\View\Model\JsonModel([
+            'success' => true,
+            'results' => $results
+        ]);
+    }
+
     public function emergenciaAction()
     {
         $this->layout()->setTemplate('layout/radio');

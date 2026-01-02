@@ -247,6 +247,7 @@
                 opacity: 0;
                 transform: translateY(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -393,7 +394,8 @@
         }
 
         /* RESPONSIVE PARA EL TECLADO - Solo mostrar en 1080px */
-        @media (max-width: 1079px) {
+        @media not all and (width: 1080px) {
+
             .virtual-keyboard,
             .keyboard-overlay {
                 display: none !important;
@@ -406,12 +408,12 @@
                 width: 900px;
                 padding: 20px;
             }
-            
+
             .key {
                 height: 55px;
                 font-size: 18px;
             }
-            
+
             .key.space {
                 width: 350px;
             }
@@ -603,23 +605,25 @@
         <img src="/didecosistemas/public/img/logo-dideco.png" alt="Logo DIDECO">
     </div>
 
-    <div class="menu-cuadrado">
-        <a href="https://www.muniarica.cl" target="_blank" class="menu-btn muni">
-            <i class="fas fa-landmark"></i>
-            <span>Muni Arica</span>
-        </a>
-        <a href="/didecosistemas/public/departamentos/radio" target="_blank" class="menu-btn dideco">
-            <i class="fas fa-broadcast-tower"></i>
-            <span>Radio DIDECO</span>
-        </a>
-        <a href="https://www.instagram.com/dideco_ima/" target="_blank" class="menu-btn insta">
-            <i class="fab fa-instagram"></i>
-            <span>Instagram</span>
-        </a>
-        <a href="/didecosistemas/public/aplicaciones" target="_blank" class="menu-btn aplicaciones">
-            <i class="bi bi-person"></i>
-            <span>Aplicaciones</span>
-        </a>
+    <div id="topMenuContainer">
+        <div class="menu-cuadrado">
+            <a href="https://www.muniarica.cl" target="_blank" class="menu-btn muni">
+                <i class="fas fa-landmark"></i>
+                <span>Muni Arica</span>
+            </a>
+            <a href="/didecosistemas/public/departamentos/radio" target="_blank" class="menu-btn dideco">
+                <i class="fas fa-broadcast-tower"></i>
+                <span>Radio DIDECO</span>
+            </a>
+            <a href="https://www.instagram.com/dideco_ima/" target="_blank" class="menu-btn insta">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+            <a href="/didecosistemas/public/geoportal/mapa" class="menu-btn aplicaciones">
+                <i class="bi bi-map-fill"></i>
+                <span>Direcciones</span>
+            </a>
+        </div>
     </div>
 
     <div class="separador-search d-flex">
@@ -629,20 +633,27 @@
         <div class="flex-fill amarillo"></div>
     </div>
     <div class="search-section">
-        <div class="search-bar">
+        <div class="search-bar position-relative">
             <input type="text" class="form-control keyboard-input" placeholder="¿Qué trámite estás buscando?" id="searchInput">
+            <button id="clearSearchBtn" class="btn btn-danger rounded-circle position-absolute d-none"
+                style="right: 10px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; padding: 0; display: flex; align-items: center; justify-content: center; z-index: 10;">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
     </div>
-    <h2 class="titulo-sub">Trámites y servicios DIDECO</h2>
 
-    <!-- Botón de evaluación solo para totem (1080px) -->
-    <div class="evaluacion-container">
-        <div class="container">
-            <div class="grid-container">
-                <div class="col-12">
-                    <button class="btn-evaluacion" onclick="window.location.href='/didecosistemas/public/departamentos/evaluacion'">
-                       Evalúa nuestra atención 😊
-                    </button>
+    <div id="secondaryMenuContainer">
+        <h2 class="titulo-sub">Trámites y servicios DIDECO</h2>
+
+        <!-- Botón de evaluación solo para totem (1080px) -->
+        <div class="evaluacion-container">
+            <div class="container">
+                <div class="grid-container">
+                    <div class="col-12">
+                        <button class="btn-evaluacion" onclick="window.location.href='/didecosistemas/public/departamentos/evaluacion'">
+                            Evalúa nuestra atención 😊
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -837,77 +848,77 @@
             const rect = inputElement.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-            
+
             // Dimensiones del teclado
             const keyboardWidth = 950;
             const keyboardHeight = 320; // Altura aproximada del teclado
-            
+
             // Posición vertical: debajo del input con un pequeño margen
             let top = rect.bottom + scrollTop + 15;
-            
+
             // Posición horizontal: centrado respecto al input, pero ajustado a la pantalla
             let left = rect.left + scrollLeft + (rect.width / 2) - (keyboardWidth / 2);
-            
+
             // Ajustar si se sale por la izquierda
             if (left < 20) {
                 left = 20;
             }
-            
+
             // Ajustar si se sale por la derecha
             if (left + keyboardWidth > window.innerWidth - 20) {
                 left = window.innerWidth - keyboardWidth - 20;
             }
-            
+
             // Ajustar si se sale por abajo de la pantalla
             if (top + keyboardHeight > window.innerHeight + scrollTop - 20) {
                 // Posicionar arriba del input si no cabe abajo
                 top = rect.top + scrollTop - keyboardHeight - 15;
-                
+
                 // Si tampoco cabe arriba, ponerlo en el centro de la pantalla visible
                 if (top < scrollTop + 20) {
                     top = scrollTop + (window.innerHeight / 2) - (keyboardHeight / 2);
                 }
             }
-            
+
             keyboard.style.top = `${top}px`;
             keyboard.style.left = `${left}px`;
-            
+
             console.log(`Posicionando teclado - Input: ${inputElement.id}, Top: ${top}, Left: ${left}`);
         }
 
         function showKeyboard(inputElement) {
-            // Solo mostrar en pantallas de 1080px o más
-            if (window.innerWidth < 1080) return;
+            // Solo mostrar en pantallas de exactamente 1080px (Totem)
+            if (window.innerWidth !== 1080) return;
             document.body.style.overflow = 'hidden';
 
 
             currentInput = inputElement;
             keyboardVisible = true;
-            
+
             const keyboard = document.getElementById('virtualKeyboard');
             const overlay = document.getElementById('keyboardOverlay');
-            
+
             // Posicionar el teclado antes de mostrarlo
             positionKeyboard(inputElement);
-            
+
             keyboard.classList.add('show');
             overlay.classList.add('show');
-            
+
             console.log('Mostrando teclado para:', inputElement.id, 'Ancho:', window.innerWidth);
         }
 
         function hideKeyboard() {
             keyboardVisible = false;
             currentInput = null;
-            
+
             document.body.style.overflow = '';
 
             const keyboard = document.getElementById('virtualKeyboard');
             const overlay = document.getElementById('keyboardOverlay');
-            
+
             keyboard.classList.remove('show');
             overlay.classList.remove('show');
-            
+
             // Resetear estados
             isShiftActive = false;
             symbolMode = false;
@@ -932,7 +943,7 @@
         function resetSymbolMode() {
             const symbolSection = document.getElementById('keyboardSymbols');
             const toggleButtons = document.querySelectorAll('.symbol-toggle');
-            
+
             symbolSection.style.display = 'none';
             toggleButtons.forEach(btn => btn.textContent = '?123');
         }
@@ -1013,27 +1024,158 @@
             }
 
             // Disparar evento input para funcionalidad de búsqueda en tiempo real
-            currentInput.dispatchEvent(new Event('input', { bubbles: true }));
+            currentInput.dispatchEvent(new Event('input', {
+                bubbles: true
+            }));
         }
 
-        // Función de búsqueda (funcionalidad original)
-        function performSearch() {
-            const searchTerm = currentInput.value.toLowerCase();
-            const cards = document.querySelectorAll('.card-departamento');
+        // Función de búsqueda (ahora busca en base de datos)
+        let searchTimeout;
 
-            cards.forEach(card => {
-                const text = card.textContent.toLowerCase();
-                if (text.includes(searchTerm)) {
-                    card.style.display = 'flex';
-                    card.style.animation = 'fadeInUp 0.3s ease-out';
+        function performSearch() {
+            clearTimeout(searchTimeout);
+            // Obtener input de manera segura (currentInput puede ser null si no se activó el teclado virtual)
+            const inputEl = currentInput || document.getElementById('searchInput');
+            if (!inputEl) return;
+
+            const searchTerm = inputEl.value.trim();
+
+            // Limpiar resultados previos
+            const existingResults = document.getElementById('searchResultsContainer');
+            if (existingResults) {
+                existingResults.remove();
+            }
+
+            // Mostrar/ocultar botón de limpiar según si hay texto
+            const clearBtn = document.getElementById('clearSearchBtn');
+            if (clearBtn) {
+                if (searchTerm.length > 0) {
+                    clearBtn.classList.remove('d-none');
                 } else {
-                    card.style.display = searchTerm === '' ? 'flex' : 'none';
+                    clearBtn.classList.add('d-none');
                 }
+            }
+
+            if (searchTerm.length < 2) {
+                // Restaurar vista normal si se borra la búsqueda
+                const topMenu = document.getElementById('topMenuContainer');
+                if (topMenu) topMenu.style.display = '';
+
+                const mainMenu = document.getElementById('mainMenuContainer');
+                if (mainMenu) mainMenu.style.display = '';
+
+                const secondaryMenu = document.getElementById('secondaryMenuContainer');
+                if (secondaryMenu) secondaryMenu.style.display = '';
+
+                // El contenedor de resultados ya se eliminó arriba
+                return;
+            }
+
+            // Ocultar menús al buscar
+            const topMenu = document.getElementById('topMenuContainer');
+            if (topMenu) topMenu.style.display = 'none';
+
+            const mainMenu = document.getElementById('mainMenuContainer');
+            if (mainMenu) mainMenu.style.display = 'none';
+
+            const secondaryMenu = document.getElementById('secondaryMenuContainer');
+            if (secondaryMenu) secondaryMenu.style.display = 'none';
+
+            // Crear contenedor de resultados si no existe
+            let resultsContainer = document.getElementById('searchResultsContainer');
+            if (!resultsContainer) {
+                resultsContainer = document.createElement('div');
+                resultsContainer.id = 'searchResultsContainer';
+                resultsContainer.style.cssText = 'margin: 2rem auto; max-width: 1200px; padding: 0 1rem;';
+                const mainContent = document.querySelector('main');
+                mainContent.insertBefore(resultsContainer, mainContent.firstChild);
+            }
+
+            // Mostrar indicador de carga
+            resultsContainer.innerHTML = '<div class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Buscando...</span></div></div>';
+
+            searchTimeout = setTimeout(function() {
+                fetch('search?q=' + encodeURIComponent(searchTerm), {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success && data.results.length > 0) {
+                            displaySearchResults(data.results, resultsContainer);
+                        } else {
+                            resultsContainer.innerHTML = '<div class="alert alert-info text-center">No se encontraron trámites que coincidan con tu búsqueda</div>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        resultsContainer.innerHTML = '<div class="alert alert-danger">Error al realizar la búsqueda</div>';
+                    });
+            }, 300);
+        }
+
+        function displaySearchResults(results, container) {
+            let html = '<h3 class="mb-3">Resultados de búsqueda:</h3><div class="row g-3">';
+
+            results.forEach(function(tramite) {
+                html += `
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <a href="${tramite.url}" class="text-decoration-none">
+                            <div class="card h-100 shadow-sm border-0" style="border-left: 4px solid #051c9c !important; transition: all 0.2s ease;">
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary">${tramite.nombre}</h5>
+                                    <p class="card-text text-muted small">${tramite.descripcion_corta || 'Sin descripción'}</p>
+                                    <span class="badge" style="background-color: rgba(5, 28, 156, 0.1); color: #051c9c;">
+                                        <i class="bi bi-building me-1"></i>${tramite.departamento_nombre}
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+
+            // Agregar estilos hover
+            container.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-4px)';
+                    this.style.boxShadow = '0 8px 16px rgba(0,0,0,0.15)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                    this.style.boxShadow = '';
+                });
             });
         }
 
         // Mostrar modal según el ancho de pantalla
         document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar botón de limpiar búsqueda
+            const clearBtn = document.getElementById('clearSearchBtn');
+            const searchInput = document.getElementById('searchInput');
+
+            // Limpiar buscador al cargar
+            if (searchInput) {
+                searchInput.value = '';
+            }
+
+            if (clearBtn && searchInput) {
+                clearBtn.addEventListener('click', function() {
+                    searchInput.value = '';
+                    searchInput.focus();
+
+                    // Ocultar botón
+                    this.classList.add('d-none');
+
+                    // Restaurar vista (ejecutar búsqueda vacía restaura todo)
+                    performSearch();
+                });
+            }
+
             if (window.innerWidth === 1080) {
                 // Modal para totem (1080px)
                 const modalTotem = new bootstrap.Modal(document.getElementById('popuptotem'));
@@ -1097,7 +1239,7 @@
 
             // Ocultar teclado al hacer clic fuera del input (excepto en el teclado mismo)
             document.addEventListener('click', function(e) {
-                if (!e.target.classList.contains('keyboard-input') && 
+                if (!e.target.classList.contains('keyboard-input') &&
                     !document.getElementById('virtualKeyboard').contains(e.target) &&
                     !document.getElementById('keyboardOverlay').contains(e.target) &&
                     keyboardVisible) {

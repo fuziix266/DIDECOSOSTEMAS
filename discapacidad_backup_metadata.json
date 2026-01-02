@@ -1,0 +1,92 @@
+{
+    "nformedeyudaocial": {
+        "slug": "ayudasocial",
+        "icono_bootstrap": "bi-heart",
+        "icono_fontawesome": null
+    },
+    "restamodeyudaecnica": {
+        "slug": "ayudatecnica",
+        "icono_bootstrap": "bi-gear",
+        "icono_fontawesome": null
+    },
+    "eneficiosemestralesey20422": {
+        "slug": "beneficiossemestrales",
+        "icono_bootstrap": "bi-calendar-check",
+        "icono_fontawesome": null
+    },
+    "nformeparaomprasdeyudasecnicas": {
+        "slug": "comprasayudastecnicas",
+        "icono_bootstrap": "bi-cart",
+        "icono_fontawesome": null
+    },
+    "evoluciondeyudaecnica": {
+        "slug": "devolucionayudatecnica",
+        "icono_bootstrap": "bi-arrow-return-left",
+        "icono_fontawesome": null
+    },
+    "nformedeyudascnicas": {
+        "slug": "informeayudatecnica",
+        "icono_bootstrap": "bi-file-earmark-text",
+        "icono_fontawesome": null
+    },
+    "nformeocialyedesdepoyo": {
+        "slug": "informesocialyredes",
+        "icono_bootstrap": "bi-people",
+        "icono_fontawesome": null
+    },
+    "olicitud": {
+        "slug": "ivadec",
+        "icono_bootstrap": "bi-ui-checks",
+        "icono_fontawesome": null
+    },
+    "nforme": {
+        "slug": "orasmi",
+        "icono_bootstrap": "bi-bank",
+        "icono_fontawesome": null
+    },
+    "ensionasicaolidariadenvalidez": {
+        "slug": "pensionbasicainvalidez",
+        "icono_bootstrap": "bi-cash",
+        "icono_fontawesome": null
+    },
+    "ostulacionayudasecnicas": {
+        "slug": "senadis",
+        "icono_bootstrap": "bi-upload",
+        "icono_fontawesome": null
+    },
+    "ubsidiodeiscapacidadparaenores": {
+        "slug": "subsidiomenores",
+        "icono_bootstrap": "bi-emoji-smile",
+        "icono_fontawesome": null
+    },
+    "allereportivoecreativo": {
+        "slug": "tallerdeportivo",
+        "icono_bootstrap": "bi-activity",
+        "icono_fontawesome": null
+    },
+    "allerdeablayenguaje": {
+        "slug": "terapiafonoaudiologia",
+        "icono_bootstrap": "bi-mic",
+        "icono_fontawesome": null
+    },
+    "erapiainesica": {
+        "slug": "terapiakinesica",
+        "icono_bootstrap": "bi-activity",
+        "icono_fontawesome": null
+    },
+    "erapiacupacional": {
+        "slug": "terapiaocupacional",
+        "icono_bootstrap": "bi-briefcase",
+        "icono_fontawesome": null
+    },
+    "rientacionsobrestipendio": {
+        "slug": "tipendio",
+        "icono_bootstrap": "bi-cash-coin",
+        "icono_fontawesome": null
+    },
+    "nformespararibunales": {
+        "slug": "tribunales",
+        "icono_bootstrap": "bi-bank",
+        "icono_fontawesome": null
+    }
+}

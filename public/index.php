@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 use Laminas\Mvc\Application;
 
+
+// Force UTF-8
+header('Content-Type: text/html; charset=utf-8');
+
 /**
  * This makes our life easier when dealing with paths. Everything is relative
  * to the application root now.
@@ -25,8 +29,8 @@ include __DIR__ . '/../vendor/autoload.php';
 if (! class_exists(Application::class)) {
     throw new RuntimeException(
         "Unable to load application.\n"
-        . "- Type `composer install` if you are developing locally.\n"
-        . "- Type `docker-compose run laminas composer install` if you are using Docker.\n"
+            . "- Type `composer install` if you are developing locally.\n"
+            . "- Type `docker-compose run laminas composer install` if you are using Docker.\n"
     );
 }
 

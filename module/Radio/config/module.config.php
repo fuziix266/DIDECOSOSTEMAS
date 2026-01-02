@@ -15,6 +15,16 @@ return [
                 'options' => [
                     'route'    => '/radio',
                     'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'radio-dashboard' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/radio/dashboard',
+                    'defaults' => [
                         'controller' => Controller\DashboardController::class,
                         'action'     => 'index',
                     ],
@@ -160,6 +170,7 @@ return [
     'controllers' => [
         'factories' => [
             Controller\DashboardController::class => InvokableFactory::class,
+            Controller\IndexController::class => InvokableFactory::class,
             Controller\Web\NewsController::class => Controller\Factory\ControllerFactory::class,
             Controller\Web\ProgramsController::class => Controller\Factory\ControllerFactory::class,
             Controller\Web\TeamController::class => Controller\Factory\ControllerFactory::class,
@@ -178,7 +189,8 @@ return [
             'ViewJsonStrategy',
         ],
         'template_map' => [
-            'layout/radio' => __DIR__ . '/../view/layout/layout_radio.phtml',
+            'layout/radio_public' => __DIR__ . '/../view/layout/layout_radio_public.phtml',
+            'layout/footer_radio' => __DIR__ . '/../view/layout/footer_radio.phtml',
         ],
         'template_path_stack' => [
             'radio' => __DIR__ . '/../view',

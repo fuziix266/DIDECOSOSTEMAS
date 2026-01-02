@@ -35,9 +35,9 @@ class DiscapacidadController extends AbstractActionController
     private function getTramiteView($tramiteSlug)
     {
         $this->layout()->setTemplate('layout/servicios');
-        
+
         $tramite = $this->tramiteModel->getTramiteCompleto($this->departamentoId, $tramiteSlug);
-        
+
         if (!$tramite) {
             return $this->notFoundAction();
         }
@@ -47,90 +47,93 @@ class DiscapacidadController extends AbstractActionController
         ]);
     }
 
-    public function terapiafonoaudiologiaAction()
+    public function devoluciondeayudatecnicaAction()
     {
-        return $this->getTramiteView('terapiafonoaudiologia');
+        return $this->getTramiteView('devolucion-de-ayuda-tecnica');
     }
 
-    public function terapiakinesicaAction()
+    public function informesdeayudastecnicasAction()
     {
-        return $this->getTramiteView('terapiakinesica');
+        return $this->getTramiteView('informes-de-ayudas-tecnicas');
     }
 
-    public function tallerdeportivoAction()
+    public function informessocialesparacomprasdeayudastecnicasAction()
     {
-        return $this->getTramiteView('tallerdeportivo');
+        return $this->getTramiteView('informes-sociales-para-compras-de-ayudas-tecnicas');
     }
 
-    public function ayudatecnicaAction()
+    public function infornesparatribunalesAction()
     {
-        return $this->getTramiteView('ayudatecnica');
+        return $this->getTramiteView('infornes-para-tribunales');
     }
 
-    public function devolucionayudatecnicaAction()
+    public function orientacionsobreelestipendioAction()
     {
-        return $this->getTramiteView('devolucionayudatecnica');
+        return $this->getTramiteView('orientacion-sobre-el-estipendio');
     }
 
-    public function informesocialyredesAction()
+    public function orientacionsobreelsubsidiodediscapacidadparamenoresde18anosAction()
     {
-        return $this->getTramiteView('informesocialyredes');
+        return $this->getTramiteView('orientacion-sobre-el-subsidio-de-discapacidad-para-menores-de-18-anos');
     }
 
-    public function orasmiAction()
+    public function orientacionsobrelapensionbasicasolidariadeinvalidezpbsiAction()
     {
-        return $this->getTramiteView('orasmi');
+        return $this->getTramiteView('orientacion-sobre-la-pension-basica-solidaria-de-invalidez-pbsi');
     }
 
-    public function ayudasocialAction()
+    public function orientacionesgeneralessobrebeneficiossemestralesdelestadocontempladosantelaley20422Action()
     {
-        return $this->getTramiteView('ayudasocial');
+        return $this->getTramiteView('orientaciones-generales-sobre-beneficios-semestrales-del-estado-contemplados-ante-la-ley-20-422');
     }
 
-    public function tribunalesAction()
+    public function solicituddeapoyoenpostulaciondeayudastecnicasasenadisAction()
     {
-        return $this->getTramiteView('tribunales');
+        return $this->getTramiteView('solicitud-de-apoyo-en-postulacion-de-ayudas-tecnicas-a-senadis');
     }
 
-    public function comprasayudastecnicasAction()
+    public function solicitudinformeayudasocialAction()
     {
-        return $this->getTramiteView('comprasayudastecnicas');
+        return $this->getTramiteView('solicitud-informe-ayuda-social');
     }
 
-    public function subsidiomenoresAction()
+    public function solicitudinformeorasmiAction()
     {
-        return $this->getTramiteView('subsidiomenores');
+        return $this->getTramiteView('solicitud-informe-orasmi');
     }
 
-    public function tipendioAction()
+    public function solicitudinformesocialyredesdeapoyoAction()
     {
-        return $this->getTramiteView('tipendio');
+        return $this->getTramiteView('solicitud-informe-social-y-redes-de-apoyo');
     }
 
-    public function pensionbasicainvalidezAction()
+    public function solicitudivadecAction()
     {
-        return $this->getTramiteView('pensionbasicainvalidez');
+        return $this->getTramiteView('solicitud-ivadec');
     }
 
-    public function beneficiossemestralesAction()
+    public function solicitudprestamodeayudatecnicaAction()
     {
-        return $this->getTramiteView('beneficiossemestrales');
+        return $this->getTramiteView('solicitud-prestamo-de-ayuda-tecnica');
     }
 
-    public function ivadecAction()
+    public function solicitudtallerdehablaylenguajeAction()
     {
-        return $this->getTramiteView('ivadec');
+        return $this->getTramiteView('solicitud-taller-de-habla-y-lenguaje');
     }
 
-    public function senadisAction()
+    public function solicitudtallerdeportivorecreativoAction()
     {
-        return $this->getTramiteView('senadis');
+        return $this->getTramiteView('solicitud-taller-deportivo-recreativo');
     }
 
-    public function terapiaocupacionalAction()
+    public function solicitudterapiakinesicaAction()
     {
-        return $this->getTramiteView('terapiaocupacional');
+        return $this->getTramiteView('solicitud-terapia-kinesica');
     }
 
-
+    public function solicitudterapiaocupacionalAction()
+    {
+        return $this->getTramiteView('solicitud-terapia-ocupacional');
+    }
 }

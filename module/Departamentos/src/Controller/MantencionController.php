@@ -31,6 +31,13 @@ class MantencionController extends AbstractActionController
         $this->session = new SessionContainer('mantencion_auth');
     }
 
+    public function onDispatch(\Laminas\Mvc\MvcEvent $e)
+    {
+        // Set custom layout for all actions in this controller
+        $this->layout()->setTemplate('layout/layout_mantencion');
+        return parent::onDispatch($e);
+    }
+
     /**
      * Verificar autenticación
      */

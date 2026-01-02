@@ -16,4 +16,5 @@ return [
     'Aplicaciones',
     'Vehiculos',
     'Radio',
+    'Geoportal',
 ];

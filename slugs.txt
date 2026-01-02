@@ -1,0 +1,18 @@
+SLUG:devolucion-de-ayuda-tecnica|NOMBRE:Devolución de Ayuda Técnica
+SLUG:informes-de-ayudas-tecnicas|NOMBRE:Informes de ayudas técnicas.
+SLUG:informes-sociales-para-compras-de-ayudas-tecnicas|NOMBRE:Informes Sociales para compras de ayudas tecnicas
+SLUG:infornes-para-tribunales|NOMBRE:Infornes para tribunales
+SLUG:orientacion-sobre-el-estipendio|NOMBRE:Orientación sobre el Estipendio
+SLUG:orientacion-sobre-el-subsidio-de-discapacidad-para-menores-de-18-anos|NOMBRE:Orientación sobre el Subsidio de Discapacidad para menores de 18 años
+SLUG:orientacion-sobre-la-pension-basica-solidaria-de-invalidez-pbsi|NOMBRE:Orientación sobre la Pensión Básica Solidaria de Invalidez (PBSI)
+SLUG:orientaciones-generales-sobre-beneficios-semestrales-del-estado-contemplados-ante-la-ley-20-422|NOMBRE:Orientaciones generales sobre beneficios semestrales del Estado contemplados ante la Ley 20.422
+SLUG:solicitud-de-apoyo-en-postulacion-de-ayudas-tecnicas-a-senadis|NOMBRE:Solicitud de apoyo en postulacion de ayudas tecnicas a SENADIS
+SLUG:solicitud-informe-ayuda-social|NOMBRE:Solicitud Informe Ayuda Social
+SLUG:solicitud-informe-orasmi|NOMBRE:Solicitud informe ORASMI
+SLUG:solicitud-informe-social-y-redes-de-apoyo|NOMBRE:Solicitud Informe Social y Redes de Apoyo
+SLUG:solicitud-ivadec|NOMBRE:Solicitud IVADEC
+SLUG:solicitud-prestamo-de-ayuda-tecnica|NOMBRE:Solicitud prestamo de Ayuda Técnica
+SLUG:solicitud-taller-de-habla-y-lenguaje|NOMBRE:Solicitud Taller de Habla y Lenguaje
+SLUG:solicitud-taller-deportivo-recreativo|NOMBRE:Solicitud Taller Deportivo Recreativo
+SLUG:solicitud-terapia-kinesica|NOMBRE:Solicitud Terapia Kinésica
+SLUG:solicitud-terapia-ocupacional|NOMBRE:Solicitud Terapia Ocupacional

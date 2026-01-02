@@ -1,76 +1,146 @@
 <?php
+
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
 ?>
-<div class="p-5 mb-4 bg-light rounded-3">
-    <h1 class="display-4">Welcome to<br>Laminas MVC Skeleton Application</h1>
 
-    <p>
-        Congratulations! You have successfully installed the
-        <a href="https://github.com/laminas/laminas-mvc-skeleton" target="_blank">Laminas MVC Skeleton</a>.
-        This skeleton can serve as a simple starting point for you to begin
-        building your application on Laminas MVC.
-    </p>
+<div class="container py-5">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold mb-3" style="color: var(--primary-color);">Buscador de Trámites</h1>
+        <p class="lead text-muted">Encuentra el trámite que necesitas de forma rápida y sencilla</p>
+    </div>
 
-    <hr class="my-4">
-
-    <a class="btn btn-primary btn-lg" href="https://github.com/laminas" target="_blank">
-        Check Laminas on GitHub &raquo;
-    </a>
-</div>
-
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-        <div class="card h-100">
-            <h2 class="card-header">Follow Development</h2>
-            <div class="card-body">
-                <p>
-                    Laminas Project is under active development. If you are
-                    interested in following the development, you can check
-                    <a href="https://getlaminas.org/blog/">Laminas dev blog</a>,
-                    and <a href="https://github.com/issues?utf8=%E2%9C%93&amp;q=is:issue+org:laminas">Laminas issue tracker</a>
-                    (link requires a GitHub account). This is a great resource
-                    for staying up to date with the latest developments!
-                </p>
-            </div>
-            <div class="card-footer">
-                <a class="btn btn-primary" href="https://getlaminas.org/" target="_blank">Laminas Project Portal &raquo;</a>
+    <!-- Search Box -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="bi bi-search text-muted"></i>
+                        </span>
+                        <input
+                            type="text"
+                            class="form-control border-start-0 ps-0"
+                            id="searchInput"
+                            placeholder="Buscar trámites por nombre o descripción..."
+                            autocomplete="off">
+                    </div>
+                    <small class="text-muted d-block mt-2">
+                        <i class="bi bi-info-circle me-1"></i>
+                        Escribe al menos 2 caracteres para comenzar la búsqueda
+                    </small>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col">
-        <div class="card h-100">
-            <h2 class="card-header">Discover Modules</h2>
-            <div class="card-body">
-                <p>
-                    Laminas MVC is a modular application.
-                    You can find multiple compatible modules on packagist.
-                </p>
+    <!-- Search Results -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div id="searchResults"></div>
+            <div id="noResults" class="text-center text-muted d-none">
+                <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+                <p>No se encontraron trámites que coincidan con tu búsqueda</p>
             </div>
-            <div class="card-footer">
-                <a class="btn btn-primary" href="https://packagist.org/?tags=module~zf2~zendframework~zend%20framework~zend%20framework%202~zf3~zf~zend~laminas" target="_blank">
-                    Explore Laminas Modules &raquo;</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col">
-        <div class="card h-100">
-            <h2 class="card-header">Help &amp; Support</h2>
-            <div class="card-body">
-                <p>
-                    If you need any help or support while developing with Laminas,
-                    you may reach us via <a href="https://laminas.dev/chat">chat</a> or
-                    <a href="https://discourse.laminas.dev">forum</a>.
-                    We'd love to hear any questions or feedback you may have
-                    regarding any release.
-                </p>
-            </div>
-            <div class="card-footer">
-                <a class="btn btn-primary" href="https://laminas.dev/chat" target="_blank">Ping us on chat &raquo;</a>
+            <div id="searchLoading" class="text-center d-none">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Buscando...</span>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .tramite-card {
+        transition: all 0.2s ease;
+        border-left: 4px solid var(--primary-color);
+    }
+
+    .tramite-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .badge-department {
+        background-color: rgba(6, 4, 140, 0.1);
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        const noResults = document.getElementById('noResults');
+        const searchLoading = document.getElementById('searchLoading');
+        let searchTimeout;
+
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            const query = this.value.trim();
+
+            if (query.length < 2) {
+                searchResults.innerHTML = '';
+                noResults.classList.add('d-none');
+                return;
+            }
+
+            searchLoading.classList.remove('d-none');
+            noResults.classList.add('d-none');
+
+            searchTimeout = setTimeout(function() {
+                fetch('/didecosistemas/search?q=' + encodeURIComponent(query), {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        searchLoading.classList.add('d-none');
+
+                        if (data.success && data.results.length > 0) {
+                            displayResults(data.results);
+                            noResults.classList.add('d-none');
+                        } else {
+                            searchResults.innerHTML = '';
+                            noResults.classList.remove('d-none');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        searchLoading.classList.add('d-none');
+                        searchResults.innerHTML = '<div class="alert alert-danger">Error al realizar la búsqueda</div>';
+                    });
+            }, 300);
+        });
+
+        function displayResults(results) {
+            let html = '<div class="list-group">';
+
+            results.forEach(function(tramite) {
+                html += `
+                <a href="${tramite.url}" class="list-group-item list-group-item-action tramite-card mb-3 border-0 shadow-sm">
+                    <div class="d-flex w-100 justify-content-between align-items-start">
+                        <div class="flex-grow-1">
+                            <h5 class="mb-2">${tramite.nombre}</h5>
+                            <p class="mb-2 text-muted small">${tramite.descripcion_corta || 'Sin descripción'}</p>
+                            <span class="badge badge-department">
+                                <i class="bi bi-building me-1"></i>${tramite.departamento_nombre}
+                            </span>
+                        </div>
+                        <i class="bi bi-arrow-right-circle fs-4 text-primary ms-3"></i>
+                    </div>
+                </a>
+            `;
+            });
+
+            html += '</div>';
+            searchResults.innerHTML = html;
+        }
+    });
+</script>

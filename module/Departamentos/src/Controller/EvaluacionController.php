@@ -43,7 +43,7 @@ class EvaluacionController extends AbstractActionController
             'correo'        => $postData['correo'] ?? '',
             'telefono'      => $postData['telefono'] ?? '',
             'mensaje'       => $postData['comentario'] ?? '',
-            'evaluacion_id' => (int)($postData['rating'] ?? 0),
+            'evaluacion_id' => !empty($postData['rating']) && $postData['rating'] > 0 ? (int)$postData['rating'] : null,
             'nombreOficina' => $postData['nombreOficina'] ?? '',
         ];
 

@@ -20,11 +20,26 @@ return [
                     ],
                 ],
             ],
+            'search' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/search',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'search',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
+            Controller\IndexController::class => Factory\IndexControllerFactory::class,
+        ],
+    ],
+    'service_manager' => [
+        'factories' => [
+            Model\TramiteModel::class => Factory\TramiteModelFactory::class,
         ],
     ],
     'view_manager' => [
