@@ -7,16 +7,16 @@
     <?= $this->headTitle('Radio Admin')->setSeparator(' - ')->setAutoEscape(false) ?>
 
     <!-- Bootstrap 5 (local) -->
-    <link href="<?= $this->basePath('public/vehiculos/vendors/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?= $this->basePath('vehiculos/vendors/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
     <!-- Bootstrap Icons -->
-    <link href="<?= $this->basePath('public/vehiculos/vendors/bootstrap-icons/bootstrap-icons.min.css') ?>" rel="stylesheet">
+    <link href="<?= $this->basePath('vehiculos/vendors/bootstrap-icons/bootstrap-icons.min.css') ?>" rel="stylesheet">
     <!-- SweetAlert2 CSS (opcional) -->
-    <link rel="stylesheet" href="<?= $this->basePath('public/vehiculos/vendors/sweetalert2/sweetalert2.min.css') ?>">
+    <link rel="stylesheet" href="<?= $this->basePath('vehiculos/vendors/sweetalert2/sweetalert2.min.css') ?>">
     <!-- DataTables CSS (global) -->
-    <link rel="stylesheet" href="<?= $this->basePath('public/vehiculos/vendors/datatables/css/dataTables.bootstrap5.min.css') ?>">
-    <link rel="stylesheet" href="<?= $this->basePath('public/vehiculos/vendors/datatables/css/responsive.bootstrap5.min.css') ?>">
+    <link rel="stylesheet" href="<?= $this->basePath('vehiculos/vendors/datatables/css/dataTables.bootstrap5.min.css') ?>">
+    <link rel="stylesheet" href="<?= $this->basePath('vehiculos/vendors/datatables/css/responsive.bootstrap5.min.css') ?>">
     <!-- Custom styles (mantener colores y forma del layout_web) -->
-    <link href="<?= $this->basePath('public/vehiculos/css/styles.css') ?>" rel="stylesheet">
+    <link href="<?= $this->basePath('vehiculos/css/styles.css') ?>" rel="stylesheet">
 
     <!-- Summernote CSS -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -107,7 +107,7 @@
     <header class="navbar-municipal">
         <div class="container py-3 d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-                <img src="<?= $this->basePath('public/vehiculos/img/logo-azul.png') ?>" alt="Logo Municipalidad" style="height:56px;" class="me-3">
+                <img src="<?= $this->basePath('vehiculos/img/logo-azul.png') ?>" alt="Logo Municipalidad" style="height:56px;" class="me-3">
             </div>
 
             <?php
@@ -118,7 +118,7 @@
 
             <nav class="d-none d-md-block">
                 <ul class="nav align-items-center">
-                    <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->basePath('public/aplicaciones') ?>"><i class="bi bi-house-door me-1"></i> Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('aplicaciones') ?>"><i class="bi bi-house-door me-1"></i> Inicio</a></li>
 
                     <?php if ($isLogged): ?>
                         <li class="nav-item"><a class="nav-link text-muted" href="<?= $this->url('radio-news') ?>">Noticias</a></li>
@@ -151,7 +151,7 @@
         <div class="collapse" id="mobileMenu">
             <div class="container pb-3">
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" href="<?= $this->basePath('public/aplicaciones') ?>">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= $this->url('aplicaciones') ?>">Inicio</a></li>
 
                     <?php if ($isLogged): ?>
                         <li class="nav-item"><a class="nav-link" href="<?= $this->url('radio-news') ?>">Noticias</a></li>
@@ -178,15 +178,15 @@
     <?= $this->partial('layout/footer') ?>
 
     <!-- Scripts -->
-    <script src="<?= $this->basePath('public/vehiculos/vendors/jquery/jquery-3.7.1.min.js') ?>"></script>
-    <script src="<?= $this->basePath('public/vehiculos/vendors/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+    <script src="<?= $this->basePath('vehiculos/vendors/jquery/jquery-3.7.1.min.js') ?>"></script>
+    <script src="<?= $this->basePath('vehiculos/vendors/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
     <!-- DataTables JS (global) -->
-    <script src="<?= $this->basePath('public/vehiculos/vendors/datatables/js/jquery.dataTables.min.js') ?>"></script>
-    <script src="<?= $this->basePath('public/vehiculos/vendors/datatables/js/dataTables.bootstrap5.min.js') ?>"></script>
-    <script src="<?= $this->basePath('public/vehiculos/vendors/datatables/js/dataTables.responsive.min.js') ?>"></script>
-    <script src="<?= $this->basePath('public/vehiculos/vendors/datatables/js/responsive.bootstrap5.min.js') ?>"></script>
-    <script src="<?= $this->basePath('public/vehiculos/vendors/sweetalert2/sweetalert2.all.min.js') ?>"></script>
-    <script src="<?= $this->basePath('public/vehiculos/js/app.js') ?>"></script>
+    <script src="<?= $this->basePath('vehiculos/vendors/datatables/js/jquery.dataTables.min.js') ?>"></script>
+    <script src="<?= $this->basePath('vehiculos/vendors/datatables/js/dataTables.bootstrap5.min.js') ?>"></script>
+    <script src="<?= $this->basePath('vehiculos/vendors/datatables/js/dataTables.responsive.min.js') ?>"></script>
+    <script src="<?= $this->basePath('vehiculos/vendors/datatables/js/responsive.bootstrap5.min.js') ?>"></script>
+    <script src="<?= $this->basePath('vehiculos/vendors/sweetalert2/sweetalert2.all.min.js') ?>"></script>
+    <script src="<?= $this->basePath('vehiculos/js/app.js') ?>"></script>
 
     <!-- Summernote JS -->
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
